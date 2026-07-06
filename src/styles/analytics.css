@@ -1,0 +1,30 @@
+.analytics-card{
+  background:white;
+  border-radius:20px;
+  padding:20px;
+  box-shadow:0 5px 20px rgba(0,0,0,0.05);
+  margin-bottom:20px;
+}
+
+.achievement-grid{
+    display:flex;
+    gap:15px;
+    flex-wrap:wrap;
+    margin-top:15px;
+}
+
+.achievement{
+    width:140px;
+    text-align:center;
+    padding:15px;
+    border-radius:12px;
+}
+
+.unlocked{
+    background:#FEF3C7;
+}
+
+.locked{
+    background:#E5E7EB;
+    opacity:0.5;
+}
