@@ -35,10 +35,8 @@ const AdminDashboard = () => {
   ).length;
 
   const totalNormalUsers = users.filter(
-    (user) =>
-      user.role === "ROLE_USER" ||
-      user.role === "USER"
-  ).length;
+  (user) => user.role !== "ROLE_ADMIN"
+).length;
 
   const filteredUsers = users.filter((user) => {
     return (
