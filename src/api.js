@@ -38,7 +38,7 @@ API.interceptors.response.use(
     console.log("API ERROR:", status, error.response?.data);
 
     // ❌ avoid multiple redirects / loops
-    if (status === 401 || status === 403) {
+    if (status === 401) {
       const token = localStorage.getItem("token");
 
       if (token) {

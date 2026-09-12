@@ -1,27 +1,67 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Button } from "@mui/material";
-import Badge from "@mui/material/Badge";
-import NotificationsIcon from "@mui/icons-material/Notifications";
+import { Badge } from "@mui/material";
+import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
+import AddTaskIcon from "@mui/icons-material/AddTask";
+import ChecklistIcon from "@mui/icons-material/Checklist";
+import AnalyticsIcon from "@mui/icons-material/Analytics";
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import BoltIcon from "@mui/icons-material/Bolt";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+import WarningAmberIcon from "@mui/icons-material/WarningAmber";
+import TrackChangesIcon from "@mui/icons-material/TrackChanges";
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
 
 import { getDashboardData } from "../services/dashboardService";
 import { getUnreadCount } from "../services/NotificationService";
 
-import "../styles/dashboard.css";
 import {
-    getUpcomingTasks,
-    getOverdueTasks
+    getOverdueTasks,
 } from "../services/taskService";
-import {
-    getAchievements
-} from "../services/taskService";
+
+import SmartDailyView from "../components/SmartDailyView";
 import PomodoroTimer from "../components/PomodoroTimer";
-const Dashboard = () => {
 
-    const navigate = useNavigate();
+import "../styles/dashboard.css";
 
 
-const [dashboard, setDashboard] = useState({
+const QUOTES = [
+    {
+        text: "The future depends on what you do today.",
+        author: "Mahatma Gandhi",
+    },
+    {
+        text: "Success is the sum of small efforts repeated day in and day out.",
+        author: "Robert Collier",
+    },
+    {
+        text: "Great things are done by a series of small things brought together.",
+        author: "Vincent van Gogh",
+    },
+    {
+        text: "The secret of getting ahead is getting started.",
+        author: "Mark Twain",
+    },
+    {
+        text: "It always seems impossible until it's done.",
+        author: "Nelson Mandela",
+    },
+];
+
+
+const DAILY_TIPS = [
+    "Choose your most important task and complete it before smaller tasks.",
+    "Break large tasks into smaller steps to make progress easier.",
+    "Take short breaks to maintain your focus and energy.",
+    "Start with one task instead of trying to do everything at once.",
+    "Review your priorities before starting your work.",
+    "Small progress every day creates meaningful results.",
+    "Set a realistic target and focus on completing it.",
+];
+
+
+const EMPTY_DASHBOARD = {
     totalTasks: 0,
     planned: 0,
     inProgressTasks: 0,
@@ -29,460 +69,1036 @@ const [dashboard, setDashboard] = useState({
     completionPercentage: 0,
     todayCompletedTasks: 0,
     dailyGoal: 0,
-    productivityScore: 0
-});
-const [unreadCount, setUnreadCount] = useState(0);
-const [dailyQuote, setDailyQuote] = useState({});
-const [studyTip, setStudyTip] = useState({});
-const [overdueTasks, setOverdueTasks] = useState([]);
-const [calendarData, setCalendarData] =
-    useState([]);
-
-
-        const quotes = [
-  {
-    text: "The future depends on what you do today.",
-    author: "Mahatma Gandhi"
-  },
-  {
-    text: "Success is the sum of small efforts repeated day in and day out.",
-    author: "Robert Collier"
-  },
-  {
-    text: "Learning never exhausts the mind.",
-    author: "Leonardo da Vinci"
-  },
-  {
-    text: "Education is the most powerful weapon which you can use to change the world.",
-    author: "Nelson Mandela"
-  },
-  {
-    text: "Dream, dream, dream. Dreams transform into thoughts and thoughts result in action.",
-    author: "A.P.J. Abdul Kalam"
-  }
-];
-
-const studyTips = [
-{
-    tip: "Use the Pomodoro Technique: 25 min focus + 5 min break."
-},
-{
-    tip: "Revise within 24 hours to improve retention."
-},
-{
-    tip: "Study difficult topics when your energy is highest."
-},
-{
-    tip: "Practice active recall instead of rereading notes."
-},
-{
-    tip: "Solve previous questions before exams."
-},
-{
-    tip: "Keep your phone away during study sessions."
-},
-{
-    tip: "Teach a concept to someone else to test understanding."
-}
-];
-
-  useEffect(() => {
-
-    loadDashboard();
-    loadUnreadCount();
-   
-    loadOverdueTasks();
-    loadCalendar();
-  
-
-    const day = new Date().getDate();
-
-    setDailyQuote(
-        quotes[day % quotes.length]
-    );
-
-    setStudyTip(
-        studyTips[day % studyTips.length]
-    );
-
-}, []);
-
-
-const loadDashboard = async () => {
-    try {
-        const response = await getDashboardData();
-        setDashboard(response.data);
-    } catch (error) {
-        console.log(error);
-    }
+    productivityScore: 0,
 };
-    const loadUnreadCount = async () => {
+
+
+function StatCard({
+    icon,
+    title,
+    value,
+    className = "",
+}) {
+    return (
+        <div className={`metric-card ${className}`}>
+            <div className="metric-icon">
+                {icon}
+            </div>
+
+            <div className="metric-content">
+                <span>{title}</span>
+                <strong>{value}</strong>
+            </div>
+
+            <span className="metric-arrow">›</span>
+        </div>
+    );
+}
+
+
+function QuickAction({
+    to,
+    icon,
+    title,
+    description,
+    className,
+}) {
+    return (
+        <Link
+            to={to}
+            className={`quick-action ${className || ""}`}
+        >
+            <div className="quick-action-icon">
+                {icon}
+            </div>
+
+            <div>
+                <strong>{title}</strong>
+                <span>{description}</span>
+            </div>
+
+            <span className="quick-action-arrow">›</span>
+        </Link>
+    );
+}
+
+
+const Dashboard = () => {
+
+    const navigate = useNavigate();
+
+    const [dashboard, setDashboard] =
+        useState(EMPTY_DASHBOARD);
+
+    const [isLoading, setIsLoading] =
+        useState(true);
+
+    const [loadError, setLoadError] =
+        useState(null);
+
+    const [unreadCount, setUnreadCount] =
+        useState(0);
+
+    const [dailyQuote, setDailyQuote] =
+        useState({});
+
+    const [dailyTip, setDailyTip] =
+        useState("");
+
+    const [overdueTasks, setOverdueTasks] =
+        useState([]);
+
+
+    useEffect(() => {
+
+        const day =
+            new Date().getDate();
+
+        setDailyQuote(
+            QUOTES[day % QUOTES.length]
+        );
+
+        setDailyTip(
+            DAILY_TIPS[day % DAILY_TIPS.length]
+        );
+
+        loadDashboard();
+        loadUnreadCount();
+        loadOverdueTasks();
+
+    }, []);
+
+
+    const loadDashboard = async () => {
+
+        setIsLoading(true);
+
         try {
-            const res = await getUnreadCount();
-            setUnreadCount(res.data);
+
+            const response =
+                await getDashboardData();
+
+            setDashboard(response.data);
+
+            setLoadError(null);
+
         } catch (error) {
-            console.error(error);
+
+            console.error(
+                "Failed to load dashboard:",
+                error
+            );
+
+            setLoadError(
+                "Unable to load your productivity data."
+            );
+
+        } finally {
+
+            setIsLoading(false);
+
         }
     };
 
 
+    const loadUnreadCount = async () => {
+
+        try {
+
+            const response =
+                await getUnreadCount();
+
+            setUnreadCount(response.data);
+
+        } catch (error) {
+
+            console.error(
+                "Failed to load notifications:",
+                error
+            );
+
+        }
+    };
 
 
+    const loadOverdueTasks = async () => {
 
-const loadOverdueTasks = async () => {
+        try {
 
-    try {
+            const response =
+                await getOverdueTasks();
 
-        const response =
-            await getOverdueTasks();
+            setOverdueTasks(
+                response.data || []
+            );
 
-        setOverdueTasks(response.data);
+        } catch (error) {
 
-    } catch (error) {
+            console.error(
+                "Failed to load overdue tasks:",
+                error
+            );
 
-        console.log(error);
-    }
-};
+        }
+    };
 
 
-const loadCalendar = async () => {
-
-    try {
-
-        const response =
-            await getCalendarData();
-
-        setCalendarData(
-            response.data
+    const goalRemaining =
+        Math.max(
+            dashboard.dailyGoal -
+            dashboard.todayCompletedTasks,
+            0
         );
 
-    } catch (error) {
 
-        console.log(error);
-    }
-};
+    const goalProgress =
+        dashboard.dailyGoal > 0
+            ? Math.min(
+                (
+                    dashboard.todayCompletedTasks /
+                    dashboard.dailyGoal
+                ) * 100,
+                100
+            )
+            : 0;
 
 
     return (
-        <div
-  style={{
-    minHeight: "100vh",
-    padding: "30px",
-    background: "#F8F5FF"
-  }}
->
 
-           <div className="dashboard-header">
+        <div className="dashboard-page">
 
-    <div>
-        <h1
-            style={{
-                fontSize: "2.5rem",
-                fontWeight: "700",
-                color: "#7C3AED"
-            }}
-        >
-            ✨ ConsistIQ Dashboard
-        </h1>
+            {/* =================================
+                TOP NAVIGATION
+            ================================= */}
 
-        <p className="dashboard-subtitle">
-            Track your tasks, build consistency,
-            and achieve your study goals.
-        </p>
-    </div>
+            <header className="dashboard-topbar">
 
-<div className="welcome-card">
-    <h2>
-        Welcome Back 👋
-    </h2>
+                <div className="brand">
 
-    <p>
-        Stay consistent today and
-        complete your goals.
-    </p>
-</div>
-    <Link to="/notifications">
-        <Badge
-            badgeContent={unreadCount}
-            color="error"
-        >
-            <NotificationsIcon fontSize="large" />
-        </Badge>
-    </Link>
+                    <div className="brand-mark">
+                        <TrackChangesIcon />
+                    </div>
 
-</div>
-<div className="quote-card">
+                    <span>ConsistIQ</span>
 
-    <h3>💡 Daily Motivation</h3>
+                </div>
 
-    <p>
-        "{dailyQuote.text}"
-    </p>
 
-    <span>
-        — {dailyQuote.author}
-    </span>
+                <nav className="top-navigation">
 
-</div>
-<div className="study-tip-card">
+                    <Link
+                        to="/profile"
+                        className="top-nav-link"
+                    >
+                        Profile
+                    </Link>
 
-    <h3>💡 Study Tip Of The Day</h3>
+                    <Link
+                        to="/dashboard"
+                        className="top-nav-link active"
+                    >
+                        Dashboard
+                    </Link>
 
-    <p>
-        {studyTip.tip}
-    </p>
+                    <Link
+                        to="/tasks"
+                        className="top-nav-link"
+                    >
+                        Tasks
+                    </Link>
 
-</div>
+                    <Link
+                        to="/create-task"
+                        className="top-nav-link"
+                    >
+                        Create Task
+                    </Link>
 
-            <div className="dashboard-grid">
-              
-              <div className="dashboard-card daily-goal-card">
+                    <Link
+                        to="/notifications"
+                        className="top-nav-link notification-link"
+                    >
 
-    <h3>🎯 Daily Goal</h3>
+                        <Badge
+                            badgeContent={unreadCount}
+                            color="error"
+                        >
+                            <NotificationsNoneIcon />
+                        </Badge>
 
-    <h2>
-        {dashboard.todayCompletedTasks} / {dashboard.dailyGoal}
-    </h2>
+                    </Link>
 
-    <div className="goal-progress">
+                </nav>
 
-        <div
-            className="goal-progress-fill"
-            style={{
-                width: `${
-                    dashboard.dailyGoal > 0
-                        ? (dashboard.todayCompletedTasks /
-                           dashboard.dailyGoal) * 100
-                        : 0
-                }%`
-            }}
-        />
+            </header>
 
-    </div>
 
-    <p>
-        {dashboard.dailyGoal -
-            dashboard.todayCompletedTasks > 0
-            ? `${dashboard.dailyGoal -
-                dashboard.todayCompletedTasks}
-                tasks remaining today`
-            : "Goal Achieved 🎉"}
-    </p>
+            {/* =================================
+                MAIN LAYOUT
+            ================================= */}
 
-</div>
-<div className="score-card">
+            <div className="dashboard-layout">
 
-    <h3>
-        ⚡ Productivity Score
-    </h3>
+                {/* =================================
+                    SIDEBAR
+                ================================= */}
 
-    <h1>
-        {dashboard.productivityScore}/100
-    </h1>
+                <aside className="dashboard-sidebar">
 
-    <div className="score-bar">
+                    <div className="sidebar-brand-mobile">
+                        <TrackChangesIcon />
+                        <span>ConsistIQ</span>
+                    </div>
 
-        <div
-            className="score-fill"
-            style={{
-                width:
-                `${dashboard.productivityScore}%`
-            }}
-        />
 
-    </div>
+                    <nav className="sidebar-navigation">
 
-</div>
-{overdueTasks.length > 0 && (
+                        <Link
+                            to="/dashboard"
+                            className="sidebar-link active"
+                        >
+                            <DashboardIcon />
+                            <span>Dashboard</span>
+                        </Link>
 
-<div className="overdue-card">
 
-    <h3>
-        🚨 Overdue Tasks
-    </h3>
+                        <Link
+                            to="/tasks"
+                            className="sidebar-link"
+                        >
+                            <ChecklistIcon />
+                            <span>Tasks</span>
+                        </Link>
 
-    <p>
-        You have {overdueTasks.length}
-        overdue task(s)
-    </p>
 
-    {overdueTasks.slice(0,3).map(task => (
+                        <Link
+                            to="/create-task"
+                            className="sidebar-link"
+                        >
+                            <AddTaskIcon />
+                            <span>Create Task</span>
+                        </Link>
 
-        <div
-            key={task.id}
-            className="overdue-item"
-        >
-            <strong>
-                ⚠️ {task.title}
-            </strong>
 
-            <p>
-                Due: {task.dueDate}
-            </p>
+                        <Link
+                            to="/analytics"
+                            className="sidebar-link"
+                        >
+                            <AnalyticsIcon />
+                            <span>Analytics</span>
+                        </Link>
+
+
+                        <Link
+                            to="/notifications"
+                            className="sidebar-link"
+                        >
+                            <NotificationsNoneIcon />
+                            <span>Notifications</span>
+
+                            {unreadCount > 0 && (
+                                <b className="sidebar-notification-count">
+                                    {unreadCount}
+                                </b>
+                            )}
+
+                        </Link>
+
+                    </nav>
+
+
+                    <div className="sidebar-bottom-card">
+
+                        <BoltIcon />
+
+                        <p>
+                            Small steps every day
+                            create big results.
+                        </p>
+
+                        <div className="sidebar-line" />
+
+                    </div>
+
+                </aside>
+
+
+                {/* =================================
+                    CONTENT
+                ================================= */}
+
+                <main className="dashboard-content">
+
+
+                    {/* =================================
+                        HERO
+                    ================================= */}
+
+                    <section className="dashboard-hero">
+
+                        <div className="hero-icon">
+                            <TrackChangesIcon />
+                        </div>
+
+                        <div className="hero-content">
+
+                            <h1>
+                                Your productivity snapshot ✨
+                            </h1>
+
+                            <p>
+                                Organize your work, stay focused,
+                                and make meaningful progress every day.
+                            </p>
+
+                        </div>
+
+                        <div className="hero-decoration">
+                            ✨
+                        </div>
+
+                    </section>
+
+
+                    {/* ERROR */}
+
+                    {loadError && (
+                        <div className="dashboard-error">
+                            {loadError}
+                        </div>
+                    )}
+
+
+                    {/* =================================
+                        DESKTOP GRID
+                    ================================= */}
+
+                    <div className="dashboard-main-grid">
+
+
+                        {/* LEFT / CENTER */}
+
+                        <div className="dashboard-primary">
+
+
+                            {/* =================================
+                                METRICS
+                            ================================= */}
+
+                            {isLoading ? (
+
+                                <div className="metrics-grid">
+
+                                    {Array.from({
+                                        length: 5
+                                    }).map((_, index) => (
+
+                                        <div
+                                            key={index}
+                                            className="metric-skeleton"
+                                        />
+
+                                    ))}
+
+                                </div>
+
+                            ) : (
+
+                                <div className="metrics-grid">
+
+                                    {/* TODAY TARGET */}
+
+                                    <div className="metric-card target-card">
+
+                                        <div className="metric-icon">
+                                            <TrackChangesIcon />
+                                        </div>
+
+                                        <div className="metric-content">
+
+                                            <span>
+                                                Today's target
+                                            </span>
+
+                                            <strong>
+                                                {
+                                                    dashboard.todayCompletedTasks
+                                                }
+                                                {" / "}
+                                                {
+                                                    dashboard.dailyGoal
+                                                }
+                                            </strong>
+
+                                            <div className="mini-progress">
+
+                                                <div
+                                                    style={{
+                                                        width:
+                                                            `${goalProgress}%`
+                                                    }}
+                                                />
+
+                                            </div>
+
+                                            <small>
+                                                {goalRemaining > 0
+                                                    ? `${goalRemaining} tasks remaining`
+                                                    : "Target achieved 🎉"
+                                                }
+                                            </small>
+
+                                        </div>
+
+                                    </div>
+
+
+                                    {/* PRODUCTIVITY */}
+
+                                    <div className="metric-card score-card">
+
+                                        <div className="metric-icon">
+                                            <BoltIcon />
+                                        </div>
+
+                                        <div className="metric-content">
+
+                                            <span>
+                                                Productivity score
+                                            </span>
+
+                                            <strong>
+                                                {
+                                                    dashboard.productivityScore
+                                                }
+                                                /100
+                                            </strong>
+
+                                            <div className="mini-progress">
+
+                                                <div
+                                                    style={{
+                                                        width:
+                                                            `${dashboard.productivityScore}%`
+                                                    }}
+                                                />
+
+                                            </div>
+
+                                            <small>
+                                                Keep going! 💪
+                                            </small>
+
+                                        </div>
+
+                                    </div>
+
+
+                                    {/* NEEDS ATTENTION */}
+
+                                    <div className="metric-card attention-card">
+
+                                        <div className="metric-icon">
+                                            <WarningAmberIcon />
+                                        </div>
+
+                                        <div className="metric-content">
+
+                                            <span>
+                                                Needs attention
+                                            </span>
+
+                                            <strong>
+                                                {overdueTasks.length}
+                                            </strong>
+
+                                            <small>
+                                                {overdueTasks.length === 1
+                                                    ? "Overdue task"
+                                                    : "Overdue tasks"
+                                                }
+                                            </small>
+
+                                        </div>
+
+                                    </div>
+
+
+                                    {/* COMPLETED */}
+
+                                    <div className="metric-card completed-card">
+
+                                        <div className="metric-icon">
+                                            <CheckCircleIcon />
+                                        </div>
+
+                                        <div className="metric-content">
+
+                                            <span>
+                                                Completed
+                                            </span>
+
+                                            <strong>
+                                                {
+                                                    dashboard.completedTask
+                                                }
+                                            </strong>
+
+                                            <small>
+                                                Overall completed
+                                            </small>
+
+                                        </div>
+
+                                    </div>
+
+
+                                    {/* COMPLETION */}
+
+                                    <div className="metric-card completion-card">
+
+                                        <div className="metric-icon">
+                                            <BoltIcon />
+                                        </div>
+
+                                        <div className="metric-content">
+
+                                            <span>
+                                                Completion rate
+                                            </span>
+
+                                            <strong>
+                                                {
+                                                    dashboard.completionPercentage
+                                                }%
+                                            </strong>
+
+                                            <div className="mini-progress">
+
+                                                <div
+                                                    style={{
+                                                        width:
+                                                            `${dashboard.completionPercentage}%`
+                                                    }}
+                                                />
+
+                                            </div>
+
+                                            <small>
+                                                Overall task completion
+                                            </small>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            )}
+
+
+                            {/* =================================
+                                MOTIVATION + TIP
+                            ================================= */}
+
+                            <div className="info-grid">
+
+
+                                <section className="info-card motivation-card">
+
+                                    <div className="info-card-header">
+
+                                        <span className="info-icon">
+                                            “
+                                        </span>
+
+                                        <h2>
+                                            Daily motivation
+                                        </h2>
+
+                                    </div>
+
+                                    <blockquote>
+                                        "{dailyQuote.text}"
+                                    </blockquote>
+
+                                    <p>
+                                        — {dailyQuote.author}
+                                    </p>
+
+                                    <div className="quote-dots">
+                                        <i className="active" />
+                                        <i />
+                                        <i />
+                                    </div>
+
+                                </section>
+
+
+                                <section className="info-card tip-card">
+
+                                    <div className="info-card-header">
+
+                                        <span className="info-icon">
+                                            💡
+                                        </span>
+
+                                        <h2>
+                                            Daily focus tip
+                                        </h2>
+
+                                    </div>
+
+                                    <p className="tip-text">
+                                        {dailyTip}
+                                    </p>
+
+                                    <span className="tip-badge">
+                                        Make it simple. Make it happen.
+                                    </span>
+
+                                </section>
+
+                            </div>
+
+
+                            {/* =================================
+                                STATISTICS
+                            ================================= */}
+
+                            <div className="statistics-grid">
+
+                                <StatCard
+                                    icon={<ChecklistIcon />}
+                                    title="Total tasks"
+                                    value={dashboard.totalTasks}
+                                    className="total-stat"
+                                />
+
+                                <StatCard
+                                    icon={<CalendarMonthIcon />}
+                                    title="Planned"
+                                    value={dashboard.planned}
+                                    className="planned-stat"
+                                />
+
+                                <StatCard
+                                    icon={<AccessTimeIcon />}
+                                    title="In progress"
+                                    value={dashboard.inProgressTasks}
+                                    className="progress-stat"
+                                />
+
+                                <StatCard
+                                    icon={<CheckCircleIcon />}
+                                    title="Completed"
+                                    value={dashboard.completedTask}
+                                    className="complete-stat"
+                                />
+
+                            </div>
+
+
+                            {/* =================================
+                                QUICK ACTIONS
+                            ================================= */}
+
+                            <section className="quick-actions-section">
+
+                                <div className="section-heading">
+
+                                    <BoltIcon />
+
+                                    <div>
+                                        <h2>
+                                            Quick actions
+                                        </h2>
+
+                                        <p>
+                                            Get things done faster.
+                                        </p>
+                                    </div>
+
+                                </div>
+
+
+                                <div className="quick-actions-grid">
+
+                                    <QuickAction
+                                        to="/create-task"
+                                        icon={<AddTaskIcon />}
+                                        title="Create Task"
+                                        description="Add a new task"
+                                        className="create-action"
+                                    />
+
+
+                                    <QuickAction
+                                        to="/tasks"
+                                        icon={<ChecklistIcon />}
+                                        title="View Tasks"
+                                        description="See all your tasks"
+                                        className="tasks-action"
+                                    />
+
+
+                                    <QuickAction
+                                        to="/analytics"
+                                        icon={<AnalyticsIcon />}
+                                        title="Analytics"
+                                        description="Check your progress"
+                                        className="analytics-action"
+                                    />
+
+                                </div>
+
+                            </section>
+
+
+                            {/* =================================
+                                SMART DAILY VIEW
+                            ================================= */}
+
+                            <section className="smart-daily-section">
+                                <SmartDailyView />
+                            </section>
+
+
+                            {/* =================================
+                                FOCUS TIMER MOBILE
+                            ================================= */}
+
+                            <div className="mobile-focus-timer">
+
+                                <div className="focus-header">
+
+                                    <AccessTimeIcon />
+
+                                    <div>
+                                        <h2>
+                                            Focus Timer
+                                        </h2>
+
+                                        <p>
+                                            Work with focus.
+                                            Take breaks.
+                                        </p>
+                                    </div>
+
+                                </div>
+
+                                <PomodoroTimer />
+
+                            </div>
+
+
+                            {/* =================================
+                                FOOTER
+                            ================================= */}
+
+                            <footer className="dashboard-footer">
+
+                                <strong>
+                                    ✨ Stay consistent, stay productive.
+                                </strong>
+
+                                <span>
+                                    © 2026 ConsistIQ. Built for everyone.
+                                </span>
+
+                            </footer>
+
+                        </div>
+
+
+                        {/* =================================
+                            RIGHT SIDEBAR
+                        ================================= */}
+
+<aside className="dashboard-right-column">
+
+
+    {/* =================================
+        FOCUS TIMER
+    ================================= */}
+
+    <section className="focus-timer-card">
+
+
+        {/* Actual Pomodoro Timer */}
+        <div className="real-timer">
+
+            <PomodoroTimer />
 
         </div>
 
-    ))}
+    </section>
 
-</div>
+{/* =================================
+    QUICK OVERVIEW
+================================= */}
 
-)}
+                            {/* =================================
+                                QUICK OVERVIEW
+                            ================================= */}
+
+                            <section className="overview-card">
+
+                                <div className="right-section-title">
+
+                                    <BoltIcon />
+
+                                    <h2>
+                                        Quick overview
+                                    </h2>
+
+                                </div>
 
 
-<div className="calendar-card">
+                                <div className="overview-item">
 
-    <h3>
-        🔥 Study Consistency
-    </h3>
+                                    <span>
+                                        🎯 Today's tasks
+                                    </span>
 
-    <div className="calendar-grid">
+                                    <strong>
+                                        {
+                                            dashboard.todayCompletedTasks
+                                        }
+                                        {" / "}
+                                        {
+                                            dashboard.dailyGoal
+                                        }
+                                    </strong>
 
-        {calendarData.map(day => (
+                                </div>
 
-            <div
-                key={day.date}
-                className={
-                    day.completed
-                    ? "calendar-day active"
-                    : "calendar-day"
-                }
-            />
 
-        ))}
+                                <div className="overview-progress">
 
-    </div>
+                                    <div
+                                        style={{
+                                            width:
+                                                `${goalProgress}%`
+                                        }}
+                                    />
 
-</div>
-<div
-  className="dashboard-card"
-  style={{
-    background: "white",
-    borderRadius: "20px",
-    padding: "25px",
-    boxShadow: "0 8px 20px rgba(0,0,0,0.08)"
-  }}
->                    <h3>📋 Total Tasks</h3>
-<h2
-  style={{
-    color: "#7C3AED",
-    fontSize: "2.5rem",
-    marginTop: "10px"
-  }}
->
-{dashboard.totalTasks}
-</h2>                </div>
+                                </div>
 
-<div
-  className="dashboard-card"
-  style={{
-    background: "white",
-    borderRadius: "20px",
-    padding: "25px",
-    boxShadow: "0 8px 20px rgba(0,0,0,0.08)"
-  }}
->                    <h3>📅 Planned</h3>
-                   <h2
-  style={{
-    color: "#7C3AED",
-    fontSize: "2.5rem",
-    marginTop: "10px"
-  }}
->
- {dashboard.planned}</h2>
-                </div>
 
-<div
-  className="dashboard-card"
-  style={{
-    background: "white",
-    borderRadius: "20px",
-    padding: "25px",
-    boxShadow: "0 8px 20px rgba(0,0,0,0.08)"
-  }}
->                   <h3>🚀 In Progress</h3>
-                    <h2
-  style={{
-    color: "#7C3AED",
-    fontSize: "2.5rem",
-    marginTop: "10px"
-  }}
->{dashboard.inProgressTasks}</h2>
-                </div>
+                                <div className="overview-item">
+                                    <span>📅 Planned</span>
+                                    <strong>
+                                        {dashboard.planned}
+                                    </strong>
+                                </div>
 
-<div
-  className="dashboard-card"
-  style={{
-    background: "white",
-    borderRadius: "20px",
-    padding: "25px",
-    boxShadow: "0 8px 20px rgba(0,0,0,0.08)"
-  }}
->                   <h3>✅ Completed</h3>
-                   <h2
-  style={{
-    color: "#7C3AED",
-    fontSize: "2.5rem",
-    marginTop: "10px"
-  }}
->
- {dashboard.completedTask}</h2>
-                </div>
 
-<div className="dashboard-card completion-card">
-    <h3>📈 Completion %</h3>
-    <h2>{dashboard.completionPercentage}%</h2>
-</div>
+                                <div className="overview-item">
+                                    <span>🕐 In progress</span>
+                                    <strong>
+                                        {dashboard.inProgressTasks}
+                                    </strong>
+                                </div>
+
+
+                                <div className="overview-item">
+                                    <span>✅ Completed</span>
+                                    <strong>
+                                        {dashboard.completedTask}
+                                    </strong>
+                                </div>
+
+                            </section>
+
+
+                            {/* =================================
+                                UPCOMING / ATTENTION
+                            ================================= */}
+
+                            <section className="upcoming-card">
+
+                                <div className="right-section-title">
+
+                                    <CalendarMonthIcon />
+
+                                    <h2>
+                                        Upcoming
+                                    </h2>
+
+                                    <Link to="/tasks">
+                                        View all →
+                                    </Link>
+
+                                </div>
+
+
+                                {overdueTasks.length > 0 ? (
+
+                                    overdueTasks
+                                        .slice(0, 3)
+                                        .map((task) => (
+
+                                            <div
+                                                className="upcoming-item"
+                                                key={task.id}
+                                            >
+
+                                                <span className="task-circle" />
+
+                                                <div>
+
+                                                    <strong>
+                                                        {task.title}
+                                                    </strong>
+
+                                                    <small>
+                                                        Due: {task.dueDate}
+                                                    </small>
+
+                                                </div>
+
+                                            </div>
+
+                                        ))
+
+                                ) : (
+
+                                    <div className="empty-upcoming">
+
+                                        <CheckCircleIcon />
+
+                                        <p>
+                                            You're all caught up!
+                                        </p>
+
+                                    </div>
+
+                                )}
+
+                            </section>
+
+
+                            {/* QUOTE */}
+
+                            <div className="side-quote">
+                                <span>“</span>
+                                <p>
+                                    Progress, not perfection.
+                                </p>
+                            </div>
+
+                        </aside>
+
+                    </div>
+
+                </main>
 
             </div>
-
-            <div className="dashboard-actions">
-
-                <Link to="/create-task">
-<button
-  style={{
-    background: "#7C3AED",
-    color: "white",
-    border: "none",
-    padding: "12px 24px",
-    borderRadius: "12px",
-    cursor: "pointer",
-    fontWeight: "600"
-  }}
->                        Create Task
-                    </button>
-                </Link>
-
-                <Link to="/tasks">
-<button
-  style={{
-    background: "#EC4899",
-    color: "white",
-    border: "none",
-    padding: "12px 24px",
-    borderRadius: "12px",
-    cursor: "pointer",
-    fontWeight: "600"
-  }}
->                        View Tasks
-                    </button>
-                </Link>
-
-               <Button
-  variant="contained"
-  sx={{
-    background: "#111827",
-    borderRadius: "12px"
-  }}
-  onClick={() => navigate("/analytics")}
->
-  Analytics
-</Button>
-
-            </div>
-            <PomodoroTimer />
 
         </div>
     );
 };
+
 
 export default Dashboard;

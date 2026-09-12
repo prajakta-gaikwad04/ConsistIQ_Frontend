@@ -7,7 +7,8 @@ import {
     CardContent,
     Grid,
     CircularProgress,
-    Box
+    Box,
+    Button
 } from "@mui/material";
 
 import {
@@ -19,12 +20,22 @@ import {
     Tooltip,
     CartesianGrid
 } from "recharts";
-
+import {
+    format,
+    startOfMonth,
+    endOfMonth,
+    startOfWeek,
+    endOfWeek,
+    eachDayOfInterval,
+    isSameMonth,
+    isToday
+} from "date-fns";
 import {
     getStats,
     getWeeklyChart,
     getMonthlyChart,
-    getStreak
+    getStreak,
+    getCompletionDates
 } from "../services/analyticsService";
 import { getAchievements }
 from "../services/analyticsService";
@@ -47,6 +58,8 @@ const [achievements, setAchievements] = useState([]);
         currentStreak: 0,
         bestStreak: 0
     });
+    const [currentMonth, setCurrentMonth] = useState(new Date());
+const [completionDates, setCompletionDates] = useState([]);
     const loadAchievements = async () => {
 
     try {
@@ -68,7 +81,25 @@ const [achievements, setAchievements] = useState([]);
 
     loadAchievements();
     }, []);
+    useEffect(() => {
+    loadCalendar(currentMonth);
+}, [currentMonth]);
+const loadCalendar = async (month) => {
+    try {
+        const start = startOfMonth(month);
+        const end = endOfMonth(month);
 
+        const response = await getCompletionDates(
+            format(start, "yyyy-MM-dd"),
+            format(end, "yyyy-MM-dd")
+        );
+
+        setCompletionDates(response.data);
+
+    } catch (error) {
+        console.log("CALENDAR ERROR:", error);
+    }
+};
     const loadAnalytics = async () => {
         try {
 
@@ -97,7 +128,39 @@ const [achievements, setAchievements] = useState([]);
             setLoading(false);
         }
     };
+const previousMonth = () => {
+    setCurrentMonth(
+        new Date(
+            currentMonth.getFullYear(),
+            currentMonth.getMonth() - 1,
+            1
+        )
+    );
+};
 
+const nextMonth = () => {
+    setCurrentMonth(
+        new Date(
+            currentMonth.getFullYear(),
+            currentMonth.getMonth() + 1,
+            1
+        )
+    );
+};
+
+const calendarStart = startOfWeek(startOfMonth(currentMonth));
+const calendarEnd = endOfWeek(endOfMonth(currentMonth));
+
+const calendarDays = eachDayOfInterval({
+    start: calendarStart,
+    end: calendarEnd
+});
+
+const isCompleted = (date) => {
+    return completionDates.includes(
+        format(date, "yyyy-MM-dd")
+    );
+};
     if (loading) {
         return (
             <Box
@@ -246,7 +309,242 @@ const [achievements, setAchievements] = useState([]);
 
                 </CardContent>
             </Card>
+<Box
+    sx={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        gap: 1,
+        mb: 3
+    }}
+>
+    <Button
+        variant="outlined"
+        onClick={previousMonth}
+        sx={{ color: "#fff", borderColor: "#fff" }}
+    >
+        ←
+    </Button>
 
+    <select
+        value={currentMonth.getMonth()}
+        onChange={(e) => {
+            setCurrentMonth(
+                new Date(
+                    currentMonth.getFullYear(),
+                    Number(e.target.value),
+                    1
+                )
+            );
+        }}
+        style={{
+            padding: "10px",
+            borderRadius: "8px",
+            fontSize: "16px"
+        }}
+    >
+        {[
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December"
+        ].map((month, index) => (
+            <option key={index} value={index}>
+                {month}
+            </option>
+        ))}
+    </select>
+
+    <select
+        value={currentMonth.getFullYear()}
+        onChange={(e) => {
+            setCurrentMonth(
+                new Date(
+                    Number(e.target.value),
+                    currentMonth.getMonth(),
+                    1
+                )
+            );
+        }}
+        style={{
+            padding: "10px",
+            borderRadius: "8px",
+            fontSize: "16px"
+        }}
+    >
+        {Array.from({ length: 11 }, (_, i) => {
+            const year = new Date().getFullYear() - 5 + i;
+
+            return (
+                <option key={year} value={year}>
+                    {year}
+                </option>
+            );
+        })}
+    </select>
+
+    <Button
+        variant="outlined"
+        onClick={nextMonth}
+        sx={{ color: "#fff", borderColor: "#fff" }}
+    >
+        →
+    </Button>
+</Box>
+<Card
+    sx={{
+        ...glassCard,
+        mb: 4
+    }}
+>
+    <CardContent>
+
+        <Typography
+            variant="h5"
+            fontWeight="bold"
+            sx={{
+                textAlign: "center",
+                mb: 3
+            }}
+        >
+            📅 Calendar
+        </Typography>
+
+        {/* WEEKDAYS */}
+        <Box
+            sx={{
+                display: "grid",
+                gridTemplateColumns: "repeat(7, 1fr)",
+                gap: 1,
+                mb: 1
+            }}
+        >
+            {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map(
+                (day) => (
+                    <Box
+                        key={day}
+                        sx={{
+                            textAlign: "center",
+                            fontWeight: "bold",
+                            color: "#fff",
+                            p: 1
+                        }}
+                    >
+                        {day}
+                    </Box>
+                )
+            )}
+        </Box>
+
+        {/* CALENDAR DAYS */}
+        <Box
+            sx={{
+                display: "grid",
+                gridTemplateColumns: "repeat(7, 1fr)",
+                gap: 1
+            }}
+        >
+            {calendarDays.map((date) => {
+
+                const completed = isCompleted(date);
+                const today = isToday(date);
+                const sameMonth = isSameMonth(
+                    date,
+                    currentMonth
+                );
+
+                return (
+                    <Box
+                        key={date.toISOString()}
+                        sx={{
+                            minHeight: { xs: 45, sm: 60 },
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            borderRadius: "10px",
+
+                            backgroundColor: completed
+                                ? "#06d6a0"
+                                : sameMonth
+                                ? "rgba(255,255,255,0.10)"
+                                : "rgba(255,255,255,0.03)",
+
+                            border: today
+                                ? "2px solid #ffd166"
+                                : "1px solid rgba(255,255,255,0.08)",
+
+                            color: sameMonth
+                                ? "#fff"
+                                : "rgba(255,255,255,0.3)",
+
+                            fontWeight: completed || today
+                                ? "bold"
+                                : "normal",
+
+                            transition: "0.2s",
+
+                            "&:hover": {
+                                backgroundColor: completed
+                                    ? "#06d6a0"
+                                    : "rgba(255,255,255,0.2)"
+                            }
+                        }}
+                    >
+                        {format(date, "d")}
+                    </Box>
+                );
+            })}
+        </Box>
+
+        {/* LEGEND */}
+        <Box
+            sx={{
+                display: "flex",
+                justifyContent: "center",
+                gap: 3,
+                mt: 3,
+                flexWrap: "wrap"
+            }}
+        >
+            <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                <Box
+                    sx={{
+                        width: 14,
+                        height: 14,
+                        borderRadius: "4px",
+                        backgroundColor: "#06d6a0"
+                    }}
+                />
+                <Typography variant="body2">
+                    Completed
+                </Typography>
+            </Box>
+
+            <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                <Box
+                    sx={{
+                        width: 14,
+                        height: 14,
+                        borderRadius: "4px",
+                        border: "2px solid #ffd166"
+                    }}
+                />
+                <Typography variant="body2">
+                    Today
+                </Typography>
+            </Box>
+        </Box>
+
+    </CardContent>
+</Card>
             {/* STREAK */}
 
             <Card sx={{ mb: 4 }}>

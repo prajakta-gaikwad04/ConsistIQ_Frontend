@@ -7,13 +7,16 @@ const CreateTask = () => {
     const navigate = useNavigate();
 
     const [task, setTask] = useState({
-        title: "",
-        description: "",
-        status: "PLANNED",
-        priority: "LOW",
-        dueDate: "",
-        category: ""
-    });
+    title: "",
+    description: "",
+    status: "PLANNED",
+    priority: "LOW",
+    dueDate: "",
+    category: "",
+    recurring: false,
+    recurrenceType: "NONE",
+    recurrenceEndDate: ""
+});
 const TASK_STATUS = [
     "PLANNED",
     "IN_PROGRESS",
@@ -29,25 +32,35 @@ const TASK_STATUS = [
         });
     };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+const handleSubmit = async (e) => {
+    e.preventDefault();
 
-        console.log(task);
+    if (
+        task.recurring &&
+        task.recurrenceEndDate &&
+        task.dueDate &&
+        task.recurrenceEndDate < task.dueDate
+    ) {
+        alert("Repeat Until date cannot be before the Due Date.");
+        return;
+    }
 
-        try {
-            await createTask(task);
+    console.log(task);
 
-            alert("Task Created Successfully");
+    try {
+        await createTask(task);
 
-            navigate("/tasks");
-        } catch (error) {
-    console.log(error);
-    console.log("Response:", error.response);
-    console.log("Data:", error.response?.data);
+        alert("Task Created Successfully");
 
-    alert("Failed To Create Task");
-}
-    };
+        navigate("/tasks");
+    } catch (error) {
+        console.log(error);
+        console.log("Response:", error.response);
+        console.log("Data:", error.response?.data);
+
+        alert("Failed To Create Task");
+    }
+};
 
     const inputStyle = {
   width: "100%",
@@ -191,7 +204,60 @@ const TASK_STATUS = [
           onChange={handleChange}
           style={inputStyle}
         />
+<div
+    style={{
+        display: "grid",
+        gridTemplateColumns: "repeat(auto-fit,minmax(200px,1fr))",
+        gap: "15px"
+    }}
+>
+    <div style={{ marginBottom: "10px" }}>
+        <label style={{ display: "block", marginBottom: "5px" }}>
+            Repeat Task
+        </label>
 
+        <select
+            name="recurrenceType"
+            value={task.recurrenceType}
+            onChange={(e) => {
+                const value = e.target.value;
+
+                setTask({
+                    ...task,
+                    recurrenceType: value,
+                    recurring: value !== "NONE",
+                    recurrenceEndDate:
+                        value === "NONE"
+                            ? ""
+                            : task.recurrenceEndDate
+                });
+            }}
+            style={inputStyle}
+        >
+            <option value="NONE">No Repeat</option>
+            <option value="DAILY">Daily</option>
+            <option value="WEEKLY">Weekly</option>
+            <option value="MONTHLY">Monthly</option>
+        </select>
+    </div>
+
+    {task.recurring && (
+        <div style={{ marginBottom: "10px" }}>
+            <label style={{ display: "block", marginBottom: "5px" }}>
+                Repeat Until
+            </label>
+
+            <input
+                type="date"
+                name="recurrenceEndDate"
+                value={task.recurrenceEndDate}
+                min={task.dueDate || undefined}
+                onChange={handleChange}
+                style={inputStyle}
+            />
+        </div>
+    )}
+</div>
         <button
           type="submit"
           style={{

@@ -1,64 +1,190 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from "react";
+
+const TIMER_MODES = {
+    focus: {
+        label: "Focus",
+        icon: "🎯",
+        duration: 25 * 60,
+    },
+    short: {
+        label: "Short Break",
+        icon: "☕",
+        duration: 5 * 60,
+    },
+    long: {
+        label: "Long Break",
+        icon: "🌿",
+        duration: 15 * 60,
+    },
+};
+
+const PRESETS = [25, 50, 90];
 
 const PomodoroTimer = () => {
-    const [seconds,setSeconds] = useState(1500);
-    const [running,setRunning] =useState(false);
+    const [mode, setMode] = useState("focus");
+    const [minutes, setMinutes] = useState(25);
+    const [seconds, setSeconds] = useState(25 * 60);
+    const [running, setRunning] = useState(false);
 
-    useEffect(() =>{
-        let timer;
-        if(running&& seconds>0){
-            timer=setInterval(()=>{
-                setSeconds(prev=>prev-1);
-            },1000);
+    useEffect(() => {
+        if (!running) return;
 
-        }
-        if(seconds===0){
-            alert("🎉 Focus Session Completed!");
+        const timer = setInterval(() => {
+            setSeconds((prev) => {
+                if (prev <= 1) {
+                    clearInterval(timer);
+                    setRunning(false);
+                    alert("🎉 Session completed!");
+                    return 0;
+                }
 
-            setRunning(false);
-        }
-        return()=>clearInterval(timer);
-    },[running,seconds]);
+                return prev - 1;
+            });
+        }, 1000);
 
-    const minutes =
-        String(Math.floor(seconds / 60)).padStart(2, "0");
+        return () => clearInterval(timer);
+    }, [running]);
 
-    const secs =
-        String(seconds % 60).padStart(2, "0");
+    const displayMinutes = String(
+        Math.floor(seconds / 60)
+    ).padStart(2, "0");
+
+    const displaySeconds = String(
+        seconds % 60
+    ).padStart(2, "0");
+
+    const toggleTimer = () => {
+        setRunning((prev) => !prev);
+    };
 
     const resetTimer = () => {
+        setRunning(false);
 
-        setSeconds(1500);
+        if (mode === "focus") {
+            setSeconds(minutes * 60);
+        } else {
+            setSeconds(TIMER_MODES[mode].duration);
+        }
+    };
+
+    const selectPreset = (value) => {
+        setMode("focus");
+        setMinutes(value);
+        setSeconds(value * 60);
         setRunning(false);
     };
-  return (
-    <div className="pomodoro-card">
 
-            <h3>⏱️ Pomodoro Timer</h3>
+    const selectMode = (selectedMode) => {
+        setMode(selectedMode);
+        setRunning(false);
+        setSeconds(TIMER_MODES[selectedMode].duration);
+    };
 
-            <h1>
-                {minutes}:{secs}
-            </h1>
+    return (
+        <div className="focus-timer-inner">
 
-            <div>
+            {/* HEADER */}
+            <div className="focus-timer-header">
+                <div className="focus-timer-icon">
+                    ◷
+                </div>
+
+                <div>
+                    <h3>Focus Timer</h3>
+                    <p>Stay focused. Get more done.</p>
+                </div>
+            </div>
+
+            {/* TIMER */}
+            <div className="timer-circle">
+                <div className="timer-circle-content">
+
+                    <strong>
+                        {displayMinutes}:{displaySeconds}
+                    </strong>
+
+                    <span>
+                        {mode === "focus"
+                            ? "Pomodoro"
+                            : TIMER_MODES[mode].label}
+                    </span>
+
+                    <button
+                        type="button"
+                        className="timer-play"
+                        onClick={toggleTimer}
+                        aria-label={
+                            running
+                                ? "Pause timer"
+                                : "Start timer"
+                        }
+                    >
+                        {running ? "❚❚" : "▶"}
+                    </button>
+
+                </div>
+            </div>
+
+            {/* PRESETS */}
+            <div className="timer-presets">
+                {PRESETS.map((preset) => (
+                    <button
+                        key={preset}
+                        type="button"
+                        className={
+                            mode === "focus" &&
+                            minutes === preset
+                                ? "selected"
+                                : ""
+                        }
+                        onClick={() => selectPreset(preset)}
+                    >
+                        {preset}:00
+                    </button>
+                ))}
+            </div>
+
+            {/* MODES */}
+            <div className="timer-modes">
+
+                {Object.entries(TIMER_MODES).map(
+                    ([key, timerMode]) => (
+                        <button
+                            key={key}
+                            type="button"
+                            className={`timer-mode ${
+                                mode === key ? "active" : ""
+                            }`}
+                            onClick={() => selectMode(key)}
+                        >
+                            <span>
+                                {timerMode.icon}
+                            </span>
+
+                            <small>
+                                {timerMode.label}
+                            </small>
+                        </button>
+                    )
+                )}
+
+            </div>
+
+            {/* CONTROLS */}
+            <div className="timer-controls">
 
                 <button
-                    onClick={() => setRunning(true)}
-                    className="primary-btn"
+                    type="button"
+                    className="timer-start-button"
+                    onClick={toggleTimer}
                 >
-                    Start
+                    {running ? "Pause" : "Start Focus"}
                 </button>
 
                 <button
-                    onClick={() => setRunning(false)}
-                    className="secondary-btn"
-                >
-                    Pause
-                </button>
-
-                <button
+                    type="button"
+                    className="timer-reset-button"
                     onClick={resetTimer}
-                    className="primary-btn"
                 >
                     Reset
                 </button>
@@ -66,9 +192,7 @@ const PomodoroTimer = () => {
             </div>
 
         </div>
-
     );
 };
 
-export default PomodoroTimer
-
+export default PomodoroTimer;

@@ -10,12 +10,14 @@ export const getStats = () =>
             Authorization: `Bearer ${getToken()}`
         }
     });
+
 export const getAchievements = () =>
     axios.get("http://localhost:8081/tasks/achievements", {
         headers: {
             Authorization: `Bearer ${getToken()}`
         }
     });
+
 export const getWeeklyChart = () =>
     axios.get(`${API_URL}/weekly-chart`, {
         headers: {
@@ -36,3 +38,17 @@ export const getStreak = () =>
             Authorization: `Bearer ${getToken()}`
         }
     });
+
+export const getCompletionDates = (startDate, endDate) => {
+    const token = getToken();
+
+    return axios.get(`${API_URL}/completion-dates`, {
+        params: {
+            startDate,
+            endDate
+        },
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    });
+};

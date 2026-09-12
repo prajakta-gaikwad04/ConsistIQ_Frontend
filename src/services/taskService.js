@@ -32,9 +32,11 @@ export const createTask = (taskData) => {
 export const completeTask = (id) => {
   return API.patch(`/tasks/${id}/complete`);
 };
+
 export const updateTask = (id, taskData) => {
   return API.put(`/tasks/${id}`, taskData);
 };
+
 export const deleteTask = (id) => {
   return API.delete(`/tasks/${id}`);
 };
@@ -44,25 +46,27 @@ export const getTaskById = (id) => {
 };
 
 export const getUpcomingTasks = () => {
-    return api.get("/tasks/upcoming");
+  return API.get("/tasks/upcoming");
 };
 
+
 export const getOverdueTasks = () => {
-    return api.get("/tasks/overdue");
+  return API.get("/tasks/overdue");
 };
 
 export const getCalendarData = () => {
-    return api.get("/tasks/calendar");
+  return API.get("/tasks/calendar");
 };
 
-export const getAchievements = () =>
-    api.get("/tasks/achievements");
+export const getAchievements = () => {
+  return API.get("/tasks/achievements");
+};
 
-import axios from "axios";
 
 export const cancelTask = (id) => {
-  return axios.put(`http://localhost:8080/tasks/${id}/cancel`);
+  return API.put(`/tasks/${id}/cancel`);
 };
+
 export const uploadFile = (taskId, file) => {
   const formData = new FormData();
   formData.append("file", file);
