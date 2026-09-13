@@ -10,7 +10,7 @@
 .dashboard-page {
     min-height: 100vh;
     width: 100%;
-    background: #f8ffff;
+    background: #f8fadb;
     color: #10265c;
     font-family:
         Inter,
@@ -2026,7 +2026,7 @@
     background:
         linear-gradient(
             135deg,
-            rgba(238, 234, 255, 0.96) 0%,
+            rgba(208, 201, 243, 0.96) 0%,
             rgba(235, 246, 255, 0.96) 48%,
             rgba(224, 255, 247, 0.96) 100%
         );
@@ -5076,4 +5076,148 @@
         padding: 16px !important;
     }
 
+}
+/* =========================================================
+   DAILY ENGLISH WORDS
+========================================================= */
+
+.daily-words-card {
+    margin-top: 18px;
+    padding: 22px;
+    border-radius: 22px;
+    background: rgba(255, 255, 255, 0.72);
+    border: 1px solid rgba(16, 38, 92, 0.08);
+    box-shadow: 0 12px 30px rgba(16, 38, 92, 0.07);
+    backdrop-filter: blur(14px);
+}
+
+.daily-words-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
+}
+
+.daily-words-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 14px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(16, 38, 92, 0.08);
+    font-size: 22px;
+}
+
+.daily-words-header h2 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 750;
+}
+
+.daily-words-header p {
+    margin: 4px 0 0;
+    font-size: 12px;
+    opacity: 0.65;
+}
+
+.daily-words-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.daily-word-item {
+    display: flex;
+    gap: 11px;
+    padding: 12px;
+
+    border-radius: 15px;
+    background: rgba(248, 250, 255, 0.85);
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease;
+}
+
+.daily-word-item:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.95);
+}
+
+.daily-word-number {
+    flex: 0 0 28px;
+
+    width: 28px;
+    height: 28px;
+
+    border-radius: 9px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    background: rgba(16, 38, 92, 0.08);
+}
+
+.daily-word-content {
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.daily-word-content strong {
+    font-size: 14px;
+    font-weight: 750;
+}
+
+.daily-word-content span {
+    font-size: 12px;
+    line-height: 1.4;
+    opacity: 0.75;
+}
+
+.daily-word-content small {
+    font-size: 11px;
+    line-height: 1.4;
+    opacity: 0.6;
+    font-style: italic;
+}
+
+.daily-words-loading,
+.daily-words-empty,
+.daily-words-unavailable {
+    padding: 18px 10px;
+    text-align: center;
+    font-size: 13px;
+    opacity: 0.7;
+}
+
+.daily-words-unavailable {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.daily-words-unavailable span,
+.daily-words-empty span {
+    font-size: 24px;
+}
+
+.daily-words-unavailable p,
+.daily-words-empty p {
+    margin: 0;
+}
+
+.daily-words-unavailable small {
+    font-size: 11px;
+    opacity: 0.65;
 }

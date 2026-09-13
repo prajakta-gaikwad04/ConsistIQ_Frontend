@@ -12,6 +12,7 @@ import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import WarningAmberIcon from "@mui/icons-material/WarningAmber";
 import TrackChangesIcon from "@mui/icons-material/TrackChanges";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import { getDailyWords } from "../services/dailyWordsService";
 
 import { getDashboardData } from "../services/dashboardService";
 import { getUnreadCount } from "../services/NotificationService";
@@ -148,7 +149,9 @@ const Dashboard = () => {
     const [overdueTasks, setOverdueTasks] =
         useState([]);
 
-
+const [dailyWords, setDailyWords] = useState([]);
+const [dailyWordsLoading, setDailyWordsLoading] = useState(true);
+const [dailyWordsAvailable, setDailyWordsAvailable] = useState(true);
     useEffect(() => {
 
         const day =
@@ -167,7 +170,35 @@ const Dashboard = () => {
         loadOverdueTasks();
 
     }, []);
+useEffect(() => {
+    const loadDailyWords = async () => {
+        try {
+            setDailyWordsLoading(true);
 
+            const response = await getDailyWords();
+
+            const words = Array.isArray(response.data)
+                ? response.data
+                : [];
+
+            setDailyWords(words.slice(0, 5));
+            setDailyWordsAvailable(true);
+
+        } catch (error) {
+            console.error("Daily English Words unavailable:", error);
+
+            // Important:
+            // Daily Words must NEVER break the dashboard.
+            setDailyWords([]);
+            setDailyWordsAvailable(false);
+
+        } finally {
+            setDailyWordsLoading(false);
+        }
+    };
+
+    loadDailyWords();
+}, []);
 
     const loadDashboard = async () => {
 
@@ -892,22 +923,6 @@ const Dashboard = () => {
                             </div>
 
 
-                            {/* =================================
-                                FOOTER
-                            ================================= */}
-
-                            <footer className="dashboard-footer">
-
-                                <strong>
-                                    ✨ Stay consistent, stay productive.
-                                </strong>
-
-                                <span>
-                                    © 2026 ConsistIQ. Built for everyone.
-                                </span>
-
-                            </footer>
-
                         </div>
 
 
@@ -1078,15 +1093,97 @@ const Dashboard = () => {
 
                             </section>
 
+{/* =================================
+    DAILY ENGLISH WORDS
+================================= */}
 
-                            {/* QUOTE */}
+<section className="daily-words-card">
 
-                            <div className="side-quote">
-                                <span>“</span>
-                                <p>
-                                    Progress, not perfection.
-                                </p>
-                            </div>
+    <div className="daily-words-header">
+
+        <div className="daily-words-icon">
+            📚
+        </div>
+
+        <div>
+            <h2>Daily English Words</h2>
+            <p>5 useful words for today</p>
+        </div>
+
+    </div>
+
+
+    {dailyWordsLoading ? (
+
+        <div className="daily-words-loading">
+            Loading today's words...
+        </div>
+
+    ) : !dailyWordsAvailable ? (
+
+        <div className="daily-words-unavailable">
+            <span>📖</span>
+
+            <p>
+                Daily words are temporarily unavailable.
+            </p>
+
+            <small>
+                Your dashboard is still working normally.
+            </small>
+        </div>
+
+    ) : dailyWords.length === 0 ? (
+
+        <div className="daily-words-empty">
+            <span>📚</span>
+
+            <p>
+                No words available yet.
+            </p>
+        </div>
+
+    ) : (
+
+        <div className="daily-words-list">
+
+            {dailyWords.map((word, index) => (
+
+                <div
+                    className="daily-word-item"
+                    key={word.id || `${word.word}-${index}`}
+                >
+
+                    <div className="daily-word-number">
+                        {index + 1}
+                    </div>
+
+                    <div className="daily-word-content">
+
+                        <strong>
+                            {word.word}
+                        </strong>
+
+                        <span>
+                            {word.meaning}
+                        </span>
+
+                        <small>
+                            “{word.example}”
+                        </small>
+
+                    </div>
+
+                </div>
+
+            ))}
+
+        </div>
+
+    )}
+
+</section>
+                           
 
                         </aside>
 

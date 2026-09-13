@@ -1,15 +1,29 @@
+
 function Footer() {
   return (
+  
     <footer className="footer">
-      <p>
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━<br></br>
+      
+      <div className="footer-content">
 
-✨ Stay Consistent. Stay Productive.<br></br><br></br>
+        <div className="footer-brand">
+          <span className="footer-logo">◈</span>
+          <strong>ConsistIQ</strong>
+        </div>
 
-© 2026 ConsistIQ
-Built for Students 🚀      </p>
+        <p className="footer-tagline">
+          🎯 Focus on what matters. 🚀 Make meaningful progress.
+        </p>
+
+        <div className="footer-bottom">
+          <span>© 2026 ConsistIQ</span>
+          <span>Built for better productivity.</span>
+        </div>
+
+      </div>
     </footer>
   );
 }
 
 export default Footer;
+
