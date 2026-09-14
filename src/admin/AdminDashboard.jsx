@@ -4,11 +4,13 @@ import axios from "axios";
 const AdminDashboard = () => {
   const [users, setUsers] = useState([]);
   const [search, setSearch] = useState("");
-
+const [deletedUsers, setDeletedUsers] = useState([]);
+const [showDeleted, setShowDeleted] = useState(false);
   const token = localStorage.getItem("token");
 
   useEffect(() => {
     fetchUsers();
+     fetchDeletedUsers();
   }, []);
 
   const fetchUsers = async () => {
@@ -39,11 +41,11 @@ const AdminDashboard = () => {
 ).length;
 
   const filteredUsers = users.filter((user) => {
-    return (
-      user.name.toLowerCase().includes(search.toLowerCase()) ||
-      user.email.toLowerCase().includes(search.toLowerCase())
-    );
-  });
+  return (
+    (user.name || "").toLowerCase().includes(search.toLowerCase()) ||
+    (user.email || "").toLowerCase().includes(search.toLowerCase())
+  );
+});
 
   const changeRole = async (id, role) => {
     try {
@@ -80,12 +82,55 @@ const AdminDashboard = () => {
         }
       );
 
-      fetchUsers();
+     fetchUsers();
+fetchDeletedUsers();
     } catch (err) {
       console.log(err);
     }
   };
+const fetchDeletedUsers = async () => {
+    try {
+        const res = await axios.get(
+            "http://localhost:8081/admin/users/deleted",
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }
+        );
 
+        setDeletedUsers(res.data);
+
+    } catch (err) {
+        console.log(err);
+    }
+};const restoreUser = async (id) => {
+
+    const confirmRestore = window.confirm(
+        "Are you sure you want to restore this user?"
+    );
+
+    if (!confirmRestore) return;
+
+    try {
+
+        await axios.put(
+            `http://localhost:8081/admin/user/${id}/restore`,
+            {},
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }
+        );
+
+        fetchUsers();
+        fetchDeletedUsers();
+
+    } catch (err) {
+        console.log(err);
+    }
+};
   return (
     <div
       style={{
@@ -170,6 +215,33 @@ const AdminDashboard = () => {
           <h1 style={cardNumber}>{totalNormalUsers}</h1>
         </div>
       </div>
+      <div
+    style={{
+        display: "flex",
+        gap: "10px",
+        marginBottom: "20px"
+    }}
+>
+    <button
+        onClick={() => setShowDeleted(false)}
+        style={{
+            ...greenButton,
+            background: !showDeleted ? "#2563eb" : "#94a3b8"
+        }}
+    >
+        Active Users
+    </button>
+
+    <button
+        onClick={() => setShowDeleted(true)}
+        style={{
+            ...redButton,
+            background: showDeleted ? "#ef4444" : "#94a3b8"
+        }}
+    >
+        Deleted Users ({deletedUsers.length})
+    </button>
+</div>
 
       {/* Search Bar */}
 
@@ -202,139 +274,309 @@ const AdminDashboard = () => {
       </div>
 
       {/* Users Table */}
+{/* ================= ACTIVE / DELETED USERS ================= */}
 
-      <div
+{!showDeleted ? (
+
+    /* ================= ACTIVE USERS ================= */
+
+    <div
         style={{
-          background: "#fff",
-          borderRadius: "18px",
-          overflow: "hidden",
-          boxShadow: "0 10px 25px rgba(0,0,0,.08)",
-          overflowX: "auto",
+            background: "#fff",
+            borderRadius: "18px",
+            overflow: "hidden",
+            boxShadow: "0 10px 25px rgba(0,0,0,.08)",
+            overflowX: "auto",
         }}
-      >
+    >
+
         <table
-          style={{
-            width: "100%",
-            borderCollapse: "collapse",
-            minWidth: "900px",
-          }}
+            style={{
+                width: "100%",
+                borderCollapse: "collapse",
+                minWidth: "900px",
+            }}
         >
-          <thead>
-            <tr
-              style={{
-                background: "#1e293b",
-                color: "#fff",
-              }}
-            >
-              <th style={thStyle}>ID</th>
-              <th style={thStyle}>Name</th>
-              <th style={thStyle}>Email</th>
-              <th style={thStyle}>Role</th>
-              <th style={thStyle}>Actions</th>
-            </tr>
-          </thead>
 
-          <tbody>
-                      {filteredUsers.length > 0 ? (
-              filteredUsers.map((user) => (
+            <thead>
                 <tr
-                  key={user.id}
-                  style={{
-                    borderBottom: "1px solid #ececec",
-                    transition: "0.3s",
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.background = "#f8fafc";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.background = "#ffffff";
-                  }}
-                >
-                  <td style={tdStyle}>{user.id}</td>
-
-                  <td style={tdStyle}>
-                    <div
-                      style={{
-                        fontWeight: "600",
-                        color: "#1f2937",
-                      }}
-                    >
-                      {user.name}
-                    </div>
-                  </td>
-
-                  <td style={tdStyle}>{user.email}</td>
-
-                  <td style={tdStyle}>
-                    <span
-                      style={{
-                        background:
-                          user.role === "ROLE_ADMIN"
-                            ? "#22c55e"
-                            : "#3b82f6",
+                    style={{
+                        background: "#1e293b",
                         color: "#fff",
-                        padding: "7px 16px",
-                        borderRadius: "25px",
-                        fontSize: "13px",
-                        fontWeight: "600",
-                      }}
-                    >
-                      {user.role === "ROLE_ADMIN"
-                        ? "ADMIN"
-                        : "USER"}
-                    </span>
-                  </td>
-
-                  <td style={tdStyle}>
-                    {user.role !== "ROLE_ADMIN" ? (
-                      <button
-                        style={greenButton}
-                        onClick={() =>
-                          changeRole(user.id, "ROLE_ADMIN")
-                        }
-                      >
-                        Make Admin
-                      </button>
-                    ) : (
-                      <button
-                        style={orangeButton}
-                        onClick={() =>
-                          changeRole(user.id, "ROLE_USER")
-                        }
-                      >
-                        Remove Admin
-                      </button>
-                    )}
-
-                    <button
-                      style={redButton}
-                      onClick={() => deleteUser(user.id)}
-                    >
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              ))
-            ) : (
-              <tr>
-                <td
-                  colSpan="5"
-                  style={{
-                    padding: "35px",
-                    textAlign: "center",
-                    color: "#777",
-                    fontSize: "18px",
-                  }}
+                    }}
                 >
-                  No users found.
-                </td>
-              </tr>
-            )}
-                      </tbody>
+                    <th style={thStyle}>S.No.</th>
+                    <th style={thStyle}>Name</th>
+                    <th style={thStyle}>Email</th>
+                    <th style={thStyle}>Role</th>
+                    <th style={thStyle}>Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                {filteredUsers.length > 0 ? (
+
+                    filteredUsers.map((user, index) => (
+
+                        <tr
+                            key={user.id}
+                            style={{
+                                borderBottom: "1px solid #ececec",
+                            }}
+                        >
+
+                            {/* SERIAL NUMBER */}
+                            <td style={tdStyle}>
+                                {index + 1}
+                            </td>
+
+                            {/* NAME */}
+                            <td style={tdStyle}>
+                                <div
+                                    style={{
+                                        fontWeight: "600",
+                                        color: "#1f2937",
+                                    }}
+                                >
+                                    {user.name}
+                                </div>
+                            </td>
+
+                            {/* EMAIL */}
+                            <td style={tdStyle}>
+                                {user.email}
+                            </td>
+
+                            {/* ROLE */}
+                            <td style={tdStyle}>
+                                <span
+                                    style={{
+                                        background:
+                                            user.role === "ROLE_ADMIN"
+                                                ? "#22c55e"
+                                                : "#3b82f6",
+                                        color: "#fff",
+                                        padding: "7px 16px",
+                                        borderRadius: "25px",
+                                        fontSize: "13px",
+                                        fontWeight: "600",
+                                    }}
+                                >
+                                    {user.role === "ROLE_ADMIN"
+                                        ? "ADMIN"
+                                        : "USER"}
+                                </span>
+                            </td>
+
+                            {/* ACTIONS */}
+                            <td style={tdStyle}>
+
+                                {user.role !== "ROLE_ADMIN" ? (
+
+                                    <button
+                                        style={greenButton}
+                                        onClick={() =>
+                                            changeRole(
+                                                user.id,
+                                                "ROLE_ADMIN"
+                                            )
+                                        }
+                                    >
+                                        Make Admin
+                                    </button>
+
+                                ) : (
+
+                                    <button
+                                        style={orangeButton}
+                                        onClick={() =>
+                                            changeRole(
+                                                user.id,
+                                                "ROLE_USER"
+                                            )
+                                        }
+                                    >
+                                        Remove Admin
+                                    </button>
+
+                                )}
+
+                                <button
+                                    style={redButton}
+                                    onClick={() =>
+                                        deleteUser(user.id)
+                                    }
+                                >
+                                    Delete
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+                    ))
+
+                ) : (
+
+                    <tr>
+                        <td
+                            colSpan="5"
+                            style={{
+                                padding: "35px",
+                                textAlign: "center",
+                                color: "#777",
+                                fontSize: "18px",
+                            }}
+                        >
+                            No users found.
+                        </td>
+                    </tr>
+
+                )}
+
+            </tbody>
+
         </table>
-      </div>
+
     </div>
-          );
+
+) : (
+
+    /* ================= DELETED USERS ================= */
+
+    <div
+        style={{
+            background: "#fff",
+            borderRadius: "18px",
+            overflow: "hidden",
+            boxShadow: "0 10px 25px rgba(0,0,0,.08)",
+            overflowX: "auto",
+        }}
+    >
+
+        <table
+            style={{
+                width: "100%",
+                borderCollapse: "collapse",
+                minWidth: "900px",
+            }}
+        >
+
+            <thead>
+                <tr
+                    style={{
+                        background: "#1e293b",
+                        color: "#fff",
+                    }}
+                >
+                    <th style={thStyle}>S.No.</th>
+                    <th style={thStyle}>Name</th>
+                    <th style={thStyle}>Email</th>
+                    <th style={thStyle}>Role</th>
+                    <th style={thStyle}>Deleted At</th>
+                    <th style={thStyle}>Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                {deletedUsers.length > 0 ? (
+
+                    deletedUsers.map((user, index) => (
+
+                        <tr
+                            key={user.id}
+                            style={{
+                                borderBottom: "1px solid #ececec",
+                            }}
+                        >
+
+                            {/* SERIAL NUMBER */}
+                            <td style={tdStyle}>
+                                {index + 1}
+                            </td>
+
+                            {/* NAME */}
+                            <td style={tdStyle}>
+                                <div
+                                    style={{
+                                        fontWeight: "600",
+                                        color: "#1f2937",
+                                    }}
+                                >
+                                    {user.name}
+                                </div>
+                            </td>
+
+                            {/* EMAIL */}
+                            <td style={tdStyle}>
+                                {user.email}
+                            </td>
+
+                            {/* ROLE */}
+                            <td style={tdStyle}>
+                                {user.role === "ROLE_ADMIN"
+                                    ? "ADMIN"
+                                    : "USER"}
+                            </td>
+
+                            {/* DELETED DATE */}
+                            <td style={tdStyle}>
+                                {user.deletedAt
+                                    ? new Date(
+                                          user.deletedAt
+                                      ).toLocaleString()
+                                    : "-"}
+                            </td>
+
+                            {/* RESTORE */}
+                            <td style={tdStyle}>
+
+                                <button
+                                    style={greenButton}
+                                    onClick={() =>
+                                        restoreUser(user.id)
+                                    }
+                                >
+                                    Restore
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+                    ))
+
+                ) : (
+
+                    <tr>
+                        <td
+                            colSpan="6"
+                            style={{
+                                padding: "35px",
+                                textAlign: "center",
+                                color: "#777",
+                                fontSize: "18px",
+                            }}
+                        >
+                            No deleted users found.
+                        </td>
+                    </tr>
+
+                )}
+
+            </tbody>
+
+        </table>
+
+    </div>
+    
+
+  
+)}
+    </div>
+  );
 };
 
 /* ---------------- TABLE ---------------- */

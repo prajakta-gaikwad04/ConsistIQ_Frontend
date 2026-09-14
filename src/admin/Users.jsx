@@ -26,12 +26,11 @@ const Users = () => {
         try {
             const token = localStorage.getItem("token");
 
-            await axios.delete(`http://localhost:8081/admin/users/${id}`, {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            });
-
+            await axios.delete(`http://localhost:8081/admin/user/${id}`, {
+    headers: {
+        Authorization: `Bearer ${token}`
+    }
+});
             loadUsers();
 
         } catch (error) {
