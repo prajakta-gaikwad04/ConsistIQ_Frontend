@@ -14,7 +14,6 @@ API.interceptors.request.use(
     console.log("API CALL:", config.url);
     console.log("TOKEN:", token);
 
-    // attach token only if exists
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
@@ -37,21 +36,18 @@ API.interceptors.response.use(
 
     console.log("API ERROR:", status, error.response?.data);
 
-    // ❌ avoid multiple redirects / loops
     if (status === 401) {
-      const token = localStorage.getItem("token");
+      localStorage.removeItem("token");
+      localStorage.removeItem("refreshToken");
+      localStorage.removeItem("role");
+      localStorage.removeItem("userEmail");
 
-      if (token) {
-        localStorage.removeItem("token");
-        console.log("Token removed due to auth failure");
+      if (!window.__authRedirectTriggered) {
+        window.__authRedirectTriggered = true;
 
-        // avoid repeated alerts if multiple API calls fail
-        if (!window.__authRedirectTriggered) {
-          window.__authRedirectTriggered = true;
+        alert("Session expired. Please login again.");
 
-          alert("Session expired. Please login again.");
-          window.location.href = "/login";
-        }
+        window.location.href = "/";
       }
     }
 

@@ -1,6 +1,6 @@
-import { Link, Outlet, useNavigate } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 const AdminLayout = () => {
-    const navigate = useNavigate();
+    
 
 const logout = () => {
   localStorage.removeItem("token");
@@ -8,7 +8,7 @@ const logout = () => {
   localStorage.removeItem("role");
   localStorage.removeItem("userEmail");
 
-  navigate("/", { replace: true });
+  window.location.href = "/";
 };
   return (
     <div style={{ display: "flex" }}>

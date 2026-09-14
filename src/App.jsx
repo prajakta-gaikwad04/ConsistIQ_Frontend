@@ -1,6 +1,6 @@
 import "./App.css";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-
+import { useEffect } from "react";
 import ProtectedRoute from "./components/ProtectedRoute";
 import AdminRoute from "./components/AdminRoute";
 import Layout from "./components/Layout";
@@ -21,7 +21,20 @@ import Profile from "./pages/Profile";
 
 import AdminDashboard from "./admin/AdminDashboard";
 import Users from "./admin/Users";
+const RootRedirect = () => {
+  const token = localStorage.getItem("token");
+  const role = localStorage.getItem("role");
 
+  if (!token) {
+    return <Navigate to="/" replace />;
+  }
+
+  if (role === "ROLE_ADMIN") {
+    return <Navigate to="/admin" replace />;
+  }
+
+  return <Navigate to="/dashboard" replace />;
+};
 function App() {
   return (
     <BrowserRouter>
@@ -30,16 +43,19 @@ function App() {
         {/* Public Routes */}
 
         <Route
-    path="/"
-    element={
-        !localStorage.getItem("token")
-            ? <Login />
-            : localStorage.getItem("role") === "ROLE_ADMIN"
-                ? <Navigate to="/admin" replace />
-                : <Navigate to="/dashboard" replace />
-    }
+  path="/"
+  element={
+    localStorage.getItem("token") ? (
+      localStorage.getItem("role") === "ROLE_ADMIN" ? (
+        <Navigate to="/admin" replace />
+      ) : (
+        <Navigate to="/dashboard" replace />
+      )
+    ) : (
+      <Login />
+    )
+  }
 />
-
         <Route path="/register" element={<Register />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password" element={<ResetPassword />} />
@@ -64,25 +80,29 @@ function App() {
 
         {/* Admin Routes */}
 
-     <Route
-  path="/admin"
-  element={
-    <AdminRoute>
-      <AdminLayout />
-    </AdminRoute>
-  }
->
-  <Route index element={<AdminDashboard />} />
-  <Route path="users" element={<Users />} />
-</Route>
+        <Route
+          path="/admin"
+          element={
+            <AdminRoute>
+              <AdminLayout />
+            </AdminRoute>
+          }
+        >
+          <Route index element={<AdminDashboard />} />
+          <Route path="users" element={<Users />} />
+        </Route>
 
-        {/* 404 Route - Keep LAST */}
+        {/* Unauthorized */}
 
-        <Route path="*" element={<Navigate to="/" />} />
-<Route
-    path="/unauthorized"
-    element={<h2>You are not authorized to access this page.</h2>}
-/>
+        <Route
+          path="/unauthorized"
+          element={<h2>You are not authorized to access this page.</h2>}
+        />
+
+        {/* 404 - MUST BE LAST */}
+
+        <Route path="*" element={<Navigate to="/" replace />} />
+
       </Routes>
     </BrowserRouter>
   );

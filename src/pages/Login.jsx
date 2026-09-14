@@ -25,11 +25,11 @@ const validateLogin = () => {
     // Email
     if (!loginData.email.trim()) {
         newErrors.email = "Email is required";
-    } else if (
-        !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(loginData.email)
-    ) {
-        newErrors.email = "Enter a valid email";
-    }
+   } else if (
+    !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(loginData.email)
+) {
+    newErrors.email = "Enter a valid email";
+}
 
     // Password
     if (!loginData.password) {
@@ -107,13 +107,15 @@ const validateLogin = () => {
         }
 
     } catch (error) {
-        console.error(error);
+    console.error("OTP Verification Error:", error);
 
-        if (error.response) {
-            alert(error.response.data);
-        } else {
-            alert("Invalid OTP");
-        }
+    const message =
+        error.response?.data?.message ||
+        error.response?.data ||
+        "Invalid OTP. Please try again.";
+
+    alert(message);
+
     }
 };
   return (

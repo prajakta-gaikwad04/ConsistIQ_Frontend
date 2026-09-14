@@ -77,3 +77,14 @@ export const uploadFile = (taskId, file) => {
     }
   });
 };
+
+export const getAttachments = (taskId) =>
+  API.get(`/tasks/${taskId}/attachments`);
+
+export const getAttachment = (taskId, attachmentId) =>
+  API.get(`/tasks/${taskId}/attachments/${attachmentId}`, {
+    responseType: "blob"
+  });
+
+export const deleteAttachment = (taskId, attachmentId) =>
+  API.delete(`/tasks/${taskId}/attachments/${attachmentId}`);

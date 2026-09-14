@@ -17,14 +17,16 @@ import "../styles/tasks.css";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 
 import {
-    completeTask,
-      cancelTask,
-    deleteTask,
-    getAllTasks,
-    searchTasks,
-    uploadFile,
-    getUpcomingTasks,
-    getTasksByStatus
+  completeTask,
+  cancelTask,
+  deleteTask,
+  getAllTasks,
+  searchTasks,
+  uploadFile,
+  getUpcomingTasks,
+  getTasksByStatus,
+  getAttachment,
+  deleteAttachment
 } from "../services/taskService";
 
 const Tasks = () => {
@@ -204,13 +206,13 @@ useEffect(() => {
 
     return "";
 };
-  const handleFileUpload = async (taskId, file) => {
+const handleFileUpload = async (taskId, file) => {
 
     const error = validateFile(file);
 
     if (error) {
         alert(error);
-return;
+        return;
     }
 
     setFileError("");
@@ -221,12 +223,50 @@ return;
 
         alert("File uploaded successfully");
 
+        await loadTasks();
+
     } catch (error) {
 
         console.log(error);
 
         alert("Upload failed");
     }
+};
+const handleViewFile = async (taskId, attachmentId) => {
+  try {
+    const response = await getAttachment(taskId, attachmentId);
+
+    const fileURL = window.URL.createObjectURL(
+      new Blob([response.data], {
+        type: response.headers["content-type"]
+      })
+    );
+
+    window.open(fileURL, "_blank");
+
+    setTimeout(() => {
+      window.URL.revokeObjectURL(fileURL);
+    }, 10000);
+
+  } catch (error) {
+    console.log(error);
+    alert("Unable to open file");
+  }
+};
+const handleDeleteAttachment = async (taskId, attachmentId) => {
+  if (!window.confirm("Delete this attachment?")) {
+    return;
+  }
+
+  try {
+    await deleteAttachment(taskId, attachmentId);
+
+    await loadTasks();
+
+  } catch (error) {
+    console.log(error);
+    alert("Unable to delete attachment");
+  }
 };
 const handleCancel = async (id) => {
     try {
@@ -496,32 +536,69 @@ sx={{ flexWrap: "wrap" }}
     </Button>
 )}
               <Button
-                variant="outlined"
-                onClick={() =>
-                  navigate(`/update-task/${task.id}`)
-                }
-              >
-                Edit
-              </Button>
+  variant="outlined"
+  onClick={() =>
+    navigate(`/update-task/${task.id}`)
+  }
+>
+  Edit
+</Button>
 
-              <Button
-                variant="outlined"
-                component="label"
-              >
-                Upload File
+<Button variant="outlined" component="label">
+  Upload File
+  <input
+    hidden
+    type="file"
+    onChange={(e) =>
+      handleFileUpload(task.id, e.target.files[0])
+    }
+  />
+</Button>
 
-                <input
-                  hidden
-                  type="file"
-                  onChange={(e) =>
-                    handleFileUpload(
-                      task.id,
-                      e.target.files[0]
-                    )
-                  }
-                />
-              </Button>
+{task.attachments && task.attachments.length > 0 && (
+  <Box sx={{ mt: 2 }}>
+    <Typography fontWeight="bold">
+      📎 Attachments
+    </Typography>
 
+    {task.attachments.map((attachment) => (
+      <Stack
+        key={attachment.id}
+        direction="row"
+        spacing={1}
+        alignItems="center"
+        sx={{ mt: 1 }}
+      >
+        <Typography>
+          📄 {attachment.fileName}
+        </Typography>
+
+        <Button
+          size="small"
+          variant="outlined"
+          onClick={() =>
+            handleViewFile(task.id, attachment.id)
+          }
+        >
+          View
+        </Button>
+
+        <Button
+          size="small"
+          color="error"
+          onClick={() =>
+            handleDeleteAttachment(
+              task.id,
+              attachment.id
+            )
+          }
+        >
+          Delete
+        </Button>
+      </Stack>
+    ))}
+  </Box>
+)}
             </div>
 
           </CardContent>

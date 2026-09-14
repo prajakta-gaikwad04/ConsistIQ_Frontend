@@ -11,8 +11,14 @@ const Notifications = () => {
   const loadNotifications = async () => {
   try {
     const res = await getNotifications();
-    console.log("Notifications:", res.data);
-    setNotifications(res.data);
+
+console.log("Notifications:", res.data);
+
+setNotifications(
+  Array.isArray(res.data)
+    ? res.data
+    : res.data.content || []
+);
   } catch (error) {
     console.error("Notification Error:", error);
   }
