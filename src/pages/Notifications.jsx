@@ -4,7 +4,7 @@ import {
   markAsRead
 } from "../services/NotificationService";
 
-import "./Notifications.css";
+import "../styles/Notifications.css";
 
 const Notifications = () => {
 
