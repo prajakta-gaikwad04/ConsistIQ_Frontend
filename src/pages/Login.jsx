@@ -1,17 +1,14 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import { loginUser, verifyOtp } from "../services/authService";
+import { loginUser } from "../services/authService";
 const Login = () => {
      const navigate = useNavigate();
-
+const [loading, setLoading] = useState(false);
     const [loginData, setLoginData] = useState({
         email: "",
         password: ""
     });
 const [errors, setErrors] = useState({});
-    const [otp, setOtp] = useState("");
-const [showOtp, setShowOtp] = useState(false);
 
     const handleChange = (e) => {
         setLoginData({
@@ -42,82 +39,44 @@ const validateLogin = () => {
 
     return Object.keys(newErrors).length === 0;
 };
-   const handleSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!validateLogin()) {
         return;
     }
 
-    try {
+    setLoading(true);
 
+    try {
         const response = await loginUser(loginData);
 
         if (response.data === "OTP Sent Successfully") {
+            navigate("/verify-otp", {
+                state: {
+                    email: loginData.email
+                }
+            });
 
-            alert("OTP Sent to your Email");
-            setShowOtp(true);
             return;
         }
 
-    } catch (error) {
+        alert(response.data);
 
+    } catch (error) {
         console.log(error);
-        alert("Login Failed");
+
+        const message =
+            error.response?.data ||
+            "Login Failed";
+
+        alert(message);
+
+    } finally {
+        setLoading(false);
     }
 };
-
-  const handleVerifyOtp = async () => {
-
-    if (!otp.trim()) {
-        alert("Please enter OTP");
-        return;
-    }
-
-    if (!/^\d{6}$/.test(otp.trim())) {
-        alert("OTP must be 6 digits");
-        return;
-    }
-
-    try {
-
-        console.log({
-            email: loginData.email,
-            otp: otp.trim()
-        });
-
-        const response = await verifyOtp({
-            email: loginData.email,
-            otp: otp.trim()
-        });
-
-        console.log("Verify OTP Response:", response.data);
-
-        // Save authentication data
-        localStorage.setItem("token", response.data.accessToken);
-        localStorage.setItem("refreshToken", response.data.refreshToken);
-        localStorage.setItem("role", response.data.role);
-        localStorage.setItem("userEmail", loginData.email);
-
-        // Redirect based on role
-        if (response.data.role === "ROLE_ADMIN") {
-            navigate("/admin", { replace: true });
-        } else {
-            navigate("/dashboard", { replace: true });
-        }
-
-    } catch (error) {
-    console.error("OTP Verification Error:", error);
-
-    const message =
-        error.response?.data?.message ||
-        error.response?.data ||
-        "Invalid OTP. Please try again.";
-
-    alert(message);
-
-    }
-};
+  
   return (
   <div
     style={{
@@ -237,77 +196,23 @@ const validateLogin = () => {
   </Link>
 </p>
 
-{showOtp && (
-  <>
-    <input
-      type="text"
-      placeholder="Enter OTP"
-      value={otp}
-      onChange={(e) => setOtp(e.target.value)}
-      style={{
+<button
+    type="submit"
+     disabled={loading}
+    style={{
         width: "100%",
         padding: "14px",
-        marginBottom: "5px",
-        borderRadius: "12px",
         border: "none",
-        outline: "none"
-      }}
-    />
-
-    {errors.otp && (
-      <p
-        style={{
-          color: "#ff4d4f",
-          fontSize: "13px",
-          marginBottom: "15px",
-          marginTop: "5px"
-        }}
-      >
-        {errors.otp}
-      </p>
-    )}
-  </>
-)}
-   {!showOtp ? (
-
-  <button
-    type="submit"
-    style={{
-      width: "100%",
-      padding: "14px",
-      border: "none",
-      borderRadius: "12px",
-      background: "#ff6b6b",
-      color: "#fff",
-      fontSize: "16px",
-      fontWeight: "bold",
-      cursor: "pointer"
+        borderRadius: "12px",
+        background: "#ff6b6b",
+        color: "#fff",
+        fontSize: "16px",
+        fontWeight: "bold",
+        cursor: "pointer"
     }}
-  >
-    Login
-  </button>
-
-) : (
-
-  <button
-    type="button"
-    onClick={handleVerifyOtp}
-    style={{
-      width: "100%",
-      padding: "14px",
-      border: "none",
-      borderRadius: "12px",
-      background: "#06d6a0",
-      color: "#fff",
-      fontSize: "16px",
-      fontWeight: "bold",
-      cursor: "pointer"
-    }}
-  >
-    Verify OTP
-  </button>
-
-)}
+>
+    {loading ? "Sending OTP..." : "Login"}
+</button>
 
         <p
           style={{
