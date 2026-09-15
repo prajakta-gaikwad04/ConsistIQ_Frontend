@@ -1,49 +1,64 @@
 /* =========================================================
-   CONSISTIQ PROFESSIONAL FOOTER
+   CONSISTIQ — PREMIUM FOOTER
 ========================================================= */
 
 .footer {
     width: 100%;
-    margin-top: 48px;
+    margin-top: 70px;
+    padding: 42px 24px 22px;
 
-    background: #fcf6f6;
+    background:
+        radial-gradient(
+            circle at 50% 0%,
+            rgba(255, 107, 107, 0.10),
+            transparent 45%
+        ),
+        #15131c;
 
-    border-top: 1px solid #e2e8f0;
+    color: #f8f5f2;
 
-    color: #64748b;
-
-    padding: 28px 24px 18px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
 
     position: relative;
+    overflow: hidden;
 }
 
 
-/* subtle top accent */
+/* =========================================================
+   TOP GLOW
+========================================================= */
 
 .footer::before {
     content: "";
 
     position: absolute;
 
-    top: -2px;
+    top: 0;
     left: 50%;
 
     transform: translateX(-50%);
 
-    width: 70px;
-    height: 2px;
+    width: 120px;
+    height: 3px;
 
     background: linear-gradient(
         90deg,
-        #10265c,
-        #0f766e
+        transparent,
+        #ff6b6b,
+        #ffd166,
+        transparent
     );
 
-    border-radius: 10px;
+    border-radius: 20px;
+
+    box-shadow:
+        0 0 18px rgba(255, 107, 107, 0.45);
 }
 
 
-/* Main footer area */
+/* =========================================================
+   MAIN CONTENT
+========================================================= */
 
 .footer-content {
     max-width: 1100px;
@@ -53,76 +68,138 @@
 }
 
 
-/* Brand */
+/* =========================================================
+   BRAND
+========================================================= */
 
 .footer-brand {
     display: flex;
     justify-content: center;
     align-items: center;
 
-    gap: 8px;
+    gap: 9px;
 
-    color: #10265c;
+    color: #ffffff;
 
-    font-size: 18px;
-    font-weight: 700;
+    font-size: 20px;
+    font-weight: 800;
+
+    letter-spacing: 0.4px;
+
+    transition: transform 0.3s ease;
 }
+
+.footer-brand:hover {
+    transform: translateY(-2px);
+}
+
+
+/* Logo */
 
 .footer-logo {
-    font-size: 19px;
-    color: #0f766e;
+    font-size: 21px;
+
+    color: #ff6b6b;
+
+    filter:
+        drop-shadow(
+            0 0 8px rgba(255, 107, 107, 0.35)
+        );
+
+    transition: transform 0.3s ease;
+}
+
+.footer-brand:hover .footer-logo {
+    transform: rotate(-8deg) scale(1.08);
 }
 
 
-/* Tagline */
+/* =========================================================
+   TAGLINE
+========================================================= */
 
 .footer-tagline {
-    margin: 8px 0 20px;
+    margin: 10px 0 26px;
 
     font-size: 13px;
 
-    color: #64748b;
+    color: rgba(255, 255, 255, 0.58);
+
+    letter-spacing: 0.2px;
 }
 
 
-/* Bottom information */
+/* =========================================================
+   BOTTOM INFORMATION
+========================================================= */
 
 .footer-bottom {
     display: flex;
     justify-content: center;
     align-items: center;
 
-    gap: 20px;
+    gap: 24px;
 
-    padding-top: 15px;
+    padding-top: 18px;
 
-    border-top: 1px solid #f1f5f9;
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
 
     font-size: 11px;
 
-    color: #94a3b8;
+    color: rgba(255, 255, 255, 0.38);
 }
 
 
-/* Mobile */
+/* =========================================================
+   HOVER EFFECT
+========================================================= */
+
+.footer-bottom span {
+    transition:
+        color 0.25s ease,
+        transform 0.25s ease;
+}
+
+.footer-bottom span:hover {
+    color: #ffd166;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
 
 @media (max-width: 600px) {
 
     .footer {
-        margin-top: 32px;
-        padding: 24px 16px 16px;
+        margin-top: 45px;
+
+        padding: 34px 16px 18px;
     }
 
     .footer-brand {
-        font-size: 17px;
+        font-size: 18px;
+    }
+
+    .footer-logo {
+        font-size: 19px;
     }
 
     .footer-tagline {
         font-size: 12px;
+
+        line-height: 1.6;
+
+        margin-bottom: 22px;
     }
 
     .footer-bottom {
         flex-direction: column;
-        gap: 5px;
+
+        gap: 8px;
+
+        padding-top: 16px;
     }
 }

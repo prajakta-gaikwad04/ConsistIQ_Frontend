@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { registerUser } from "../services/authService";
-
+import "../styles/Register.css";
 function Register() {
 
     const [errors, setErrors] = useState({});

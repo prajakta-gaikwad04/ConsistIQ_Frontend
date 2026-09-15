@@ -14,8 +14,8 @@ const validateEmail = () => {
 
     if (!email.trim()) {
         newErrors.email = "Email is required";
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        newErrors.email = "Enter a valid email address";
+} else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            newErrors.email = "Enter a valid email address";
     }
 
     setErrors(newErrors);
@@ -46,44 +46,68 @@ const validateEmail = () => {
     }
 };
 
-    return (
+   return (
+    <div className="forgot-page">
+
         <div className="forgot-container">
-            <h2>Forgot Password</h2>
 
-           <input
-    type="email"
-    placeholder="Enter Email"
-    value={email}
-    onChange={(e) => {
-        setEmail(e.target.value);
+            <div className="forgot-icon">
+                🔐
+            </div>
 
-        setErrors({
-            ...errors,
-            email: ""
-        });
-    }}
-    className="email-input"
-/>
-{errors.email && (
-    <p
-        style={{
-            color: "red",
-            fontSize: "14px",
-            marginTop: "5px",
-            marginBottom: "10px"
-        }}
-    >
-        {errors.email}
-    </p>
-)}
+            <h2 className="title">
+                Forgot Password?
+            </h2>
 
-            <button onClick={sendOtp} className="otp-btn">
-                {loading ? "Sending..." : "Send OTP"}
+            <p className="forgot-subtitle">
+                No worries. Enter your email and we'll send you an OTP to reset your password.
+            </p>
+
+            <input
+                type="email"
+                placeholder="Enter your email"
+                value={email}
+                onChange={(e) => {
+                    setEmail(e.target.value);
+                    setErrors({
+                        ...errors,
+                        email: ""
+                    });
+                }}
+                className="email-input"
+            />
+
+            {errors.email && (
+                <p className="email-error">
+                    {errors.email}
+                </p>
+            )}
+
+            <button
+                onClick={sendOtp}
+                className="otp-btn"
+                disabled={loading}
+            >
+                {loading ? "Sending OTP..." : "Send OTP"}
             </button>
 
-            {message && <p>{message}</p>}
+            {message && (
+                <p className="forgot-message">
+                    {message}
+                </p>
+            )}
+
+            <button
+                className="back-login"
+                onClick={() => navigate("/login")}
+            >
+                ← Back to Login
+            </button>
+
         </div>
-    );
+
+    </div>
+);
 };
 
 export default ForgotPassword;
