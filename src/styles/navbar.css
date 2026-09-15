@@ -1,15 +1,12 @@
 /* =========================================================
-   CONSISTIQ — PREMIUM NAVBAR
+   CONSISTIQ — PREMIUM LIGHT NAVBAR
 ========================================================= */
 
 .navbar {
     width: 100%;
     min-height: 70px;
 
-    background: rgba(242, 239, 251, 0.88);
-
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    background: rgba(255, 255, 255, 0.96);
 
     display: flex;
     justify-content: space-between;
@@ -19,13 +16,14 @@
 
     position: sticky;
     top: 0;
-
     z-index: 1000;
 
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid #e8eaf0;
 
     box-shadow:
-        0 8px 30px rgba(0, 0, 0, 0.20);
+        0 4px 18px rgba(31, 41, 55, 0.08);
+
+    transition: box-shadow 0.25s ease;
 }
 
 
@@ -34,11 +32,9 @@
 ========================================================= */
 
 .navbar h2 {
-    color: #ffffff;
-
+    color: #172554;
     font-size: 24px;
     font-weight: 800;
-
     letter-spacing: -0.5px;
 
     cursor: pointer;
@@ -49,8 +45,7 @@
 }
 
 .navbar h2:hover {
-    color: #ff8585;
-
+    color: #ff6b6b;
     transform: translateY(-1px);
 }
 
@@ -61,19 +56,16 @@
 
 .nav-links {
     display: flex;
-
     align-items: center;
-
     gap: 8px;
 }
-
 
 .nav-links a {
     position: relative;
 
     padding: 9px 14px;
 
-    color: rgba(255, 255, 255, 0.68);
+    color: #374151;
 
     font-size: 14px;
     font-weight: 500;
@@ -88,18 +80,17 @@
         transform 0.25s ease;
 }
 
-
 .nav-links a:hover {
-    color: #ffffff;
+    color: #172554;
 
-    background: rgba(247, 232, 232, 0.1);
+    background: #fff1f0;
 
     transform: translateY(-1px);
 }
 
 
 /* =========================================================
-   ACTIVE / HIGHLIGHT EFFECT
+   HOVER UNDERLINE
 ========================================================= */
 
 .nav-links a::after {
@@ -163,7 +154,6 @@
 
     .nav-links a {
         padding: 8px 11px;
-
         font-size: 13px;
     }
 }
@@ -185,7 +175,6 @@
 
     .nav-links a {
         padding: 7px 9px;
-
         font-size: 12px;
     }
 }
