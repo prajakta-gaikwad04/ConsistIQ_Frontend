@@ -9,7 +9,9 @@ const Users = () => {
         try {
             const token = localStorage.getItem("token");
 
-            const res = await axios.get("http://localhost:8081/admin/users", {
+            const res = await axios.get(
+    "https://consistiq-backend.onrender.com/admin/users",
+    {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
@@ -26,7 +28,9 @@ const Users = () => {
         try {
             const token = localStorage.getItem("token");
 
-            await axios.delete(`http://localhost:8081/admin/user/${id}`, {
+           await axios.delete(
+    `https://consistiq-backend.onrender.com/admin/user/${id}`,
+    {
     headers: {
         Authorization: `Bearer ${token}`
     }

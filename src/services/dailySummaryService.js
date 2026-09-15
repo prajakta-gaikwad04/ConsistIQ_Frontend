@@ -1,7 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:8081";
-
+const API_URL = "https://consistiq-backend.onrender.com";
 export const getDailySummary = () => {
     const token = localStorage.getItem("token");
 

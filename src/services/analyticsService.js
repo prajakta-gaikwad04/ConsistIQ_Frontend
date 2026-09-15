@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:8081/analytics";
+const API_URL = "https://consistiq-backend.onrender.com/analytics";
 
 const getToken = () => localStorage.getItem("token");
 
@@ -12,7 +12,7 @@ export const getStats = () =>
     });
 
 export const getAchievements = () =>
-    axios.get("http://localhost:8081/tasks/achievements", {
+    axios.get("https://consistiq-backend.onrender.com/tasks/achievements", {
         headers: {
             Authorization: `Bearer ${getToken()}`
         }

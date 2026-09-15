@@ -15,8 +15,8 @@ const [showDeleted, setShowDeleted] = useState(false);
 
   const fetchUsers = async () => {
     try {
-      const res = await axios.get(
-        "http://localhost:8081/admin/users",
+     const res = await axios.get(
+  "https://consistiq-backend.onrender.com/admin/users",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -50,8 +50,7 @@ const [showDeleted, setShowDeleted] = useState(false);
   const changeRole = async (id, role) => {
     try {
       await axios.put(
-        `http://localhost:8081/admin/user/${id}/role?role=${role}`,
-        {},
+  `https://consistiq-backend.onrender.com/admin/user/${id}/role?role=${role}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -74,7 +73,7 @@ const [showDeleted, setShowDeleted] = useState(false);
 
     try {
       await axios.delete(
-        `http://localhost:8081/admin/user/${id}`,
+  `https://consistiq-backend.onrender.com/admin/user/${id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -91,7 +90,7 @@ fetchDeletedUsers();
 const fetchDeletedUsers = async () => {
     try {
         const res = await axios.get(
-            "http://localhost:8081/admin/users/deleted",
+  "https://consistiq-backend.onrender.com/admin/users/deleted",
             {
                 headers: {
                     Authorization: `Bearer ${token}`
@@ -115,7 +114,7 @@ const fetchDeletedUsers = async () => {
     try {
 
         await axios.put(
-            `http://localhost:8081/admin/user/${id}/restore`,
+  `https://consistiq-backend.onrender.com/admin/user/${id}/restore`,
             {},
             {
                 headers: {

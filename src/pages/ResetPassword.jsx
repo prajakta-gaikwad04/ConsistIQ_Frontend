@@ -50,7 +50,7 @@ const validateResetPassword = () => {
     try {
 
         const res = await axios.post(
-            "http://localhost:8081/auth/reset-password",
+            "https://consistiq-backend.onrender.com/auth/reset-password",
             {
                 email,
                 otp,
