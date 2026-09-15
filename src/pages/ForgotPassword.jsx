@@ -32,10 +32,9 @@ const validateEmail = () => {
         setLoading(true);
 
         const res = await axios.post(
-            "http://localhost:8081/auth/forgot-password",
-            { email }
-        );
-
+    "https://consistiq-backend.onrender.com/auth/forgot-password",
+    { email }
+);
         setMessage(res.data || "OTP sent successfully");
 
         navigate("/reset-password", { state: { email } });
