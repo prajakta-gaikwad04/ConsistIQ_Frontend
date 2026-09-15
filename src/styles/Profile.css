@@ -82,11 +82,17 @@
     align-items:center;
     padding:20px;
     cursor:pointer;
-    border-bottom:1px solid #eee;
+    border-bottom:1px solid #e5e7eb;
+    background:#ffffff;
+    color:#111827;
     font-size:17px;
     font-weight:600;
+    transition:background .2s ease;
 }
 
+.setting-title:hover{
+    background:#f8fafc;
+}
 .setting-title:hover{
     background:#f8f8f8;
 }
@@ -99,9 +105,16 @@
 
 .setting-content{
     padding:25px;
-    background:#fafafa;
+    background:#ffffff;
+    color:#111827;
+}
+.setting-content p{
+    color:#374151;
 }
 
+.setting-content label{
+    color:#111827;
+}
 .setting-content label{
     display:block;
     margin-bottom:8px;
