@@ -27,17 +27,7 @@ function Navbar() {
     loadUnreadCount();
   }, []);
 
-  const handleLogout = () => {
-
-    localStorage.removeItem("token");
-    localStorage.removeItem("refreshToken");
-    localStorage.removeItem("role");
-    localStorage.removeItem("userEmail");
-
-    window.__authRedirectTriggered = false;
-
-    navigate("/", { replace: true });
-  };
+  
 
   return (
     <header className="dashboard-topbar">
@@ -99,12 +89,7 @@ function Navbar() {
           </Badge>
         </Link>
 
-        <button
-          onClick={handleLogout}
-          className="top-nav-logout"
-        >
-          Logout
-        </button>
+       
 
       </nav>
 
