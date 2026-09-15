@@ -11,13 +11,13 @@ const logout = () => {
   window.location.href = "/";
 };
   return (
-    <div style={{ display: "flex" }}>
+    <div style={{ display: "flex", minHeight: "100vh" }}>
 
       {/* Sidebar */}
       <div
         style={{
           width: "260px",
-          height: "100vh",
+          minHeight: "100vh",
           background: "#1f1c2c",
           color: "white",
           padding: "30px 20px",
