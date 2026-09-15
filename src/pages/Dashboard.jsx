@@ -16,7 +16,7 @@ import { getDailyWords } from "../services/dailyWordsService";
 
 import { getDashboardData } from "../services/dashboardService";
 import { getUnreadCount } from "../services/NotificationService";
-
+import Navbar from "../components/Navbar";
 import {
     getOverdueTasks,
 } from "../services/taskService";
@@ -302,67 +302,8 @@ useEffect(() => {
                 TOP NAVIGATION
             ================================= */}
 
-            <header className="dashboard-topbar">
-
-                <div className="brand">
-
-                    <div className="brand-mark">
-                        <TrackChangesIcon />
-                    </div>
-
-                    <span>ConsistIQ</span>
-
-                </div>
-
-
-                <nav className="top-navigation">
-
-                    <Link
-                        to="/profile"
-                        className="top-nav-link"
-                    >
-                        Profile
-                    </Link>
-
-                    <Link
-                        to="/dashboard"
-                        className="top-nav-link active"
-                    >
-                        Dashboard
-                    </Link>
-
-                    <Link
-                        to="/tasks"
-                        className="top-nav-link"
-                    >
-                        Tasks
-                    </Link>
-
-                    <Link
-                        to="/create-task"
-                        className="top-nav-link"
-                    >
-                        Create Task
-                    </Link>
-
-                    <Link
-                        to="/notifications"
-                        className="top-nav-link notification-link"
-                    >
-
-                        <Badge
-                            badgeContent={unreadCount}
-                            color="error"
-                        >
-                            <NotificationsNoneIcon />
-                        </Badge>
-
-                    </Link>
-
-                </nav>
-
-            </header>
-
+           
+<Navbar />
 
             {/* =================================
                 MAIN LAYOUT
