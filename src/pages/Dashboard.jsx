@@ -16,7 +16,6 @@ import { getDailyWords } from "../services/dailyWordsService";
 
 import { getDashboardData } from "../services/dashboardService";
 import { getUnreadCount } from "../services/NotificationService";
-import Navbar from "../components/Navbar";
 import {
     getOverdueTasks,
 } from "../services/taskService";
@@ -303,7 +302,7 @@ useEffect(() => {
             ================================= */}
 
            
-<Navbar />
+
 
             {/* =================================
                 MAIN LAYOUT
