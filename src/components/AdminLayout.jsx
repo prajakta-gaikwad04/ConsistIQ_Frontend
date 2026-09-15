@@ -18,12 +18,12 @@ const logout = () => {
         style={{
           width: "260px",
           minHeight: "100vh",
-          background: "#1f1c2c",
+          background: "#172554",
           color: "white",
           padding: "30px 20px",
         }}
       >
-        <h3>Admin Panel</h3>
+        <h3 >Admin Panel</h3>
 
         <nav style={{ marginTop: "35px" }}>
 
