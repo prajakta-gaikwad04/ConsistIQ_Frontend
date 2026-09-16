@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-
+import "../styles/PomodoroTimer.css";
 const TIMER_MODES = {
     focus: {
         label: "Focus",

@@ -1,0 +1,597 @@
+/* =========================================================
+   POMODORO TIMER
+   Reusable component styles
+   ========================================================= */
+
+.focus-timer-inner {
+    width: 100%;
+    padding: 22px;
+    border-radius: 22px;
+
+    background: linear-gradient(
+        145deg,
+        #4f3bb8 0%,
+        #6048d2 45%,
+        #7560df 100%
+    );
+
+    border: 1px solid rgba(255, 255, 255, 0.22);
+
+    box-shadow:
+        0 18px 40px rgba(67, 48, 160, 0.22),
+        inset 0 1px 0 rgba(255, 255, 255, 0.18);
+
+    color: #ffffff;
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.focus-timer-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.focus-timer-icon {
+    width: 42px;
+    height: 42px;
+
+    flex: 0 0 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 13px;
+
+    background: rgba(255, 255, 255, 0.16);
+
+    border: 1px solid rgba(255, 255, 255, 0.18);
+
+    font-size: 23px;
+
+    box-shadow:
+        inset 0 1px 2px rgba(255, 255, 255, 0.15),
+        0 6px 16px rgba(30, 20, 90, 0.12);
+}
+
+.focus-timer-header h3 {
+    margin: 0;
+
+    font-size: 17px;
+    line-height: 1.2;
+    font-weight: 750;
+
+    color: #ffffff;
+}
+
+.focus-timer-header p {
+    margin: 4px 0 0;
+
+    font-size: 11px;
+    line-height: 1.4;
+
+    color: rgba(255, 255, 255, 0.72);
+}
+
+
+/* =========================================================
+   CENTER TIMER CIRCLE
+   ========================================================= */
+
+.timer-circle {
+    width: 180px;
+    height: 180px;
+
+    margin: 4px auto 22px;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(255, 255, 255, 0.08);
+
+    border: 6px solid rgba(255, 255, 255, 0.28);
+
+    box-shadow:
+        0 0 0 7px rgba(255, 255, 255, 0.05),
+        0 14px 32px rgba(30, 18, 90, 0.25),
+        inset 0 0 24px rgba(255, 255, 255, 0.07);
+}
+
+.timer-circle-content {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+}
+
+.timer-circle-content strong {
+    font-size: 36px;
+    line-height: 1;
+
+    font-weight: 800;
+    letter-spacing: 1px;
+
+    color: #ffffff;
+}
+
+.timer-circle-content span {
+    margin-top: 7px;
+
+    font-size: 11px;
+    line-height: 1.3;
+
+    font-weight: 600;
+
+    color: rgba(255, 255, 255, 0.72);
+
+    letter-spacing: 0.3px;
+}
+
+
+/* =========================================================
+   PLAY BUTTON
+   ========================================================= */
+
+.timer-play {
+    width: 40px;
+    height: 40px;
+
+    margin-top: 12px;
+
+    border: 0;
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    font-size: 15px;
+    font-weight: 700;
+
+    background: #ffffff;
+    color: #5742cf;
+
+    box-shadow:
+        0 8px 18px rgba(25, 15, 85, 0.24);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+.timer-play:hover {
+    transform: scale(1.08);
+
+    background: #f7f5ff;
+
+    box-shadow:
+        0 10px 22px rgba(25, 15, 85, 0.30);
+}
+
+.timer-play:active {
+    transform: scale(0.95);
+}
+
+
+/* =========================================================
+   PRESETS
+   ========================================================= */
+
+.timer-presets {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 7px;
+
+    margin-bottom: 12px;
+}
+
+.timer-presets button {
+    min-width: 0;
+    height: 34px;
+
+    padding: 0 6px;
+
+    border-radius: 9px;
+
+    border: 1px solid rgba(255, 255, 255, 0.18);
+
+    background: rgba(255, 255, 255, 0.10);
+
+    color: rgba(255, 255, 255, 0.82);
+
+    font-size: 11px;
+    font-weight: 650;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease,
+        color 0.2s ease;
+}
+
+.timer-presets button:hover {
+    background: rgba(255, 255, 255, 0.17);
+
+    border-color: rgba(255, 255, 255, 0.30);
+
+    color: #ffffff;
+
+    transform: translateY(-1px);
+}
+
+.timer-presets button.selected {
+    background: #ffffff;
+
+    border-color: #ffffff;
+
+    color: #5540c8;
+
+    box-shadow:
+        0 5px 14px rgba(30, 20, 90, 0.16);
+}
+
+
+/* =========================================================
+   TIMER MODES
+   ========================================================= */
+
+.timer-modes {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 6px;
+
+    margin-bottom: 16px;
+}
+
+.timer-mode {
+    min-width: 0;
+    min-height: 55px;
+
+    padding: 7px 4px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    gap: 4px;
+
+    border-radius: 11px;
+
+    border: 1px solid rgba(255, 255, 255, 0.15);
+
+    background: rgba(255, 255, 255, 0.08);
+
+    color: rgba(255, 255, 255, 0.82);
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.timer-mode:hover {
+    transform: translateY(-2px);
+
+    background: rgba(255, 255, 255, 0.14);
+
+    border-color: rgba(255, 255, 255, 0.25);
+}
+
+.timer-mode span {
+    font-size: 16px;
+    line-height: 1;
+}
+
+.timer-mode small {
+    max-width: 100%;
+
+    font-size: 9px;
+    line-height: 1.2;
+
+    font-weight: 650;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.timer-mode.active {
+    background: rgba(255, 255, 255, 0.20);
+
+    border-color: rgba(255, 255, 255, 0.38);
+
+    color: #ffffff;
+
+    box-shadow:
+        inset 0 1px 2px rgba(255, 255, 255, 0.10);
+}
+
+
+/* =========================================================
+   CONTROLS
+   ========================================================= */
+
+.timer-controls {
+    width: 100%;
+
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+
+    gap: 8px;
+}
+
+.timer-start-button,
+.timer-reset-button {
+    height: 42px;
+
+    border-radius: 10px;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+.timer-start-button {
+    min-width: 0;
+
+    padding: 0 16px;
+
+    border: 0;
+
+    background: #ffffff;
+    color: #5540c8;
+
+    box-shadow:
+        0 7px 18px rgba(25, 15, 85, 0.18);
+}
+
+.timer-start-button:hover {
+    transform: translateY(-1px);
+
+    background: #f7f5ff;
+
+    box-shadow:
+        0 9px 21px rgba(25, 15, 85, 0.24);
+}
+
+.timer-reset-button {
+    padding: 0 15px;
+
+    border: 1px solid rgba(255, 255, 255, 0.22);
+
+    background: rgba(255, 255, 255, 0.10);
+
+    color: #ffffff;
+}
+
+.timer-reset-button:hover {
+    transform: translateY(-1px);
+
+    background: rgba(255, 255, 255, 0.16);
+
+    border-color: rgba(255, 255, 255, 0.32);
+}
+
+.timer-start-button:active,
+.timer-reset-button:active {
+    transform: translateY(0);
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .focus-timer-inner {
+        padding: 20px;
+    }
+
+    .timer-circle {
+        width: 175px;
+        height: 175px;
+    }
+
+    .timer-circle-content strong {
+        font-size: 34px;
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    .focus-timer-inner {
+        width: 100%;
+        padding: 22px;
+
+        border-radius: 20px;
+    }
+
+    .focus-timer-header {
+        margin-bottom: 22px;
+    }
+
+    .focus-timer-icon {
+        width: 44px;
+        height: 44px;
+
+        flex-basis: 44px;
+    }
+
+    .focus-timer-header h3 {
+        font-size: 18px;
+    }
+
+    .focus-timer-header p {
+        font-size: 12px;
+    }
+
+    .timer-circle {
+        width: 200px;
+        height: 200px;
+
+        margin-bottom: 24px;
+
+        border-width: 7px;
+    }
+
+    .timer-circle-content strong {
+        font-size: 40px;
+    }
+
+    .timer-circle-content span {
+        font-size: 12px;
+    }
+
+    .timer-play {
+        width: 44px;
+        height: 44px;
+
+        font-size: 16px;
+    }
+
+    .timer-presets {
+        gap: 8px;
+
+        margin-bottom: 14px;
+    }
+
+    .timer-presets button {
+        height: 38px;
+
+        font-size: 12px;
+    }
+
+    .timer-modes {
+        gap: 8px;
+
+        margin-bottom: 18px;
+    }
+
+    .timer-mode {
+        min-height: 62px;
+
+        border-radius: 12px;
+    }
+
+    .timer-mode span {
+        font-size: 18px;
+    }
+
+    .timer-mode small {
+        font-size: 10px;
+    }
+
+    .timer-controls {
+        gap: 9px;
+    }
+
+    .timer-start-button,
+    .timer-reset-button {
+        height: 44px;
+
+        font-size: 13px;
+    }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 380px) {
+
+    .focus-timer-inner {
+        padding: 18px;
+    }
+
+    .focus-timer-header {
+        gap: 9px;
+    }
+
+    .focus-timer-icon {
+        width: 40px;
+        height: 40px;
+
+        flex-basis: 40px;
+
+        font-size: 21px;
+    }
+
+    .focus-timer-header h3 {
+        font-size: 16px;
+    }
+
+    .focus-timer-header p {
+        font-size: 11px;
+    }
+
+    .timer-circle {
+        width: 168px;
+        height: 168px;
+
+        border-width: 6px;
+    }
+
+    .timer-circle-content strong {
+        font-size: 35px;
+    }
+
+    .timer-play {
+        width: 40px;
+        height: 40px;
+    }
+
+    .timer-mode {
+        min-height: 58px;
+    }
+
+    .timer-mode small {
+        font-size: 9px;
+    }
+
+    .timer-start-button {
+        padding: 0 10px;
+    }
+
+    .timer-reset-button {
+        padding: 0 11px;
+    }
+}

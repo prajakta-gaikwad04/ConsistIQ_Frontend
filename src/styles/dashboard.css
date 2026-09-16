@@ -1,7 +1,435 @@
+
+.score-card {
+    background: #f6faff;
+}
+
+.score-card .metric-icon {
+    background: #e5eeff;
+    color: #2770e8;
+}
+
+.attention-card {
+    background: #fff8f9;
+    border-color: #f5c9d0;
+}
+
+.attention-card .metric-icon {
+    background: #ffe2e6;
+    color: #ed4358;
+}
+
+.completed-card {
+    background: #faf8ff;
+}
+
+.completed-card .metric-icon {
+    background: #e9e3ff;
+    color: #5b3be5;
+}
+
+
+/* COMPLETION */
+
+.completion-card {
+    background: #fffaf0;
+    border-color: #f3ddb0;
+}
+
+.completion-card .metric-icon {
+    background: #fff0c8;
+    color: #e59b17;
+}
+
+
 /* =========================================================
-   CONSISTIQ DASHBOARD
-   Responsive productivity dashboard
+   PROGRESS BARS
 ========================================================= */
+
+.mini-progress {
+    width: 100%;
+    height: 6px;
+
+    margin-top: 11px;
+
+    border-radius: 999px;
+
+    background: #e7edf6;
+    overflow: hidden;
+}
+
+.mini-progress div {
+    height: 100%;
+
+    border-radius: inherit;
+
+    background: #20b486;
+
+    transition: width 0.5s ease;
+}
+
+.score-card .mini-progress div {
+    background: #3274e7;
+}
+
+.completion-card .mini-progress div {
+    background: #e6a51c;
+}
+
+
+/* =========================================================
+   INFO CARDS
+========================================================= */
+
+.info-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 16px;
+
+    margin-bottom: 18px;
+}
+
+.info-card {
+    min-width: 0;
+    min-height: 175px;
+
+    padding: 20px;
+
+    border-radius: 14px;
+
+    border: 1px solid #e1e7f4;
+
+    background: #ffffff;
+}
+
+.motivation-card {
+    background:
+        linear-gradient(
+            145deg,
+            #f6f2ff,
+            #ffffff
+        );
+}
+
+.tip-card {
+    background:
+        linear-gradient(
+            145deg,
+            #fffdf1,
+            #ffffff
+        );
+}
+
+.info-card-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.info-card-header h2 {
+    margin: 0;
+
+    font-size: 15px;
+    color: #10265c;
+}
+
+.info-icon {
+    width: 32px;
+    height: 32px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 50%;
+
+    background: #eeeaff;
+    color: #5c43e7;
+
+    font-size: 23px;
+    font-weight: 800;
+}
+
+.info-card blockquote {
+    margin: 20px 0 7px;
+
+    max-width: 90%;
+
+    font-size: 15px;
+    line-height: 1.6;
+    color: #253d6d;
+}
+
+.info-card > p {
+    margin: 0;
+
+    color: #65789b;
+    font-size: 12px;
+}
+
+.quote-dots {
+    display: flex;
+    gap: 7px;
+
+    margin-top: 18px;
+}
+
+.quote-dots i {
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: #d9def1;
+}
+
+.quote-dots i.active {
+    background: #5d3ce5;
+}
+
+.tip-text {
+    margin: 19px 0 14px !important;
+
+    color: #263f6d !important;
+
+    font-size: 14px !important;
+    line-height: 1.6;
+}
+
+.tip-badge {
+    display: inline-block;
+
+    padding: 8px 13px;
+
+    border-radius: 999px;
+
+    background: #fff0d4;
+
+    color: #6d572a;
+
+    font-size: 11px;
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   STATISTICS
+========================================================= */
+
+.statistics-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 14px;
+
+    margin-bottom: 18px;
+}
+
+.statistics-grid .metric-card {
+    min-height: 110px;
+}
+
+.statistics-grid .metric-content strong {
+    margin-top: 13px;
+    font-size: 27px;
+}
+
+.total-stat {
+    background: #f7fbff;
+}
+
+.planned-stat {
+    background: #faf8ff;
+}
+
+.progress-stat {
+    background: #fffaf5;
+}
+
+.complete-stat {
+    background: #f5fff9;
+}
+
+.complete-stat .metric-icon {
+    background: #ddf7e9;
+    color: #16a56e;
+}
+
+
+/* =========================================================
+   QUICK ACTIONS
+========================================================= */
+
+.quick-actions-section {
+    padding: 19px;
+
+    border-radius: 14px;
+
+    background: #ffffff;
+    border: 1px solid #e1e7f4;
+
+    margin-bottom: 18px;
+}
+
+.section-heading {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    margin-bottom: 15px;
+}
+
+.section-heading > svg {
+    color: #5d3ee4;
+}
+
+.section-heading h2 {
+    margin: 0;
+
+    font-size: 16px;
+    color: #10265c;
+}
+
+.section-heading p {
+    margin: 3px 0 0;
+
+    color: #7282a0;
+    font-size: 11px;
+}
+
+.quick-actions-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 10px;
+}
+
+.quick-action {
+    min-width: 0;
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 15px;
+
+    border-radius: 11px;
+
+    text-decoration: none;
+
+    border: 1px solid #e1e8f5;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.quick-action:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 8px 20px rgba(30, 60, 120, 0.08);
+}
+
+.quick-action-icon {
+    width: 38px;
+    height: 38px;
+
+    flex-shrink: 0;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 11px;
+
+    background: #edf0ff;
+    color: #5439df;
+}
+
+.quick-action strong {
+    display: block;
+
+    color: #173366;
+    font-size: 13px;
+}
+
+.quick-action span {
+    display: block;
+
+    margin-top: 3px;
+
+    color: #65799d;
+    font-size: 10px;
+}
+
+.quick-action-arrow {
+    margin-left: auto;
+
+    color: #65799d !important;
+    font-size: 21px !important;
+}
+
+.create-action {
+    background: #f7f3ff;
+}
+
+.tasks-action {
+    background: #f3f8ff;
+}
+
+.analytics-action {
+    background: #f1fbf8;
+}
+
+
+/* =========================================================
+   RIGHT COLUMN
+========================================================= */
+
+.dashboard-right-column {
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 17px;
+}
+
+
+/* =========================================
+   FOCUS TIMER
+   Outer card position/layout unchanged
+========================================= */
+.focus-timer-card {
+    width: 100%;
+    min-width: 0;
+
+    padding: 0;
+    margin: 0;
+
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+}
+
+.real-timer {
+    width: 100%;
+    min-width: 0;
+}
+
+
+.mobile-focus-timer {
+    display: none;
+}
+/* MOBILE FOCUS TIMER */
+
+
 
 * {
     box-sizing: border-box;
@@ -466,946 +894,6 @@
     color: #18a878;
 }
 
-.score-card {
-    background: #f6faff;
-}
-
-.score-card .metric-icon {
-    background: #e5eeff;
-    color: #2770e8;
-}
-
-.attention-card {
-    background: #fff8f9;
-    border-color: #f5c9d0;
-}
-
-.attention-card .metric-icon {
-    background: #ffe2e6;
-    color: #ed4358;
-}
-
-.completed-card {
-    background: #faf8ff;
-}
-
-.completed-card .metric-icon {
-    background: #e9e3ff;
-    color: #5b3be5;
-}
-
-
-/* COMPLETION */
-
-.completion-card {
-    background: #fffaf0;
-    border-color: #f3ddb0;
-}
-
-.completion-card .metric-icon {
-    background: #fff0c8;
-    color: #e59b17;
-}
-
-
-/* =========================================================
-   PROGRESS BARS
-========================================================= */
-
-.mini-progress {
-    width: 100%;
-    height: 6px;
-
-    margin-top: 11px;
-
-    border-radius: 999px;
-
-    background: #e7edf6;
-    overflow: hidden;
-}
-
-.mini-progress div {
-    height: 100%;
-
-    border-radius: inherit;
-
-    background: #20b486;
-
-    transition: width 0.5s ease;
-}
-
-.score-card .mini-progress div {
-    background: #3274e7;
-}
-
-.completion-card .mini-progress div {
-    background: #e6a51c;
-}
-
-
-/* =========================================================
-   INFO CARDS
-========================================================= */
-
-.info-grid {
-    display: grid;
-
-    grid-template-columns:
-        repeat(2, minmax(0, 1fr));
-
-    gap: 16px;
-
-    margin-bottom: 18px;
-}
-
-.info-card {
-    min-width: 0;
-    min-height: 175px;
-
-    padding: 20px;
-
-    border-radius: 14px;
-
-    border: 1px solid #e1e7f4;
-
-    background: #ffffff;
-}
-
-.motivation-card {
-    background:
-        linear-gradient(
-            145deg,
-            #f6f2ff,
-            #ffffff
-        );
-}
-
-.tip-card {
-    background:
-        linear-gradient(
-            145deg,
-            #fffdf1,
-            #ffffff
-        );
-}
-
-.info-card-header {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.info-card-header h2 {
-    margin: 0;
-
-    font-size: 15px;
-    color: #10265c;
-}
-
-.info-icon {
-    width: 32px;
-    height: 32px;
-
-    display: grid;
-    place-items: center;
-
-    border-radius: 50%;
-
-    background: #eeeaff;
-    color: #5c43e7;
-
-    font-size: 23px;
-    font-weight: 800;
-}
-
-.info-card blockquote {
-    margin: 20px 0 7px;
-
-    max-width: 90%;
-
-    font-size: 15px;
-    line-height: 1.6;
-    color: #253d6d;
-}
-
-.info-card > p {
-    margin: 0;
-
-    color: #65789b;
-    font-size: 12px;
-}
-
-.quote-dots {
-    display: flex;
-    gap: 7px;
-
-    margin-top: 18px;
-}
-
-.quote-dots i {
-    width: 7px;
-    height: 7px;
-
-    border-radius: 50%;
-
-    background: #d9def1;
-}
-
-.quote-dots i.active {
-    background: #5d3ce5;
-}
-
-.tip-text {
-    margin: 19px 0 14px !important;
-
-    color: #263f6d !important;
-
-    font-size: 14px !important;
-    line-height: 1.6;
-}
-
-.tip-badge {
-    display: inline-block;
-
-    padding: 8px 13px;
-
-    border-radius: 999px;
-
-    background: #fff0d4;
-
-    color: #6d572a;
-
-    font-size: 11px;
-    font-weight: 600;
-}
-
-
-/* =========================================================
-   STATISTICS
-========================================================= */
-
-.statistics-grid {
-    display: grid;
-
-    grid-template-columns:
-        repeat(4, minmax(0, 1fr));
-
-    gap: 14px;
-
-    margin-bottom: 18px;
-}
-
-.statistics-grid .metric-card {
-    min-height: 110px;
-}
-
-.statistics-grid .metric-content strong {
-    margin-top: 13px;
-    font-size: 27px;
-}
-
-.total-stat {
-    background: #f7fbff;
-}
-
-.planned-stat {
-    background: #faf8ff;
-}
-
-.progress-stat {
-    background: #fffaf5;
-}
-
-.complete-stat {
-    background: #f5fff9;
-}
-
-.complete-stat .metric-icon {
-    background: #ddf7e9;
-    color: #16a56e;
-}
-
-
-/* =========================================================
-   QUICK ACTIONS
-========================================================= */
-
-.quick-actions-section {
-    padding: 19px;
-
-    border-radius: 14px;
-
-    background: #ffffff;
-    border: 1px solid #e1e7f4;
-
-    margin-bottom: 18px;
-}
-
-.section-heading {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-
-    margin-bottom: 15px;
-}
-
-.section-heading > svg {
-    color: #5d3ee4;
-}
-
-.section-heading h2 {
-    margin: 0;
-
-    font-size: 16px;
-    color: #10265c;
-}
-
-.section-heading p {
-    margin: 3px 0 0;
-
-    color: #7282a0;
-    font-size: 11px;
-}
-
-.quick-actions-grid {
-    display: grid;
-
-    grid-template-columns:
-        repeat(3, minmax(0, 1fr));
-
-    gap: 10px;
-}
-
-.quick-action {
-    min-width: 0;
-
-    display: flex;
-    align-items: center;
-    gap: 12px;
-
-    padding: 15px;
-
-    border-radius: 11px;
-
-    text-decoration: none;
-
-    border: 1px solid #e1e8f5;
-
-    transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease,
-        border-color 0.2s ease;
-}
-
-.quick-action:hover {
-    transform: translateY(-3px);
-
-    box-shadow:
-        0 8px 20px rgba(30, 60, 120, 0.08);
-}
-
-.quick-action-icon {
-    width: 38px;
-    height: 38px;
-
-    flex-shrink: 0;
-
-    display: grid;
-    place-items: center;
-
-    border-radius: 11px;
-
-    background: #edf0ff;
-    color: #5439df;
-}
-
-.quick-action strong {
-    display: block;
-
-    color: #173366;
-    font-size: 13px;
-}
-
-.quick-action span {
-    display: block;
-
-    margin-top: 3px;
-
-    color: #65799d;
-    font-size: 10px;
-}
-
-.quick-action-arrow {
-    margin-left: auto;
-
-    color: #65799d !important;
-    font-size: 21px !important;
-}
-
-.create-action {
-    background: #f7f3ff;
-}
-
-.tasks-action {
-    background: #f3f8ff;
-}
-
-.analytics-action {
-    background: #f1fbf8;
-}
-
-
-/* =========================================================
-   RIGHT COLUMN
-========================================================= */
-
-.dashboard-right-column {
-    min-width: 0;
-
-    display: flex;
-    flex-direction: column;
-
-    gap: 17px;
-}
-
-
-/* =========================================
-   FOCUS TIMER
-   Outer card position/layout unchanged
-========================================= */
-
-.focus-timer-card {
-    width: 100%;
-    min-width: 0;
-    border-radius: 20px;
-    overflow: hidden;
-
-    /* Calm productivity gradient */
-    background:
-        linear-gradient(
-            145deg,
-            #5542d8 0%,
-            #4665dc 52%,
-            #329ed1 100%
-        );
-
-    color: #ffffff;
-
-    box-shadow:
-        0 12px 30px rgba(70, 70, 180, 0.18);
-}
-
-
-/* =========================================
-   INNER FOCUS TIMER
-========================================= */
-
-.focus-timer-inner {
-    width: 100%;
-    box-sizing: border-box;
-    padding: 24px 18px 20px;
-
-    /* subtle inner atmosphere */
-    background:
-        radial-gradient(
-            circle at 50% 35%,
-            rgba(255, 255, 255, 0.12),
-            transparent 48%
-        );
-}
-
-
-/* =========================================
-   HEADER
-========================================= */
-
-.focus-timer-header {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 18px;
-}
-
-.focus-timer-header h3 {
-    margin: 0;
-    font-size: 17px;
-    font-weight: 700;
-    color: #ffffff;
-}
-
-.focus-timer-header p {
-    margin: 3px 0 0;
-    font-size: 12px;
-    color: rgba(255, 255, 255, 0.78);
-}
-
-.focus-timer-icon {
-    width: 34px;
-    height: 34px;
-    border-radius: 10px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    font-size: 20px;
-
-    background: rgba(255, 255, 255, 0.16);
-    color: #ffffff;
-
-    box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, 0.15);
-}
-
-
-/* =========================================
-   TIMER BOX
-   Separate visible box for focus time
-========================================= */
-
-.timer-circle {
-    width: min(180px, 62vw);
-    aspect-ratio: 1;
-
-    margin: 10px auto 18px;
-
-    border-radius: 50%;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    position: relative;
-
-    /* Outer timer ring */
-    background:
-        conic-gradient(
-            #ffffff 0deg,
-            #dff8ff 220deg,
-            rgba(255, 255, 255, 0.20) 220deg,
-            rgba(255, 255, 255, 0.20) 360deg
-        );
-
-    box-shadow:
-        0 0 0 7px rgba(255, 255, 255, 0.08),
-        0 12px 32px rgba(25, 40, 110, 0.22);
-}
-
-
-/* Inner separate timer box */
-
-.timer-circle::before {
-    content: "";
-
-    position: absolute;
-    inset: 8px;
-
-    border-radius: 50%;
-
-    background:
-        linear-gradient(
-            145deg,
-            #5140d1,
-            #3979dc
-        );
-
-    box-shadow:
-        inset 0 1px 2px rgba(255, 255, 255, 0.12);
-}
-
-
-/* =========================================
-   TIMER CONTENT
-========================================= */
-
-.timer-circle-content {
-    position: relative;
-    z-index: 2;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-    text-align: center;
-
-    color: #ffffff;
-}
-
-.timer-circle-content strong {
-    font-size: clamp(30px, 5vw, 42px);
-    line-height: 1;
-    font-weight: 800;
-
-    letter-spacing: -1px;
-}
-
-.timer-circle-content span {
-    margin-top: 6px;
-
-    font-size: 12px;
-    color: rgba(255, 255, 255, 0.82);
-}
-
-
-/* =========================================
-   PLAY BUTTON
-========================================= */
-
-.timer-play {
-    width: 40px;
-    height: 40px;
-
-    margin-top: 12px;
-
-    border: 0;
-    border-radius: 50%;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    cursor: pointer;
-    font-size: 16px;
-
-    background: #ffffff;
-    color: #5140d1;
-
-    box-shadow:
-        0 7px 18px rgba(20, 35, 100, 0.25);
-
-    transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease,
-        background 0.2s ease;
-}
-
-.timer-play:hover {
-    transform: scale(1.08);
-
-    background: #f5fbff;
-
-    box-shadow:
-        0 10px 25px rgba(20, 35, 100, 0.32);
-}
-
-.timer-play:active {
-    transform: scale(0.96);
-}
-
-
-/* =========================================
-   PRESETS
-========================================= */
-
-.timer-presets {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-
-    gap: 7px;
-    margin-bottom: 12px;
-}
-
-.timer-presets button {
-    min-width: 0;
-
-    padding: 9px 4px;
-
-    border-radius: 8px;
-
-    border: 1px solid rgba(255, 255, 255, 0.22);
-
-    background: rgba(255, 255, 255, 0.10);
-
-    color: #ffffff;
-
-    font-size: 11px;
-    font-weight: 600;
-
-    cursor: pointer;
-
-    transition:
-        background 0.2s ease,
-        transform 0.2s ease,
-        border-color 0.2s ease;
-}
-
-.timer-presets button:hover {
-    background: rgba(255, 255, 255, 0.19);
-
-    border-color: rgba(255, 255, 255, 0.38);
-
-    transform: translateY(-1px);
-}
-
-
-/* =========================================
-   TIMER MODES
-========================================= */
-
-.timer-modes {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-
-    gap: 6px;
-    margin-bottom: 16px;
-}
-
-.timer-mode {
-    min-width: 0;
-    min-height: 55px;
-
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    border-radius: 10px;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-    gap: 3px;
-
-    cursor: pointer;
-
-    background: rgba(255, 255, 255, 0.07);
-
-    color: rgba(255, 255, 255, 0.78);
-
-    transition:
-        background 0.2s ease,
-        border-color 0.2s ease,
-        transform 0.2s ease;
-}
-
-.timer-mode:hover {
-    background: rgba(255, 255, 255, 0.14);
-
-    border-color: rgba(255, 255, 255, 0.32);
-
-    transform: translateY(-1px);
-}
-
-.timer-mode.active {
-    background: rgba(255, 255, 255, 0.20);
-
-    border-color: rgba(255, 255, 255, 0.45);
-
-    color: #ffffff;
-
-    box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, 0.12);
-}
-
-.timer-mode span {
-    font-size: 15px;
-}
-
-.timer-mode small {
-    font-size: 9px;
-    white-space: nowrap;
-}
-
-
-/* =========================================
-   START / RESET
-========================================= */
-
-.timer-controls {
-    display: grid;
-    grid-template-columns: 1fr auto;
-
-    gap: 8px;
-
-    width: 100%;
-}
-
-.timer-start-button,
-.timer-reset-button {
-    height: 42px;
-
-    border-radius: 10px;
-    border: none;
-
-    font-weight: 700;
-
-    cursor: pointer;
-
-    transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease,
-        background 0.2s ease;
-}
-
-.timer-start-button {
-    padding: 0 16px;
-
-    background: #ffffff;
-    color: #5140d1;
-
-    box-shadow:
-        0 6px 16px rgba(20, 35, 100, 0.18);
-}
-
-.timer-reset-button {
-    padding: 0 15px;
-
-    background: rgba(255, 255, 255, 0.13);
-
-    color: #ffffff;
-
-    border: 1px solid rgba(255, 255, 255, 0.22);
-}
-
-.timer-start-button:hover,
-.timer-reset-button:hover {
-    transform: translateY(-2px);
-}
-
-.timer-start-button:hover {
-    background: #f5fbff;
-
-    box-shadow:
-        0 9px 22px rgba(20, 35, 100, 0.24);
-}
-
-.timer-reset-button:hover {
-    background: rgba(255, 255, 255, 0.20);
-}
-
-
-/* =========================================
-   MOBILE
-========================================= */
-
-@media (max-width: 768px) {
-
-    .focus-timer-card {
-        width: 100%;
-    }
-
-    .focus-timer-inner {
-        padding: 22px 16px 18px;
-    }
-
-    .timer-circle {
-        width: min(190px, 55vw);
-    }
-
-    .timer-controls {
-        grid-template-columns: 1fr 1fr;
-    }
-
-    .timer-start-button,
-    .timer-reset-button {
-        width: 100%;
-    }
-}
-
-
-/* =========================================
-   SMALL PHONES
-========================================= */
-
-@media (max-width: 420px) {
-
-    .focus-timer-inner {
-        padding: 18px 14px 16px;
-    }
-
-    .timer-circle {
-        width: 165px;
-    }
-
-    .timer-presets button {
-        font-size: 10px;
-    }
-
-    .timer-mode {
-        min-height: 52px;
-    }
-
-    .timer-controls {
-        grid-template-columns: 1fr 1fr;
-    }
-}
-/* =========================================================
-   TIMER MODE ACCENT COLORS
-   Layout unchanged
-========================================================= */
-
-/* ---------- FOCUS ---------- */
-
-.timer-mode.focus-mode {
-    background: rgba(112, 83, 235, 0.25);
-    border-color: rgba(190, 175, 255, 0.55);
-    color: #ffffff;
-
-    box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, 0.10);
-}
-
-.timer-mode.focus-mode:hover {
-    background: rgba(112, 83, 235, 0.38);
-    border-color: rgba(205, 193, 255, 0.70);
-}
-
-.timer-mode.focus-mode.active {
-    background: #7658ed;
-    border-color: #a998ff;
-    color: #ffffff;
-
-    box-shadow:
-        0 6px 18px rgba(86, 61, 210, 0.30),
-        inset 0 1px 0 rgba(255, 255, 255, 0.18);
-}
-
-
-/* ---------- SHORT BREAK ---------- */
-
-.timer-mode.short-break-mode {
-    background: rgba(27, 183, 145, 0.20);
-    border-color: rgba(100, 226, 195, 0.45);
-    color: #f2fffb;
-}
-
-.timer-mode.short-break-mode:hover {
-    background: rgba(27, 183, 145, 0.32);
-    border-color: rgba(125, 238, 208, 0.65);
-}
-
-.timer-mode.short-break-mode.active {
-    background: #20b894;
-    border-color: #72e5c6;
-    color: #ffffff;
-
-    box-shadow:
-        0 6px 18px rgba(21, 161, 126, 0.28),
-        inset 0 1px 0 rgba(255, 255, 255, 0.18);
-}
-
-
-/* ---------- LONG BREAK ---------- */
-
-.timer-mode.long-break-mode {
-    background: rgba(235, 164, 45, 0.20);
-    border-color: rgba(255, 211, 119, 0.48);
-    color: #fffaf0;
-}
-
-.timer-mode.long-break-mode:hover {
-    background: rgba(235, 164, 45, 0.32);
-    border-color: rgba(255, 220, 145, 0.68);
-}
-
-.timer-mode.long-break-mode.active {
-    background: #e9a63a;
-    border-color: #ffd27a;
-    color: #ffffff;
-
-    box-shadow:
-        0 6px 18px rgba(205, 137, 30, 0.28),
-        inset 0 1px 0 rgba(255, 255, 255, 0.18);
-}
 /* =========================================================
    OVERVIEW
 ========================================================= */
@@ -1599,10 +1087,6 @@
    MOBILE TIMER
 ========================================================= */
 
-.mobile-focus-timer {
-    display: none;
-}
-
 
 /* =========================================================
    FOOTER
@@ -1667,28 +1151,6 @@
    LARGE LAPTOP
 ========================================================= */
 
-@media (max-width: 1350px) {
-
-    .dashboard-layout {
-        grid-template-columns: 190px minmax(0, 1fr);
-    }
-
-    .dashboard-content {
-        padding: 22px;
-    }
-
-    .dashboard-main-grid {
-        grid-template-columns:
-            minmax(0, 1fr)
-            270px;
-    }
-
-    .metrics-grid {
-        grid-template-columns:
-            repeat(3, minmax(0, 1fr));
-    }
-
-}
 
 
 /* =========================================================
@@ -1751,247 +1213,9 @@
 }
 
 
-/* =========================================================
-   SMALL TABLET
-========================================================= */
 
-@media (max-width: 800px) {
 
-    .dashboard-topbar {
-        height: 58px;
-    }
 
-    .top-navigation {
-        display: none;
-    }
-
-    .dashboard-layout {
-        display: block;
-    }
-
-    .dashboard-sidebar {
-        display: none;
-    }
-
-    .dashboard-content {
-        padding: 16px;
-    }
-
-    .dashboard-hero {
-        min-height: 105px;
-        padding: 20px;
-    }
-
-    .metrics-grid {
-        grid-template-columns:
-            repeat(2, minmax(0, 1fr));
-    }
-
-    .statistics-grid {
-        grid-template-columns:
-            repeat(2, minmax(0, 1fr));
-    }
-
-    .dashboard-right-column {
-        grid-template-columns: 1fr;
-    }
-
-}
-
-
-/* =========================================================
-   MOBILE
-========================================================= */
-
-@media (max-width: 600px) {
-
-    .dashboard-content {
-        padding: 12px;
-    }
-
-    .brand {
-        font-size: 18px;
-    }
-
-    .dashboard-hero {
-        min-height: auto;
-
-        padding: 17px;
-
-        align-items: flex-start;
-    }
-
-    .hero-icon {
-        width: 48px;
-        height: 48px;
-    }
-
-    .hero-icon svg {
-        font-size: 30px;
-    }
-
-    .hero-content {
-        margin-left: 12px;
-    }
-
-    .hero-content h1 {
-        font-size: 18px;
-        line-height: 1.3;
-    }
-
-    .hero-content p {
-        font-size: 11px;
-        line-height: 1.5;
-    }
-
-    .hero-decoration {
-        display: none;
-    }
-
-
-    /* METRICS */
-
-    .metrics-grid {
-        grid-template-columns: 1fr;
-
-        gap: 10px;
-    }
-
-    .metric-card {
-        min-height: 105px;
-    }
-
-
-    /* INFO */
-
-    .info-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .info-card {
-        min-height: 155px;
-    }
-
-
-    /* STATISTICS */
-
-    .statistics-grid {
-        grid-template-columns:
-            repeat(2, minmax(0, 1fr));
-
-        gap: 9px;
-    }
-
-    .statistics-grid .metric-card {
-        min-height: 105px;
-
-        padding: 14px;
-    }
-
-    .statistics-grid .metric-content strong {
-        font-size: 24px;
-    }
-
-
-    /* QUICK ACTIONS */
-
-    .quick-actions-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .quick-action {
-        min-height: 62px;
-    }
-
-
-    /* RIGHT SIDE */
-
-    .dashboard-right-column {
-        display: none;
-    }
-
-
-    /* MOBILE TIMER */
-
-    .mobile-focus-timer {
-        display: block;
-
-        margin-top: 18px;
-
-        padding: 18px;
-
-        border-radius: 15px;
-
-        background:
-            linear-gradient(
-                145deg,
-                #f0edff,
-                #ffffff
-            );
-
-        border: 1px solid #ddd7ff;
-    }
-
-    .focus-header {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-
-        margin-bottom: 14px;
-    }
-
-    .focus-header svg {
-        color: #5c42e6;
-    }
-
-    .focus-header h2 {
-        margin: 0;
-
-        font-size: 16px;
-    }
-
-    .focus-header p {
-        margin: 3px 0 0;
-
-        color: #68799b;
-
-        font-size: 10px;
-    }
-
-}
-
-
-/* =========================================================
-   VERY SMALL PHONES
-========================================================= */
-
-@media (max-width: 380px) {
-
-    .dashboard-content {
-        padding: 9px;
-    }
-
-    .statistics-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .metric-card {
-        padding: 14px;
-    }
-
-    .metric-content strong {
-        font-size: 21px;
-    }
-
-    .info-card {
-        padding: 16px;
-    }
-
-    .quick-actions-section {
-        padding: 15px;
-    }
-
-}
 
 
 /* =========================================================
@@ -5232,22 +4456,6 @@
    TABLET
 ========================================================= */
 
-@media (max-width: 900px) {
-
-    .quick-actions-section {
-        padding: 20px !important;
-    }
-
-    .daily-words-card {
-        padding: 20px;
-    }
-
-    .smart-task-card {
-        margin-top: 16px !important;
-    }
-}
-
-
 /* =========================================================
    MOBILE — DEDICATED MOBILE LAYOUT
 ========================================================= */
@@ -6001,6 +5209,15 @@
         background: #eeecff;
         color: #4f2fe3;
     }
+    .mobile-focus-timer {
+    display: block;
+    width: 100%;
+    margin-top: 18px;
+}
+
+.dashboard-right-column .focus-timer-card {
+    display: none;
+}
 
 }
 
@@ -6060,4 +5277,1085 @@
         font-size: 13px;
     }
 
+}
+/* =========================================================
+   CONSISTIQ DASHBOARD
+   FINAL RESPONSIVE SYSTEM
+   Desktop layout preserved
+   Mobile gets a dedicated structure
+========================================================= */
+
+
+/* =========================================================
+   LARGE LAPTOPS / SMALL DESKTOPS
+========================================================= */
+
+@media (max-width: 1350px) {
+
+    .dashboard-layout {
+        grid-template-columns: 190px minmax(0, 1fr);
+    }
+
+    .dashboard-content {
+        padding: 22px;
+    }
+
+    .dashboard-main-grid {
+        grid-template-columns: minmax(0, 1fr) 270px;
+        gap: 18px;
+    }
+
+    .metrics-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .quick-actions-section {
+        padding: 20px !important;
+    }
+
+    .daily-words-card {
+        padding: 20px;
+    }
+
+    .smart-task-card {
+        margin-top: 16px !important;
+    }
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1000px) {
+
+    .dashboard-topbar {
+        padding: 0 20px;
+    }
+
+    .dashboard-layout {
+        grid-template-columns: 175px minmax(0, 1fr);
+    }
+
+    .dashboard-sidebar {
+        padding: 22px 12px;
+    }
+
+    .sidebar-link {
+        padding: 0 11px;
+        gap: 10px;
+        font-size: 13px;
+    }
+
+    .dashboard-content {
+        padding: 18px;
+    }
+
+    .dashboard-main-grid {
+        grid-template-columns: minmax(0, 1fr) 250px;
+        gap: 16px;
+    }
+
+    .metrics-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .info-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .statistics-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .quick-actions-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .daily-words-card {
+        padding: 18px;
+    }
+}
+
+
+/* =========================================================
+   MOBILE NAVBAR
+========================================================= */
+
+.mobile-menu-button,
+.mobile-notification-link,
+.mobile-navigation {
+    display: none;
+}
+
+@media (max-width: 800px) {
+
+    /* ---------- TOP BAR ---------- */
+
+    .dashboard-topbar {
+        height: 58px;
+        width: 100%;
+        padding: 0 14px;
+        display: flex;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.97);
+        border-bottom: 1px solid #e7ecf7;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+    }
+
+    .mobile-menu-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        margin-right: 8px;
+        padding: 0;
+        border: none;
+        border-radius: 10px;
+        background: transparent;
+        color: #263a68;
+        cursor: pointer;
+        flex-shrink: 0;
+    }
+
+    .mobile-menu-button svg {
+        font-size: 25px;
+    }
+
+    .mobile-menu-button:hover {
+        background: #f1efff;
+        color: #5634e8;
+    }
+
+    .brand {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        min-width: 0;
+        flex: 1;
+        font-size: 18px;
+        text-decoration: none;
+    }
+
+    .brand-mark {
+        width: 30px;
+        height: 30px;
+        flex-shrink: 0;
+    }
+
+    .brand-mark svg {
+        font-size: 27px;
+    }
+
+    .top-navigation {
+        display: none;
+    }
+
+    .mobile-notification-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        margin-left: 8px;
+        border-radius: 10px;
+        color: #263a68;
+        text-decoration: none;
+        flex-shrink: 0;
+    }
+
+    .mobile-notification-link:hover,
+    .mobile-notification-link.active {
+        background: #f1efff;
+        color: #5634e8;
+    }
+
+    .mobile-notification-link svg {
+        font-size: 24px;
+    }
+
+
+    /* ---------- MOBILE MENU ---------- */
+
+    .mobile-navigation {
+        display: flex;
+        flex-direction: column;
+        position: sticky;
+        top: 58px;
+        width: 100%;
+        padding: 8px 12px 12px;
+        background: rgba(255, 255, 255, 0.98);
+        border-bottom: 1px solid #e7ecf7;
+        box-shadow: 0 8px 20px rgba(30, 45, 90, 0.08);
+        z-index: 999;
+    }
+
+    .mobile-nav-link {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        min-height: 48px;
+        padding: 0 13px;
+        margin-bottom: 4px;
+        gap: 12px;
+        border-radius: 10px;
+        color: #263a68;
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 600;
+        transition:
+            background 0.2s ease,
+            color 0.2s ease;
+    }
+
+    .mobile-nav-link svg {
+        font-size: 21px;
+        flex-shrink: 0;
+    }
+
+    .mobile-nav-link:hover {
+        background: #f1efff;
+        color: #5634e8;
+    }
+
+    .mobile-nav-link.active {
+        background: #eeecff;
+        color: #4f2fe3;
+    }
+
+
+    /* =====================================================
+       MOBILE PAGE STRUCTURE
+    ===================================================== */
+
+    .dashboard-page {
+        width: 100%;
+        min-width: 0;
+        overflow-x: hidden;
+    }
+
+    .dashboard-layout {
+        display: block;
+        width: 100%;
+        min-height: calc(100vh - 58px);
+    }
+
+
+    /* ---------- HIDE DESKTOP SIDEBAR ---------- */
+
+    .dashboard-sidebar {
+        display: none;
+    }
+
+
+    /* ---------- MAIN CONTENT ---------- */
+
+    .dashboard-content {
+        width: 100%;
+        min-width: 0;
+        padding: 16px 14px 24px;
+    }
+
+
+    /* ---------- HERO ---------- */
+
+    .dashboard-hero {
+        min-height: 0;
+        width: 100%;
+        padding: 18px;
+        margin-bottom: 16px;
+        border-radius: 15px;
+    }
+
+    .hero-icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 13px;
+    }
+
+    .hero-icon svg {
+        font-size: 32px;
+    }
+
+    .hero-content {
+        margin-left: 13px;
+        min-width: 0;
+    }
+
+    .hero-content h1 {
+        font-size: 22px;
+        line-height: 1.2;
+    }
+
+    .hero-content p {
+        margin-top: 5px;
+        font-size: 12px;
+        line-height: 1.45;
+    }
+
+    .hero-decoration {
+        right: 15px;
+        font-size: 30px;
+        opacity: 0.35;
+    }
+
+
+    /* ---------- ERROR ---------- */
+
+    .dashboard-error {
+        margin-bottom: 16px;
+        padding: 12px 14px;
+        font-size: 12px;
+        overflow-wrap: anywhere;
+    }
+
+
+    /* =====================================================
+       MOBILE MAIN GRID
+    ===================================================== */
+
+    .dashboard-main-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        width: 100%;
+        gap: 18px;
+    }
+
+    .dashboard-primary {
+        width: 100%;
+        min-width: 0;
+    }
+
+
+    /* =====================================================
+       METRICS
+    ===================================================== */
+
+    .metrics-grid {
+        width: 100%;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+        margin-bottom: 14px;
+    }
+
+    .metric-card {
+        width: 100%;
+        min-height: 125px;
+        padding: 14px;
+        gap: 9px;
+        border-radius: 13px;
+    }
+
+    .metric-card:hover {
+        transform: none;
+    }
+
+    .metric-icon {
+        width: 34px;
+        height: 34px;
+    }
+
+    .metric-icon svg {
+        font-size: 19px;
+    }
+
+    .metric-content span {
+        font-size: 11px;
+        line-height: 1.3;
+    }
+
+    .metric-content strong {
+        margin-top: 9px;
+        font-size: 21px;
+    }
+
+    .metric-content small {
+        margin-top: 6px;
+        font-size: 9px;
+        line-height: 1.35;
+    }
+
+    .metric-arrow {
+        right: 9px;
+        top: 11px;
+        font-size: 17px;
+    }
+
+
+    /* =====================================================
+       MOTIVATION + TIP
+    ===================================================== */
+
+    .info-grid {
+        width: 100%;
+        grid-template-columns: 1fr;
+        gap: 12px;
+        margin-bottom: 14px;
+    }
+
+    .info-card {
+        width: 100%;
+        border-radius: 14px;
+    }
+
+    .info-card:hover {
+        transform: none;
+    }
+
+    .motivation-card,
+    .tip-card {
+        width: 100%;
+    }
+
+    .motivation-card blockquote {
+        font-size: 13px;
+        line-height: 1.55;
+    }
+
+    .tip-card .tip-text {
+        font-size: 13px;
+        line-height: 1.55;
+    }
+
+
+    /* =====================================================
+       STATISTICS
+    ===================================================== */
+
+    .statistics-grid {
+        width: 100%;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+        margin-bottom: 16px;
+    }
+
+    .statistics-grid > * {
+        min-width: 0;
+    }
+
+
+    /* =====================================================
+       QUICK ACTIONS
+    ===================================================== */
+
+    .quick-actions-section {
+        width: 100%;
+        padding: 16px !important;
+        border-radius: 15px;
+    }
+
+    .quick-actions-grid {
+        width: 100%;
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .quick-action {
+        width: 100%;
+        min-height: 0;
+        padding: 13px;
+    }
+
+    .quick-action:hover {
+        transform: none;
+    }
+
+
+    /* =====================================================
+       SMART DAILY VIEW
+    ===================================================== */
+
+    .smart-daily-section {
+        width: 100%;
+        margin-top: 16px;
+    }
+
+    .smart-daily-header {
+        margin-bottom: 16px;
+    }
+
+    .smart-daily-title {
+        font-size: 25px !important;
+        line-height: 1.2 !important;
+    }
+
+    .smart-daily-subtitle {
+        margin-top: 4px !important;
+        font-size: 13px !important;
+        line-height: 1.45 !important;
+    }
+
+    .smart-daily-stats {
+        width: 100%;
+        margin-bottom: 0 !important;
+    }
+
+    .smart-stat-card {
+        width: 100%;
+        min-height: 0;
+        border-radius: 14px !important;
+    }
+
+    .smart-stat-card:hover {
+        transform: none;
+    }
+
+    .smart-stat-card .MuiCardContent-root {
+        padding: 15px !important;
+    }
+
+    .smart-stat-title {
+        font-size: 12px !important;
+    }
+
+    .smart-stat-number {
+        font-size: 26px !important;
+    }
+
+    .smart-task-card {
+        width: 100%;
+        margin-top: 14px !important;
+        border-radius: 14px !important;
+    }
+
+    .smart-task-card:hover {
+        transform: none;
+    }
+
+    .smart-task-item {
+        width: 100%;
+        padding: 12px 13px;
+        margin-bottom: 7px;
+        overflow-wrap: anywhere;
+    }
+
+    .smart-task-name {
+        font-size: 13px !important;
+        line-height: 1.4 !important;
+    }
+
+    .smart-task-priority {
+        font-size: 11px !important;
+    }
+
+
+  
+
+    /* =====================================================
+       DESKTOP TIMER HIDDEN ON MOBILE
+    ===================================================== */
+
+    .dashboard-right-column .focus-timer-card {
+        display: none;
+    }
+
+
+    /* =====================================================
+       RIGHT COLUMN BECOMES MOBILE CONTENT
+       
+       Order:
+       Focus Timer
+       Quick Overview
+       Upcoming
+       Daily English Words
+    ===================================================== */
+
+    .dashboard-right-column {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        min-width: 0;
+        gap: 14px;
+    }
+
+    .overview-card,
+    .upcoming-card,
+    .daily-words-card,
+    .side-quote {
+        width: 100%;
+        min-width: 0;
+    }
+
+
+    /* ---------- OVERVIEW ---------- */
+
+    .overview-card {
+        padding: 16px;
+        border-radius: 15px;
+    }
+
+    .overview-card:hover {
+        transform: none;
+    }
+
+    .right-section-title {
+        margin-bottom: 12px;
+    }
+
+    .right-section-title h2 {
+        font-size: 14px;
+    }
+
+    .overview-item {
+        width: 100%;
+        font-size: 11px;
+        overflow-wrap: anywhere;
+    }
+
+    .overview-card .overview-item:hover {
+        transform: none;
+    }
+
+
+    /* ---------- UPCOMING ---------- */
+
+    .upcoming-card {
+        padding: 16px;
+        border-radius: 15px;
+    }
+
+    .upcoming-card:hover {
+        transform: none;
+    }
+
+    .upcoming-item {
+        width: 100%;
+    }
+
+    .upcoming-card .upcoming-item:hover {
+        transform: none;
+    }
+
+    .upcoming-item strong {
+        font-size: 11px;
+        line-height: 1.4;
+    }
+
+    .upcoming-item small {
+        font-size: 9px;
+        line-height: 1.4;
+    }
+
+
+    /* =====================================================
+       DAILY ENGLISH WORDS
+    ===================================================== */
+
+    .daily-words-card {
+        width: 100%;
+        margin-top: 0;
+        padding: 16px;
+        border-radius: 17px;
+    }
+
+    .daily-words-header {
+        gap: 10px;
+        margin-bottom: 14px;
+    }
+
+    .daily-words-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 12px;
+        font-size: 20px;
+    }
+
+    .daily-words-header h2 {
+        font-size: 16px;
+    }
+
+    .daily-words-header p {
+        font-size: 11px;
+    }
+
+    .daily-words-list {
+        gap: 8px;
+    }
+
+    .daily-word-item {
+        width: 100%;
+        padding: 10px;
+        border-radius: 13px;
+    }
+
+    .daily-word-item:hover {
+        transform: none;
+    }
+
+    .daily-word-number {
+        flex: 0 0 27px;
+        width: 27px;
+        height: 27px;
+        border-radius: 8px;
+        font-size: 11px;
+    }
+
+    .daily-word-content strong {
+        font-size: 13px;
+    }
+
+    .daily-word-content span {
+        font-size: 11px;
+        line-height: 1.4;
+    }
+
+    .daily-word-content small {
+        font-size: 10px;
+        line-height: 1.4;
+    }
+
+
+    /* =====================================================
+       SHARED MOBILE PAGES
+    ===================================================== */
+
+    .day-page,
+    .tasks-page,
+    .your-day-page {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        overflow-x: hidden;
+    }
+
+    .day-page h1,
+    .tasks-page h1,
+    .your-day-page h1 {
+        font-size: 25px;
+        line-height: 1.2;
+    }
+
+    .day-page > p,
+    .tasks-page > p,
+    .your-day-page > p {
+        font-size: 13px;
+        line-height: 1.45;
+    }
+
+    .day-page .stat-card,
+    .tasks-page .stat-card,
+    .your-day-page .stat-card,
+    .day-page .summary-card,
+    .tasks-page .summary-card,
+    .your-day-page .summary-card,
+    .tasks-card,
+    .today-card,
+    .tomorrow-card {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .day-page .stat-card:hover,
+    .tasks-page .stat-card:hover,
+    .your-day-page .stat-card:hover,
+    .day-page .summary-card:hover,
+    .tasks-page .summary-card:hover,
+    .your-day-page .summary-card:hover {
+        transform: none;
+    }
+
+
+    /* =====================================================
+       FOOTER
+    ===================================================== */
+
+    .dashboard-footer {
+        width: 100%;
+        margin-top: 22px;
+        padding: 16px 10px;
+        font-size: 10px;
+        overflow-wrap: anywhere;
+    }
+
+
+    /* =====================================================
+       LONG TEXT PROTECTION
+    ===================================================== */
+
+    .dashboard-page,
+    .dashboard-page * {
+        overflow-wrap: anywhere;
+    }
+}
+
+
+/* =========================================================
+   SMALL PHONES
+========================================================= */
+
+@media (max-width: 480px) {
+
+    .dashboard-content {
+        padding: 13px 11px 22px;
+    }
+
+    .dashboard-topbar {
+        height: 56px;
+        padding: 0 10px;
+    }
+
+    .dashboard-layout {
+        min-height: calc(100vh - 56px);
+    }
+
+    .mobile-menu-button {
+        width: 38px;
+        height: 38px;
+        margin-right: 5px;
+    }
+
+    .mobile-menu-button svg {
+        font-size: 23px;
+    }
+
+    .brand {
+        gap: 6px;
+        font-size: 16px;
+    }
+
+    .brand-mark {
+        width: 28px;
+        height: 28px;
+    }
+
+    .brand-mark svg {
+        font-size: 25px;
+    }
+
+    .mobile-notification-link {
+        width: 38px;
+        height: 38px;
+        margin-left: 5px;
+    }
+
+    .mobile-notification-link svg {
+        font-size: 23px;
+    }
+
+    .mobile-navigation {
+        top: 56px;
+        padding: 7px 9px 10px;
+    }
+
+    .mobile-nav-link {
+        min-height: 46px;
+        font-size: 13px;
+    }
+
+
+    /* ---------- HERO ---------- */
+
+    .dashboard-hero {
+        padding: 15px;
+        border-radius: 14px;
+    }
+
+    .hero-icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 11px;
+    }
+
+    .hero-icon svg {
+        font-size: 28px;
+    }
+
+    .hero-content {
+        margin-left: 10px;
+    }
+
+    .hero-content h1 {
+        font-size: 20px;
+    }
+
+    .hero-content p {
+        font-size: 11px;
+    }
+
+    .hero-decoration {
+        display: none;
+    }
+
+
+    /* =====================================================
+       METRICS — SINGLE COLUMN ON VERY SMALL PHONES
+    ===================================================== */
+
+    .metrics-grid {
+        grid-template-columns: 1fr;
+        gap: 9px;
+    }
+
+    .metric-card {
+        min-height: 108px;
+        padding: 13px;
+    }
+
+    .metric-content strong {
+        font-size: 22px;
+    }
+
+
+    /* ---------- STATISTICS ---------- */
+
+    .statistics-grid {
+        grid-template-columns: 1fr;
+        gap: 9px;
+    }
+
+
+    /* ---------- SMART DAILY ---------- */
+
+    .smart-daily-title {
+        font-size: 22px !important;
+    }
+
+    .smart-daily-subtitle {
+        font-size: 12px !important;
+    }
+
+    .smart-stat-card .MuiCardContent-root {
+        padding: 14px !important;
+    }
+
+    .smart-stat-number {
+        font-size: 23px !important;
+    }
+
+
+
+    /* ---------- DAILY WORDS ---------- */
+
+    .daily-words-card {
+        padding: 13px;
+    }
+
+    .daily-words-header {
+        margin-bottom: 12px;
+    }
+
+    .daily-words-icon {
+        width: 37px;
+        height: 37px;
+        border-radius: 10px;
+        font-size: 18px;
+    }
+
+    .daily-words-header h2 {
+        font-size: 15px;
+    }
+
+    .daily-words-header p {
+        font-size: 10px;
+    }
+
+    .daily-word-item {
+        padding: 9px;
+        gap: 9px;
+    }
+
+
+    /* ---------- QUICK ACTIONS ---------- */
+
+    .quick-actions-section {
+        padding: 13px !important;
+    }
+
+    .quick-action {
+        padding: 11px;
+    }
+
+
+    /* ---------- INFO CARDS ---------- */
+
+    .info-card {
+        border-radius: 14px;
+    }
+
+    .motivation-card blockquote,
+    .tip-card .tip-text {
+        font-size: 12px;
+    }
+
+    .side-quote {
+        padding: 16px;
+    }
+
+    .side-quote p {
+        font-size: 13px;
+    }
+}
+
+
+/* =========================================================
+   EXTRA SMALL PHONES
+========================================================= */
+
+@media (max-width: 380px) {
+
+    .dashboard-content {
+        padding-left: 9px;
+        padding-right: 9px;
+    }
+
+    .dashboard-hero {
+        padding: 13px;
+    }
+
+    .hero-content h1 {
+        font-size: 18px;
+    }
+
+    .metric-card {
+        min-height: 102px;
+    }
+
+    .smart-daily-title {
+        font-size: 21px !important;
+    }
+
+    .smart-stat-number {
+        font-size: 22px !important;
+    }
+
+    .quick-actions-section {
+        padding: 12px !important;
+    }
+
+    .quick-action {
+        padding: 10px;
+    }
+
+    .daily-words-card {
+        padding: 12px;
+    }
+
+    .right-section-title h2 {
+        font-size: 13px;
+    }
+}
+
+
+/* =========================================================
+   TOUCH DEVICES
+   Prevent desktop hover movement on mobile
+========================================================= */
+
+@media (hover: none) and (pointer: coarse) {
+
+    .metric-card:hover,
+    .info-card:hover,
+    .overview-card:hover,
+    .upcoming-card:hover,
+    .side-quote:hover,
+    .smart-stat-card:hover,
+    .smart-task-card:hover,
+    .smart-task-item:hover,
+    .daily-word-item:hover,
+    .quick-action:hover {
+        transform: none;
+    }
 }
