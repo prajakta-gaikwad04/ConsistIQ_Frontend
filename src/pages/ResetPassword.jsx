@@ -72,12 +72,14 @@ const validateResetPassword = () => {
             <h2>Reset Password</h2>
 
             <input
-                type="email"
+    className="reset-email-input"
+    type="email"
                 placeholder="Email"
                 value={email}
             />
 
            <input
+    className="reset-otp-input"
     type="text"
     placeholder="Enter OTP"
     value={otp}
@@ -92,11 +94,12 @@ const validateResetPassword = () => {
 />
 
 {errors.otp && (
-    <p style={{ color: "red", fontSize: "13px" }}>
-        {errors.otp}
+ <p className="reset-error">
+            {errors.otp}
     </p>
 )}
-            <input
+      <input
+    className="reset-password-input"
     type="password"
     placeholder="New Password"
     value={newPassword}
@@ -111,11 +114,12 @@ const validateResetPassword = () => {
 />
 
 {errors.newPassword && (
-    <p style={{ color: "red", fontSize: "13px" }}>
-        {errors.newPassword}
+ <p className="reset-error">      
+   {errors.newPassword}
     </p>
 )}
 <input
+    className="reset-confirm-input"
     type="password"
     placeholder="Confirm Password"
     value={confirmPassword}
@@ -130,15 +134,18 @@ const validateResetPassword = () => {
 />
 
 {errors.confirmPassword && (
-    <p style={{ color: "red", fontSize: "13px" }}>
-        {errors.confirmPassword}
+ <p className="reset-error">
+            {errors.confirmPassword}
     </p>
 )}
-            <button onClick={resetPassword}>
+            <button
+    className="reset-password-btn"
+    onClick={resetPassword}
+>
                 Reset Password
             </button>
 
-            {message && <p>{message}</p>}
+            {message && <p className="reset-message">{message}</p>}
         </div>
     );
 };

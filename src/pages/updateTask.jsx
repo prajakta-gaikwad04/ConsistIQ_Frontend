@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { getAllTasks,  getTaskById, updateTask } from "../services/taskService";
+import {  getTaskById, updateTask } from "../services/taskService";
 import "../styles/updateTask.css";
 const UpdateTask = () => {
 

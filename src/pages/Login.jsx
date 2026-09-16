@@ -80,6 +80,7 @@ const validateLogin = () => {
   
   return (
   <div
+    className="login-page"
     style={{
       minHeight: "100vh",
       display: "flex",
@@ -91,7 +92,8 @@ const validateLogin = () => {
     }}
   >
     <div
-      style={{
+    className="login-card"
+    style={{
         width: "100%",
         maxWidth: "420px",
         background: "rgba(255,255,255,0.12)",
@@ -102,7 +104,7 @@ const validateLogin = () => {
         color: "#fff"
       }}
     >
-      <form onSubmit={handleSubmit}>
+      <form className="login-form" onSubmit={handleSubmit}>
         <h1
           style={{
             textAlign: "center",

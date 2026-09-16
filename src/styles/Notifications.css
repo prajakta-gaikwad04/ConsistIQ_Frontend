@@ -1,117 +1,272 @@
 /* =========================================================
-   CONSISTIQ - NOTIFICATIONS PAGE
+   CONSISTIQ NOTIFICATIONS
+   Desktop + Mobile Responsive Styling
 ========================================================= */
 
 .notifications-page {
+    width: 100%;
     max-width: 900px;
-    margin: 40px auto;
-    padding: 0 20px;
+    margin: 0 auto;
+    padding: 30px;
+    box-sizing: border-box;
+    overflow-x: hidden;
 }
 
-/* Page heading */
 .notifications-page h2 {
+    margin: 0 0 25px;
     color: #111827;
     font-size: 30px;
-    font-weight: 700;
-    margin-bottom: 25px;
+    line-height: 1.25;
 }
 
-/* Empty state */
 .notifications-page > p {
-    background: #ffffff;
-    color: #6b7280;
     padding: 30px;
-    border-radius: 16px;
-    border: 1px solid #e5e7eb;
+    margin: 0;
     text-align: center;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
-}
-
-/* Notification card */
-.notifications-page .notification-item {
+    color: #6b7280;
     background: #ffffff;
-    border: 1px solid #e5e7eb;
     border-radius: 16px;
-    margin-bottom: 15px;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
-    transition: all 0.25s ease;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
 }
 
-/* Hover */
-.notifications-page .notification-item:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.10);
+
+/* =========================================================
+   NOTIFICATION ITEM
+========================================================= */
+
+.notification-item {
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 15px;
+    border-radius: 16px;
+    background: #ffffff;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+    border-left: 4px solid transparent;
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
 }
+
+.notification-item:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
 
 /* Unread notification */
-.notifications-page .notification-item.unread {
-    border-left: 5px solid #6366f1;
+
+.notification-item.unread {
+    border-left-color: #4f46e5;
     background: #f8f7ff;
 }
 
+
 /* Read notification */
-.notifications-page .notification-item.read {
-    border-left: 5px solid #d1d5db;
-    background: #ffffff;
+
+.notification-item.read {
+    border-left-color: #d1d5db;
 }
 
-/* Card content */
-.notifications-page .notification-body {
+
+/* =========================================================
+   NOTIFICATION BODY
+========================================================= */
+
+.notification-body {
+    width: 100%;
+    box-sizing: border-box;
     padding: 20px;
 }
 
-/* Notification message */
-.notifications-page .notification-message {
-    color: #111827;
-    font-size: 15px;
-    font-weight: 500;
+.notification-message {
     margin: 0 0 10px;
-    line-height: 1.6;
+    color: #1f2937;
+    font-size: 15px;
+    line-height: 1.5;
+    word-break: break-word;
 }
 
-/* Date/time */
-.notifications-page .notification-date {
+.notification-date {
+    display: block;
+    margin-bottom: 14px;
     color: #6b7280;
-    font-size: 13px;
+    font-size: 12px;
+    word-break: break-word;
 }
 
-/* Mark Read button */
-.notifications-page .mark-read-btn {
-    margin-left: 15px;
-    padding: 7px 14px;
+
+/* =========================================================
+   MARK READ BUTTON
+========================================================= */
+
+.mark-read-btn {
+    min-height: 38px;
+    padding: 9px 15px;
     border: none;
-    border-radius: 8px;
-    background: #6366f1;
+    border-radius: 9px;
+    background: #4f46e5;
     color: #ffffff;
     font-size: 13px;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.25s ease;
+    transition:
+        opacity 0.2s ease,
+        transform 0.2s ease;
 }
 
-.notifications-page .mark-read-btn:hover {
-    background: #4f46e5;
+.mark-read-btn:hover {
+    opacity: 0.9;
     transform: translateY(-1px);
 }
 
-/* Mobile */
+
+/* =========================================================
+   TABLET
+========================================================= */
+
 @media (max-width: 768px) {
 
     .notifications-page {
-        margin: 25px auto;
-        padding: 0 15px;
+        max-width: 100%;
+        padding: 25px 20px;
     }
 
     .notifications-page h2 {
-        font-size: 26px;
+        font-size: 27px;
+        margin-bottom: 20px;
     }
 
-    .notifications-page .notification-body {
+    .notification-body {
+        padding: 18px;
+    }
+
+    .notification-message {
+        font-size: 14px;
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .notifications-page {
+        width: 100%;
+        padding: 20px 15px;
+    }
+
+    .notifications-page h2 {
+        font-size: 24px;
+        margin-bottom: 18px;
+    }
+
+    .notifications-page > p {
+        padding: 25px 15px;
+        font-size: 14px;
+    }
+
+    .notification-item {
+        margin-bottom: 12px;
+        border-radius: 14px;
+    }
+
+    .notification-body {
         padding: 16px;
     }
 
-    .notifications-page .mark-read-btn {
-        display: block;
-        margin: 12px 0 0;
+    .notification-message {
+        font-size: 14px;
+        line-height: 1.5;
+    }
+
+    .notification-date {
+        font-size: 11px;
+        margin-bottom: 12px;
+    }
+
+    .mark-read-btn {
+        width: 100%;
+        min-height: 42px;
+        padding: 10px;
+        font-size: 13px;
+    }
+}
+
+
+/* =========================================================
+   SMALL PHONES
+========================================================= */
+
+@media (max-width: 430px) {
+
+    .notifications-page {
+        padding: 15px 10px;
+    }
+
+    .notifications-page h2 {
+        font-size: 22px;
+        margin-bottom: 16px;
+    }
+
+    .notifications-page > p {
+        padding: 22px 12px;
+        font-size: 13px;
+        border-radius: 14px;
+    }
+
+    .notification-item {
+        border-left-width: 3px;
+        border-radius: 12px;
+    }
+
+    .notification-body {
+        padding: 14px;
+    }
+
+    .notification-message {
+        font-size: 13px;
+    }
+
+    .notification-date {
+        font-size: 10px;
+    }
+
+    .mark-read-btn {
+        min-height: 40px;
+        font-size: 12px;
+    }
+}
+
+
+/* =========================================================
+   VERY SMALL PHONES
+========================================================= */
+
+@media (max-width: 360px) {
+
+    .notifications-page {
+        padding: 12px 8px;
+    }
+
+    .notifications-page h2 {
+        font-size: 20px;
+    }
+
+    .notification-body {
+        padding: 12px;
+    }
+
+    .notification-message {
+        font-size: 12px;
+    }
+
+    .notification-date {
+        font-size: 10px;
+    }
+
+    .mark-read-btn {
+        font-size: 11px;
     }
 }

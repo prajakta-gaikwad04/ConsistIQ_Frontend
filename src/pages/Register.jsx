@@ -141,8 +141,9 @@ function Register() {
 
     return (
 
-        <div
-            style={{
+    <div
+    className="register-page"
+    style={{
                 minHeight: "100vh",
                 display: "flex",
                 justifyContent: "center",
@@ -154,7 +155,8 @@ function Register() {
         >
 
             <div
-                style={{
+    className="register-card"
+    style={{
                     width: "100%",
                     maxWidth: "450px",
                     background: "rgba(255,255,255,0.12)",
@@ -166,8 +168,7 @@ function Register() {
                 }}
             >
 
-                <form onSubmit={handleSubmit}>
-
+<form className="register-form" onSubmit={handleSubmit}>
                     <h1
                         style={{
                             textAlign: "center",

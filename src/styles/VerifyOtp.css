@@ -1,54 +1,47 @@
 /* =========================================================
-   CONSISTIQ REGISTER
+   CONSISTIQ VERIFY OTP
    Desktop + Mobile Responsive Styling
 ========================================================= */
 
-.register-page {
+.verify-otp-page {
     width: 100%;
     min-height: 100vh;
     box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
     overflow-x: hidden;
 }
 
-.register-card {
+.verify-otp-card {
+    width: 100%;
+    max-width: 420px;
     box-sizing: border-box;
 }
 
-.register-form {
+.verify-otp-input {
     width: 100%;
-}
-
-.register-form input,
-.register-form select {
     box-sizing: border-box;
     max-width: 100%;
 }
 
-
-/* =========================================================
-   FORM INTERACTION
-========================================================= */
-
-.register-form input:focus,
-.register-form select:focus {
+.verify-otp-input:focus {
     box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.35);
 }
 
-.register-form button {
+.verify-otp-button,
+.verify-otp-back {
     transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
-.register-form button:hover {
+.verify-otp-button:hover,
+.verify-otp-back:hover {
     opacity: 0.92;
+}
+
+.verify-otp-button:hover {
     transform: translateY(-1px);
-}
-
-.register-form a {
-    transition: opacity 0.2s ease;
-}
-
-.register-form a:hover {
-    opacity: 0.85;
 }
 
 
@@ -58,29 +51,33 @@
 
 @media (max-width: 768px) {
 
-    .register-page {
-        align-items: flex-start !important;
-        padding: 30px 15px !important;
+    .verify-otp-page {
+        align-items: flex-start;
+        padding: 30px 15px;
     }
 
-    .register-card {
+    .verify-otp-card {
         padding: 32px 24px !important;
         border-radius: 20px !important;
     }
 
-    .register-form h1 {
+    .verify-otp-card h1 {
         font-size: 28px;
         line-height: 1.25;
     }
 
-    .register-form > p {
+    .verify-otp-card p {
         font-size: 14px;
         line-height: 1.5;
+        word-break: break-word;
     }
 
-    .register-form input,
-    .register-form select {
+    .verify-otp-input {
         font-size: 14px;
+    }
+
+    .verify-otp-button {
+        min-height: 46px;
     }
 }
 
@@ -91,33 +88,42 @@
 
 @media (max-width: 600px) {
 
-    .register-page {
+    .verify-otp-page {
         width: 100%;
-        padding: 25px 12px !important;
+        padding: 25px 12px;
     }
 
-    .register-card {
-        width: 100% !important;
-        max-width: 450px !important;
+    .verify-otp-card {
+        width: 100%;
+        max-width: 420px;
         padding: 28px 18px !important;
         border-radius: 18px !important;
     }
 
-    .register-form h1 {
+    .verify-otp-card h1 {
         font-size: 25px;
-        margin-bottom: 8px !important;
+        margin-bottom: 10px;
     }
 
-    .register-form input,
-    .register-form select {
-        width: 100% !important;
+    .verify-otp-card p {
+        font-size: 13px;
+    }
+
+    .verify-otp-input {
+        width: 100%;
         padding: 13px !important;
         font-size: 14px;
     }
 
-    .register-form button {
-        min-height: 46px;
+    .verify-otp-button {
+        width: 100%;
+        padding: 13px !important;
         font-size: 15px !important;
+        min-height: 46px;
+    }
+
+    .verify-otp-back {
+        font-size: 13px !important;
     }
 }
 
@@ -128,41 +134,35 @@
 
 @media (max-width: 430px) {
 
-    .register-page {
-        padding: 18px 10px !important;
+    .verify-otp-page {
+        padding: 18px 10px;
     }
 
-    .register-card {
+    .verify-otp-card {
         padding: 24px 15px !important;
         border-radius: 16px !important;
     }
 
-    .register-form h1 {
+    .verify-otp-card h1 {
         font-size: 22px;
     }
 
-    .register-form > p {
+    .verify-otp-card p {
         font-size: 12px;
-        line-height: 1.5;
     }
 
-    .register-form input,
-    .register-form select {
+    .verify-otp-input {
         padding: 12px !important;
         font-size: 13px;
     }
 
-    .register-form button {
-        padding: 13px !important;
+    .verify-otp-button {
+        padding: 12px !important;
         font-size: 14px !important;
     }
 
-    .register-form a {
-        font-size: 13px;
-    }
-
-    .register-form p {
-        line-height: 1.5;
+    .verify-otp-back {
+        font-size: 12px !important;
     }
 }
 
@@ -173,29 +173,32 @@
 
 @media (max-width: 360px) {
 
-    .register-page {
-        padding: 12px 8px !important;
+    .verify-otp-page {
+        padding: 12px 8px;
     }
 
-    .register-card {
+    .verify-otp-card {
         padding: 22px 12px !important;
     }
 
-    .register-form h1 {
+    .verify-otp-card h1 {
         font-size: 20px;
     }
 
-    .register-form input,
-    .register-form select {
+    .verify-otp-card p {
+        font-size: 11px;
+    }
+
+    .verify-otp-input {
         padding: 11px !important;
         font-size: 12px;
     }
 
-    .register-form button {
+    .verify-otp-button {
         font-size: 13px !important;
     }
 
-    .register-form a {
-        font-size: 12px;
+    .verify-otp-back {
+        font-size: 11px !important;
     }
 }

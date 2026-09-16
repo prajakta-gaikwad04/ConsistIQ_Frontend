@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { verifyOtp } from "../services/authService";
-
+import "../styles/VerifyOtp.css";
 const VerifyOtp = () => {
     const navigate = useNavigate();
     const location = useLocation();
@@ -53,7 +53,8 @@ const VerifyOtp = () => {
 
     return (
         <div
-            style={{
+    className="verify-otp-page"
+    style={{
                 minHeight: "100vh",
                 display: "flex",
                 justifyContent: "center",
@@ -64,7 +65,8 @@ const VerifyOtp = () => {
             }}
         >
             <div
-                style={{
+    className="verify-otp-card"
+    style={{
                     width: "100%",
                     maxWidth: "420px",
                     background: "rgba(255,255,255,0.12)",
@@ -99,7 +101,8 @@ const VerifyOtp = () => {
                 </p>
 
                 <input
-                    type="text"
+    className="verify-otp-input"
+    type="text"
                     placeholder="Enter 6-digit OTP"
                     value={otp}
                     onChange={(e) => setOtp(e.target.value)}
@@ -116,7 +119,8 @@ const VerifyOtp = () => {
                 />
 
                 <button
-                    type="button"
+    className="verify-otp-button"
+    type="button"
                     onClick={handleVerifyOtp}
                     style={{
                         width: "100%",
@@ -140,8 +144,9 @@ const VerifyOtp = () => {
                     }}
                 >
                     <button
-                        type="button"
-                        onClick={() => navigate("/login")}
+    className="verify-otp-back"
+    type="button"
+    onClick={() => navigate("/login")}
                         style={{
                             background: "none",
                             border: "none",

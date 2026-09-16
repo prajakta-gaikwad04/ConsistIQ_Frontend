@@ -5221,3 +5221,843 @@
     font-size: 11px;
     opacity: 0.65;
 }
+/* =========================================================
+   CONSISTIQ — RESPONSIVE DASHBOARD
+   Desktop stays unchanged
+   Mobile gets a dedicated layout
+========================================================= */
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .quick-actions-section {
+        padding: 20px !important;
+    }
+
+    .daily-words-card {
+        padding: 20px;
+    }
+
+    .smart-task-card {
+        margin-top: 16px !important;
+    }
+}
+
+
+/* =========================================================
+   MOBILE — DEDICATED MOBILE LAYOUT
+========================================================= */
+
+@media (max-width: 600px) {
+
+    /* -----------------------------------------------------
+       GENERAL PAGE
+    ----------------------------------------------------- */
+
+    .day-page,
+    .tasks-page,
+    .your-day-page {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        overflow-x: hidden;
+    }
+
+
+    /* -----------------------------------------------------
+       PAGE TITLES
+    ----------------------------------------------------- */
+
+    .day-page h1,
+    .tasks-page h1,
+    .your-day-page h1 {
+
+        font-size: 25px !important;
+        line-height: 1.2 !important;
+        letter-spacing: -0.5px;
+
+        margin-bottom: 6px !important;
+    }
+
+    .day-page > p,
+    .tasks-page > p,
+    .your-day-page > p {
+
+        font-size: 13px !important;
+        line-height: 1.5 !important;
+    }
+
+
+    /* -----------------------------------------------------
+       STAT CARDS
+    ----------------------------------------------------- */
+
+    .day-page .stat-card,
+    .tasks-page .stat-card,
+    .your-day-page .stat-card {
+
+        min-width: 0 !important;
+        width: 100% !important;
+        box-sizing: border-box;
+
+        border-radius: 14px !important;
+    }
+
+    .day-page .stat-card strong,
+    .tasks-page .stat-card strong,
+    .your-day-page .stat-card strong {
+
+        font-size: 25px !important;
+    }
+
+    .day-page .stat-card span,
+    .tasks-page .stat-card span,
+    .your-day-page .stat-card span {
+
+        font-size: 12px !important;
+    }
+
+
+    /* -----------------------------------------------------
+       SUMMARY CARDS
+    ----------------------------------------------------- */
+
+    .day-page .summary-card,
+    .tasks-page .summary-card,
+    .your-day-page .summary-card {
+
+        width: 100% !important;
+        min-width: 0 !important;
+        box-sizing: border-box;
+    }
+
+
+    /* -----------------------------------------------------
+       TODAY / TOMORROW CARDS
+    ----------------------------------------------------- */
+
+    .day-page .tasks-card,
+    .tasks-page .tasks-card,
+    .your-day-page .tasks-card,
+
+    .day-page .today-card,
+    .tasks-page .today-card,
+    .your-day-page .today-card,
+
+    .day-page .tomorrow-card,
+    .tasks-page .tomorrow-card,
+    .your-day-page .tomorrow-card {
+
+        width: 100% !important;
+        min-width: 0 !important;
+        box-sizing: border-box;
+
+        border-radius: 14px;
+    }
+
+    .day-page .tasks-card h2,
+    .day-page .today-card h2,
+    .tasks-page .tasks-card h2,
+    .tasks-page .today-card h2,
+    .your-day-page .tasks-card h2,
+    .your-day-page .today-card h2,
+
+    .day-page .tomorrow-card h2,
+    .tasks-page .tomorrow-card h2,
+    .your-day-page .tomorrow-card h2 {
+
+        font-size: 17px !important;
+        line-height: 1.3;
+    }
+
+
+    /* -----------------------------------------------------
+       SMART DAILY HEADER
+    ----------------------------------------------------- */
+
+    .smart-daily-header {
+        margin-bottom: 17px;
+    }
+
+    .smart-daily-title {
+        font-size: 25px !important;
+        line-height: 1.2 !important;
+    }
+
+    .smart-daily-subtitle {
+        font-size: 13px !important;
+        line-height: 1.5 !important;
+    }
+
+
+    /* -----------------------------------------------------
+       SMART STATISTICS
+    ----------------------------------------------------- */
+
+    .smart-daily-stats {
+        width: 100%;
+    }
+
+    .smart-stat-card {
+
+        min-height: 0 !important;
+        width: 100% !important;
+
+        border-radius: 14px !important;
+    }
+
+    .smart-stat-card .MuiCardContent-root {
+        padding: 15px !important;
+    }
+
+    .smart-stat-title {
+        font-size: 12px !important;
+    }
+
+    .smart-stat-number {
+        font-size: 26px !important;
+    }
+
+
+    /* -----------------------------------------------------
+       SMART TASK CARDS
+    ----------------------------------------------------- */
+
+    .smart-task-card {
+
+        width: 100% !important;
+        min-width: 0 !important;
+
+        margin-top: 14px !important;
+
+        border-radius: 14px !important;
+
+        box-sizing: border-box;
+    }
+
+    .smart-task-title {
+        font-size: 17px !important;
+        margin-bottom: 12px !important;
+    }
+
+
+    /* -----------------------------------------------------
+       SMART TASK ITEMS
+    ----------------------------------------------------- */
+
+    .smart-task-item {
+
+        width: 100%;
+        box-sizing: border-box;
+
+        padding: 11px 12px;
+        margin-bottom: 7px;
+
+        border-radius: 10px;
+    }
+
+    .smart-task-name {
+
+        font-size: 13px !important;
+
+        overflow-wrap: anywhere;
+        word-break: break-word;
+    }
+
+    .smart-task-priority {
+
+        font-size: 11px !important;
+    }
+
+
+    /* -----------------------------------------------------
+       DAILY WORDS
+    ----------------------------------------------------- */
+
+    .daily-words-card {
+
+        width: 100%;
+        box-sizing: border-box;
+
+        margin-top: 14px;
+        padding: 16px;
+
+        border-radius: 17px;
+    }
+
+    .daily-words-header {
+
+        gap: 9px;
+        margin-bottom: 14px;
+    }
+
+    .daily-words-icon {
+
+        width: 38px;
+        height: 38px;
+
+        border-radius: 11px;
+
+        font-size: 19px;
+    }
+
+    .daily-words-header h2 {
+        font-size: 16px;
+    }
+
+    .daily-words-header p {
+        font-size: 11px;
+    }
+
+    .daily-word-item {
+
+        width: 100%;
+        box-sizing: border-box;
+
+        padding: 10px;
+
+        gap: 9px;
+
+        border-radius: 12px;
+    }
+
+    .daily-word-number {
+
+        flex: 0 0 25px;
+
+        width: 25px;
+        height: 25px;
+
+        border-radius: 8px;
+
+        font-size: 11px;
+    }
+
+    .daily-word-content strong {
+        font-size: 13px;
+    }
+
+    .daily-word-content span {
+        font-size: 11px;
+    }
+
+    .daily-word-content small {
+        font-size: 10px;
+    }
+
+
+    /* -----------------------------------------------------
+       QUICK ACTIONS
+    ----------------------------------------------------- */
+
+    .quick-actions-section {
+
+        width: 100%;
+        box-sizing: border-box;
+
+        border-radius: 15px !important;
+
+        padding: 16px !important;
+    }
+
+    .quick-actions-section .section-heading > svg {
+
+        width: 27px;
+        height: 27px;
+
+        padding: 6px;
+        border-radius: 8px;
+    }
+
+    .quick-actions-section .section-heading h2 {
+        font-size: 18px !important;
+    }
+
+    .quick-actions-section .section-heading p {
+        font-size: 12px !important;
+    }
+
+
+    /* -----------------------------------------------------
+       QUICK ACTION CARDS
+    ----------------------------------------------------- */
+
+    .quick-action {
+
+        width: 100%;
+        box-sizing: border-box;
+
+        min-height: 0 !important;
+
+        padding: 13px !important;
+
+        border-radius: 12px !important;
+    }
+
+    .quick-action-icon {
+
+        width: 38px !important;
+        height: 38px !important;
+    }
+
+    .quick-action strong {
+        font-size: 13px !important;
+    }
+
+    .quick-action span {
+        font-size: 11px !important;
+        line-height: 1.4;
+    }
+
+    .quick-action-arrow {
+        font-size: 17px !important;
+    }
+
+
+    /* -----------------------------------------------------
+       INFO CARDS
+    ----------------------------------------------------- */
+
+    .info-card {
+
+        width: 100%;
+        box-sizing: border-box;
+
+        border-radius: 14px;
+    }
+
+    .info-card-header h2 {
+
+        font-size: 17px !important;
+    }
+
+    .motivation-card blockquote {
+
+        font-size: 14px !important;
+        line-height: 1.55 !important;
+    }
+
+    .motivation-card > p {
+
+        font-size: 11px !important;
+        line-height: 1.5;
+    }
+
+    .tip-card .tip-text {
+
+        font-size: 13px !important;
+        line-height: 1.55 !important;
+    }
+
+
+    /* -----------------------------------------------------
+       OVERVIEW
+    ----------------------------------------------------- */
+
+    .overview-card,
+    .upcoming-card,
+    .side-quote {
+
+        width: 100%;
+        box-sizing: border-box;
+
+        border-radius: 14px;
+    }
+
+    .overview-card .right-section-title h2,
+    .upcoming-card .right-section-title h2 {
+
+        font-size: 17px !important;
+    }
+
+    .overview-card .overview-item,
+    .upcoming-card .upcoming-item {
+
+        width: 100%;
+        box-sizing: border-box;
+
+        padding: 10px !important;
+    }
+
+    .overview-card .overview-item span,
+    .upcoming-card .upcoming-item small {
+
+        font-size: 11px !important;
+    }
+
+    .overview-card .overview-item strong,
+    .upcoming-card .upcoming-item strong {
+
+        font-size: 13px !important;
+    }
+
+
+    /* -----------------------------------------------------
+       SIDE QUOTE
+    ----------------------------------------------------- */
+
+    .side-quote {
+
+        padding: 16px !important;
+    }
+
+    .side-quote p {
+
+        font-size: 13px !important;
+        line-height: 1.55 !important;
+    }
+
+
+    /* -----------------------------------------------------
+       FOOTER
+    ----------------------------------------------------- */
+
+    .day-page footer,
+    .tasks-page footer,
+    .your-day-page footer,
+    .dashboard-footer {
+
+        font-size: 11px !important;
+        text-align: center;
+
+        line-height: 1.5;
+    }
+
+
+    /* -----------------------------------------------------
+       DISABLE DESKTOP HOVER MOVEMENT ON TOUCH
+    ----------------------------------------------------- */
+
+    .quick-action:hover,
+    .info-card:hover,
+    .overview-card:hover,
+    .upcoming-card:hover,
+    .side-quote:hover,
+    .smart-stat-card:hover,
+    .smart-task-card:hover,
+    .day-page .stat-card:hover,
+    .tasks-page .stat-card:hover,
+    .your-day-page .stat-card:hover {
+
+        transform: none;
+    }
+
+
+    /* -----------------------------------------------------
+       PREVENT LONG TEXT FROM BREAKING MOBILE
+    ----------------------------------------------------- */
+
+    .smart-task-name,
+    .daily-word-content,
+    .overview-card,
+    .upcoming-card,
+    .info-card,
+    .quick-action {
+
+        overflow-wrap: anywhere;
+        word-break: break-word;
+    }
+}
+
+
+/* =========================================================
+   VERY SMALL PHONES
+========================================================= */
+
+@media (max-width: 380px) {
+
+    .smart-daily-title,
+    .day-page h1,
+    .tasks-page h1,
+    .your-day-page h1 {
+
+        font-size: 22px !important;
+    }
+
+    .smart-stat-number {
+
+        font-size: 23px !important;
+    }
+
+    .quick-actions-section,
+    .daily-words-card {
+
+        padding: 13px !important;
+    }
+
+    .quick-action {
+
+        padding: 11px !important;
+    }
+
+    .info-card-header h2,
+    .overview-card .right-section-title h2,
+    .upcoming-card .right-section-title h2 {
+
+        font-size: 15px !important;
+    }
+}
+/* =========================================================
+   MOBILE NAVBAR
+   Desktop navbar remains unchanged
+========================================================= */
+
+.mobile-menu-button,
+.mobile-notification-link,
+.mobile-navigation {
+    display: none;
+}
+
+
+/* =========================================================
+   MOBILE TOP BAR
+========================================================= */
+
+@media (max-width: 800px) {
+
+    .dashboard-topbar {
+        height: 58px;
+        width: 100%;
+        padding: 0 14px;
+        display: flex;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.97);
+        border-bottom: 1px solid #e7ecf7;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+    }
+
+
+    /* HAMBURGER */
+
+    .mobile-menu-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        width: 40px;
+        height: 40px;
+
+        margin-right: 8px;
+
+        padding: 0;
+
+        border: none;
+        border-radius: 10px;
+
+        background: transparent;
+        color: #263a68;
+
+        cursor: pointer;
+
+        flex-shrink: 0;
+    }
+
+    .mobile-menu-button svg {
+        font-size: 25px;
+    }
+
+    .mobile-menu-button:hover {
+        background: #f1efff;
+        color: #5634e8;
+    }
+
+
+    /* BRAND */
+
+    .brand {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        font-size: 18px;
+
+        text-decoration: none;
+
+        flex: 1;
+        min-width: 0;
+    }
+
+    .brand-mark {
+        width: 30px;
+        height: 30px;
+        flex-shrink: 0;
+    }
+
+    .brand-mark svg {
+        font-size: 27px;
+    }
+
+
+    /* HIDE DESKTOP NAVIGATION */
+
+    .top-navigation {
+        display: none;
+    }
+
+
+    /* =====================================================
+       MOBILE NOTIFICATION
+    ===================================================== */
+
+    .mobile-notification-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        width: 40px;
+        height: 40px;
+
+        margin-left: 8px;
+
+        color: #263a68;
+        text-decoration: none;
+
+        border-radius: 10px;
+
+        flex-shrink: 0;
+    }
+
+    .mobile-notification-link:hover,
+    .mobile-notification-link.active {
+        background: #f1efff;
+        color: #5634e8;
+    }
+
+    .mobile-notification-link svg {
+        font-size: 24px;
+    }
+
+
+    /* =====================================================
+       MOBILE MENU
+    ===================================================== */
+
+    .mobile-navigation {
+        display: flex;
+        flex-direction: column;
+
+        position: sticky;
+        top: 58px;
+
+        width: 100%;
+
+        padding: 8px 12px 12px;
+
+        background: rgba(255, 255, 255, 0.98);
+
+        border-bottom: 1px solid #e7ecf7;
+
+        box-shadow: 0 8px 20px rgba(30, 45, 90, 0.08);
+
+        z-index: 999;
+    }
+
+
+    .mobile-nav-link {
+        display: flex;
+        align-items: center;
+
+        width: 100%;
+        min-height: 48px;
+
+        padding: 0 13px;
+
+        margin-bottom: 4px;
+
+        gap: 12px;
+
+        box-sizing: border-box;
+
+        border-radius: 10px;
+
+        color: #263a68;
+        text-decoration: none;
+
+        font-size: 14px;
+        font-weight: 600;
+
+        transition:
+            background 0.2s ease,
+            color 0.2s ease;
+    }
+
+    .mobile-nav-link svg {
+        font-size: 21px;
+        flex-shrink: 0;
+    }
+
+    .mobile-nav-link:hover {
+        background: #f1efff;
+        color: #5634e8;
+    }
+
+    .mobile-nav-link.active {
+        background: #eeecff;
+        color: #4f2fe3;
+    }
+
+}
+
+
+/* =========================================================
+   SMALL PHONES
+========================================================= */
+
+@media (max-width: 420px) {
+
+    .dashboard-topbar {
+        height: 56px;
+        padding: 0 10px;
+    }
+
+    .mobile-menu-button {
+        width: 38px;
+        height: 38px;
+        margin-right: 5px;
+    }
+
+    .mobile-menu-button svg {
+        font-size: 23px;
+    }
+
+    .brand {
+        gap: 6px;
+        font-size: 16px;
+    }
+
+    .brand-mark {
+        width: 28px;
+        height: 28px;
+    }
+
+    .brand-mark svg {
+        font-size: 25px;
+    }
+
+    .mobile-notification-link {
+        width: 38px;
+        height: 38px;
+        margin-left: 5px;
+    }
+
+    .mobile-notification-link svg {
+        font-size: 23px;
+    }
+
+    .mobile-navigation {
+        top: 56px;
+        padding: 7px 9px 10px;
+    }
+
+    .mobile-nav-link {
+        min-height: 46px;
+        font-size: 13px;
+    }
+
+}

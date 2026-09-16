@@ -1,0 +1,363 @@
+```css
+/* =========================================
+   ADMIN DASHBOARD
+========================================= */
+
+.admin-dashboard-page {
+    width: 100%;
+    min-height: 100vh;
+    box-sizing: border-box;
+    overflow-x: hidden;
+}
+
+/* Prevent input overflow */
+
+.admin-dashboard-page input {
+    box-sizing: border-box;
+}
+
+.admin-dashboard-page input:focus {
+    border-color: #6366f1 !important;
+    box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.12);
+}
+
+/* Button interaction */
+
+.admin-dashboard-page button {
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.admin-dashboard-page button:hover {
+    opacity: 0.9;
+}
+
+.admin-dashboard-page button:active {
+    transform: translateY(1px);
+}
+
+/* Mobile cards hidden on desktop */
+
+.admin-mobile-list {
+    display: none;
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 900px) {
+
+    .admin-dashboard-page {
+        padding: 25px !important;
+    }
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 768px) {
+
+    .admin-dashboard-page {
+        width: 100%;
+        padding: 20px 15px !important;
+    }
+
+    /* Header */
+
+    .admin-dashboard-header {
+        margin-bottom: 22px !important;
+    }
+
+    .admin-dashboard-header h1 {
+        font-size: 27px !important;
+        line-height: 1.25;
+    }
+
+    .admin-dashboard-header p {
+        font-size: 13px !important;
+        line-height: 1.5;
+    }
+
+
+    /* Statistics */
+
+    .admin-stats-grid {
+        grid-template-columns: 1fr !important;
+        gap: 15px !important;
+        margin-bottom: 25px !important;
+    }
+
+    .admin-stats-grid > div {
+        padding: 20px !important;
+    }
+
+
+    /* Active / Deleted buttons */
+
+    .admin-user-tabs {
+        width: 100%;
+        flex-direction: column !important;
+        gap: 9px !important;
+    }
+
+    .admin-user-tabs button {
+        width: 100%;
+        min-height: 44px;
+        margin-right: 0 !important;
+        box-sizing: border-box;
+    }
+
+
+    /* Search */
+
+    .admin-search-section {
+        width: 100%;
+        margin-bottom: 20px !important;
+    }
+
+    .admin-search-section input {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+
+
+    /* Hide desktop table */
+
+    .admin-users-table {
+        display: none !important;
+    }
+
+
+    /* Show mobile cards */
+
+    .admin-mobile-list {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        width: 100%;
+    }
+
+
+    /* User card */
+
+    .admin-user-card {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 18px;
+        background: #ffffff;
+        border-radius: 16px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.07);
+        border: 1px solid #edf0f5;
+    }
+
+
+    /* Card header */
+
+    .admin-user-card-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        margin-bottom: 16px;
+    }
+
+    .admin-user-number {
+        color: #6b7280;
+        font-size: 13px;
+        font-weight: 600;
+    }
+
+
+    /* Role badge */
+
+    .admin-role-badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 6px 12px;
+        border-radius: 20px;
+        color: #ffffff;
+        font-size: 11px;
+        font-weight: 700;
+    }
+
+    .admin-role {
+        background: #22c55e;
+    }
+
+    .user-role {
+        background: #3b82f6;
+    }
+
+
+    /* User information */
+
+    .admin-user-info {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .admin-user-info > div {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+        min-width: 0;
+    }
+
+    .admin-info-label {
+        color: #6b7280;
+        font-size: 11px;
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+
+    .admin-user-info strong {
+        color: #1f2937;
+        font-size: 15px;
+        word-break: break-word;
+    }
+
+    .admin-email,
+    .admin-deleted-date {
+        color: #374151;
+        font-size: 13px;
+        line-height: 1.5;
+        word-break: break-word;
+    }
+
+
+    /* Mobile action buttons */
+
+    .admin-mobile-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 9px;
+        margin-top: 17px;
+        padding-top: 15px;
+        border-top: 1px solid #edf0f5;
+    }
+
+    .admin-mobile-actions button {
+        width: 100%;
+        min-height: 43px;
+        margin-right: 0 !important;
+        box-sizing: border-box;
+    }
+
+
+    /* Empty state */
+
+    .admin-mobile-empty {
+        padding: 30px 15px;
+        text-align: center;
+        background: #ffffff;
+        border-radius: 16px;
+        color: #777;
+        font-size: 14px;
+        box-sizing: border-box;
+    }
+
+}
+
+
+/* =========================================
+   SMALL PHONES
+========================================= */
+
+@media (max-width: 430px) {
+
+    .admin-dashboard-page {
+        padding: 15px 10px !important;
+    }
+
+    .admin-dashboard-header h1 {
+        font-size: 22px !important;
+    }
+
+    .admin-dashboard-header p {
+        font-size: 12px !important;
+    }
+
+
+    .admin-stats-grid > div {
+        padding: 17px !important;
+    }
+
+
+    .admin-user-card {
+        padding: 15px;
+        border-radius: 14px;
+    }
+
+    .admin-user-card-header {
+        margin-bottom: 14px;
+    }
+
+    .admin-user-info {
+        gap: 10px;
+    }
+
+    .admin-user-info strong {
+        font-size: 14px;
+    }
+
+    .admin-email,
+    .admin-deleted-date {
+        font-size: 12px;
+    }
+
+    .admin-mobile-actions button {
+        min-height: 41px;
+        font-size: 12px;
+    }
+
+}
+
+
+/* =========================================
+   VERY SMALL PHONES
+========================================= */
+
+@media (max-width: 360px) {
+
+    .admin-dashboard-page {
+        padding: 12px 8px !important;
+    }
+
+    .admin-dashboard-header h1 {
+        font-size: 20px !important;
+    }
+
+    .admin-user-card {
+        padding: 13px;
+    }
+
+    .admin-user-number {
+        font-size: 12px;
+    }
+
+    .admin-role-badge {
+        font-size: 10px;
+        padding: 5px 10px;
+    }
+
+    .admin-info-label {
+        font-size: 10px;
+    }
+
+    .admin-user-info strong {
+        font-size: 13px;
+    }
+
+    .admin-email,
+    .admin-deleted-date {
+        font-size: 11px;
+    }
+
+}
+```

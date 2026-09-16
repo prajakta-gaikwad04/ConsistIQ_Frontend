@@ -1,210 +1,138 @@
+/* =========================================================
+   CONSISTIQ UPDATE TASK
+   Desktop + Mobile Responsive Styling
+========================================================= */
+
 .update-task-page {
+    width: 100%;
     min-height: 100vh;
+    box-sizing: border-box;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 40px 20px;
-    background:
-        radial-gradient(circle at top left, rgba(255, 107, 107, 0.12), transparent 35%),
-        #15131c;
+    background: linear-gradient(135deg, #1f1c2c 0%, #928dab 100%);
+    overflow-x: hidden;
 }
-
-
-/* ============================= */
-/* UPDATE TASK CARD */
-/* ============================= */
 
 .update-task-card {
     width: 100%;
     max-width: 700px;
-    padding: 35px;
-    border-radius: 24px;
-
-    background: rgba(255, 255, 255, 0.07);
-    border: 1px solid rgba(255, 255, 255, 0.09);
-
-    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.28);
-
+    box-sizing: border-box;
+    background: rgba(255, 255, 255, 0.12);
     backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border-radius: 24px;
+    padding: 40px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    color: #fff;
 }
-
-
-/* ============================= */
-/* HEADING */
-/* ============================= */
 
 .update-task-card h2 {
-    margin-bottom: 6px;
-    color: #f8f5f2;
-    font-size: 28px;
-    font-weight: 700;
+    text-align: center;
+    margin: 0 0 10px;
+    font-size: 30px;
 }
 
-.update-task-card p {
-    color: #aaa4b2;
-    margin-bottom: 25px;
-    font-size: 14px;
+.update-task-card > p {
+    text-align: center;
+    opacity: 0.8;
+    margin: 0 0 30px;
+    font-size: 15px;
 }
 
-
-/* ============================= */
-/* FORM */
-/* ============================= */
+.update-task-card form {
+    width: 100%;
+}
 
 .form-group {
-    display: flex;
-    flex-direction: column;
+    width: 100%;
     margin-bottom: 18px;
-    flex: 1;
 }
 
 .form-group label {
-    margin-bottom: 8px;
-    color: #ddd7df;
-    font-weight: 600;
+    display: block;
+    margin-bottom: 7px;
     font-size: 14px;
+    font-weight: 600;
+    color: #fff;
 }
-
-
-/* ============================= */
-/* INPUTS */
-/* ============================= */
 
 .form-group input,
 .form-group textarea,
 .form-group select {
     width: 100%;
+    box-sizing: border-box;
     padding: 13px 14px;
-
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 12px;
-
-    background: rgba(255, 255, 255, 0.08);
-    color: #f8f5f2;
-
-    font-size: 15px;
+    border: none;
     outline: none;
-
-    transition: 0.25s ease;
+    border-radius: 12px;
+    background: #fff;
+    color: #111827;
+    font-size: 15px;
+    font-family: inherit;
 }
 
 .form-group textarea {
-    min-height: 110px;
     resize: vertical;
-}
-
-.form-group input::placeholder,
-.form-group textarea::placeholder {
-    color: #8f8995;
+    min-height: 110px;
 }
 
 .form-group input:focus,
 .form-group textarea:focus,
 .form-group select:focus {
-    border-color: #ff6b6b;
-    box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.12);
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.5);
 }
-
-
-/* Select dropdown */
-
-.form-group select option {
-    background: #211e28;
-    color: #f8f5f2;
-}
-
-
-/* ============================= */
-/* FORM ROW */
-/* ============================= */
 
 .row {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 15px;
 }
 
-
-/* ============================= */
-/* UPDATE BUTTON */
-/* ============================= */
-
 .update-btn {
     width: 100%;
-    border: none;
     padding: 14px;
-
-    border-radius: 14px;
-
-    background: linear-gradient(135deg, #ff6b6b, #ff856f);
-    color: white;
-
+    margin-top: 8px;
+    border: none;
+    border-radius: 12px;
+    background: #ff6b6b;
+    color: #fff;
     font-size: 16px;
-    font-weight: 600;
-
+    font-weight: bold;
     cursor: pointer;
-
-    box-shadow: 0 8px 20px rgba(255, 107, 107, 0.22);
-
-    transition:
-        transform 0.25s ease,
-        box-shadow 0.25s ease;
+    transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
 .update-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 26px rgba(255, 107, 107, 0.32);
-}
-
-.update-btn:active {
-    transform: translateY(0);
+    opacity: 0.92;
+    transform: translateY(-1px);
 }
 
 
-/* ============================= */
-/* MOBILE */
-/* ============================= */
+/* =========================================================
+   TABLET
+========================================================= */
 
 @media (max-width: 768px) {
 
     .update-task-page {
-        padding: 25px 15px;
         align-items: flex-start;
+        padding: 30px 15px;
     }
 
     .update-task-card {
-        padding: 25px 20px;
+        padding: 30px 22px;
         border-radius: 20px;
-        margin-top: 20px;
     }
 
     .update-task-card h2 {
-        font-size: 24px;
+        font-size: 27px;
     }
 
-    .row {
-        flex-direction: column;
-        gap: 0;
-    }
-}
-
-
-/* ============================= */
-/* SMALL MOBILE */
-/* ============================= */
-
-@media (max-width: 480px) {
-
-    .update-task-page {
-        padding: 15px 10px;
-    }
-
-    .update-task-card {
-        padding: 22px 16px;
-        border-radius: 18px;
-    }
-
-    .update-task-card h2 {
-        font-size: 22px;
+    .update-task-card > p {
+        font-size: 14px;
+        margin-bottom: 25px;
     }
 
     .form-group input,
@@ -212,8 +140,126 @@
     .form-group select {
         font-size: 14px;
     }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .update-task-page {
+        width: 100%;
+        padding: 20px 12px;
+    }
+
+    .update-task-card {
+        width: 100%;
+        padding: 25px 18px;
+        border-radius: 18px;
+    }
+
+    .row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .form-group {
+        margin-bottom: 16px;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+        padding: 12px;
+        font-size: 14px;
+    }
+
+    .update-btn {
+        min-height: 46px;
+    }
+}
+
+
+/* =========================================================
+   SMALL PHONES
+========================================================= */
+
+@media (max-width: 430px) {
+
+    .update-task-page {
+        padding: 15px 10px;
+    }
+
+    .update-task-card {
+        padding: 22px 14px;
+        border-radius: 16px;
+    }
+
+    .update-task-card h2 {
+        font-size: 23px;
+        line-height: 1.25;
+    }
+
+    .update-task-card > p {
+        font-size: 12px;
+        line-height: 1.5;
+        margin-bottom: 22px;
+    }
+
+    .form-group label {
+        font-size: 13px;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+        padding: 11px;
+        font-size: 13px;
+    }
+
+    .form-group textarea {
+        min-height: 100px;
+    }
 
     .update-btn {
         padding: 13px;
+        font-size: 14px;
+    }
+}
+
+
+/* =========================================================
+   VERY SMALL PHONES
+========================================================= */
+
+@media (max-width: 360px) {
+
+    .update-task-page {
+        padding: 12px 8px;
+    }
+
+    .update-task-card {
+        padding: 20px 12px;
+    }
+
+    .update-task-card h2 {
+        font-size: 21px;
+    }
+
+    .form-group label {
+        font-size: 12px;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+        padding: 10px;
+        font-size: 12px;
+    }
+
+    .update-btn {
+        font-size: 13px;
     }
 }

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { createTask } from "../services/taskService";
 import { useNavigate } from "react-router-dom";
-
+import "../styles/CreateTask.css";
 const CreateTask = () => {
 
     const navigate = useNavigate();
@@ -74,8 +74,9 @@ const handleSubmit = async (e) => {
 };
         return (
   <div
-    style={{
-      minHeight: "100vh",
+  className="create-task-page"
+  style={{
+    minHeight: "100vh",
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
@@ -85,9 +86,10 @@ const handleSubmit = async (e) => {
     }}
   >
     <div
-      style={{
-        width: "100%",
-        maxWidth: "700px",
+  className="create-task-card"
+  style={{
+    width: "100%",
+    maxWidth: "700px",
         background: "rgba(255,255,255,0.12)",
         backdropFilter: "blur(18px)",
         borderRadius: "24px",
@@ -115,7 +117,7 @@ const handleSubmit = async (e) => {
         Organize your work and stay productive
       </p>
 
-      <form onSubmit={handleSubmit}>
+     <form className="create-task-form" onSubmit={handleSubmit}>
 
         <input
           type="text"
@@ -197,13 +199,23 @@ const handleSubmit = async (e) => {
   />
 </div>
 
-        <input
-          type="text"
-          name="category"
-          placeholder="Category"
-          onChange={handleChange}
-          style={inputStyle}
-        />
+        <div style={{ marginBottom: "10px" }}>
+  <label style={{ display: "block", marginBottom: "5px" }}>
+    Category
+  </label>
+
+  <select
+    name="category"
+    value={task.category}
+    onChange={handleChange}
+    style={inputStyle}
+  >
+    <option value="">Select Category</option>
+    <option value="WORK">Work</option>
+    <option value="PERSONAL">Personal</option>
+    <option value="STUDY">Study</option>
+  </select>
+</div>
 <div
     style={{
         display: "grid",
